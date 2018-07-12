@@ -40,7 +40,7 @@
         <div class="text-center loginLogo m-t" >
         </div>
             <div class="form-group col-sm-8 col-md-offset-2 loginLine">
-                <input name="name" id="name" type="username" class="form-control loginLine " style="font-size:13px" placeholder="请输入账号（邮箱/手机/用户名）" maxlength="15" required="">
+                <input name="name" id="name" type="username" class="form-control loginLine " style="font-size:13px" placeholder="请输入管理员账户" maxlength="15" required="">
             </div>
             <div class="form-group col-sm-8 col-md-offset-2 loginLine">
                 <input name="password" id="password"  type="password" class="form-control loginLine " style="font-size:13px" placeholder="请输入密码" maxlength="22" required="">
@@ -49,7 +49,7 @@
                 <button id="login_button" class="btn btn-w-m btn-Bblack btn-sm" onclick="verification()">登 录</button>
             </div>
         <div class="form-group" >
-            <p class="text-muted text-center" > <a href="login-jmpReplacepassword"><small>找回密码</small></a> | <a href="login-jmpRegistration"><small>注册账号</small></a></p>
+            <p class="text-muted text-center" > <a href="login-jmpReplacepassword"><small>找回密码</small></a></p>
         </div>
     </div>
 </div>
@@ -71,6 +71,7 @@
 </body>
 <script>
     function verification() {
+        alert("a")
             $.ajax({
                 url: "login-login",
                 data: {name: $("input#name").val(), password: $("input#password").val()},

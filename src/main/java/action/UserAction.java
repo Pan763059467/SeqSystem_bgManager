@@ -2,14 +2,13 @@ package action;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
+import dao.AdminDao;
 import dao.PersonalCenterDao;
 import dao.UserDao;
 import daoImp.SysManagerDaoImp;
 import daoImp.UserDaoImp;
-import entity.PersonalCenterEntity;
-import entity.SysManagerEntity;
-import entity.UserEntity;
-import entity.postmailEntity;
+import daoImp.AdminDaoImp;
+import entity.*;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 import javax.servlet.http.HttpServlet;
@@ -24,7 +23,7 @@ import java.util.Map;
  *
  * @author MJY
  */
-public class UserAction extends ActionSupport implements RequestAware, SessionAware, ModelDriven<UserEntity>, Preparable {
+public class UserAction extends ActionSupport implements RequestAware, SessionAware, ModelDriven<AdminEntity>, Preparable {
 
     private UserDao userDao;
     private PersonalCenterDao personalcenterdao;
@@ -37,19 +36,24 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
     private Map<String, Object> dataMap;
     private String verification;
 
+    private AdminDao adminDao;
+    private AdminEntity admin;
+
     public String login() {
         dataMap = new HashMap<String, Object>();
         userDao = new UserDaoImp();
-        boolean res = userDao.login(user.getName(), user.getPassword());
+        adminDao = new AdminDaoImp();
+        System.out.println(admin.getName()+admin.getPassword());
+        boolean res = adminDao.login(admin.getName(),admin.getPassword());
+        System.out.println(res);
         dataMap.put("res", res);
         if(res==true) {
-            user = userDao.getOne(user.getName());
-            int orgManager=userDao.orgManager(user.getId_user());
-            int sysManager=userDao.sysManager(user.getId_user());
-            session.put("user",user);
+            int orgManager=1;
+            int sysManager=2;
+            session.put("user",admin);
             session.put("sysManager",sysManager);
             session.put("orgManager",orgManager);
-            System.out.println(user+"and"+sysManager+"and"+orgManager);
+            System.out.println(admin+"and"+sysManager+"and"+orgManager);
         }
         return "RES";
     }
@@ -218,13 +222,13 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
     }
 
     @Override
-    public UserEntity getModel() {
-        return user;
+    public AdminEntity getModel() {
+        return admin;
     }
 
     @Override
     public void prepare() throws Exception {
-        user = new UserEntity();
+        admin = new AdminEntity();
     }
 
     @Override
