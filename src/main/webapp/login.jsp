@@ -71,7 +71,6 @@
 </body>
 <script>
     function verification() {
-        alert("a")
             $.ajax({
                 url: "login-login",
                 data: {name: $("input#name").val(), password: $("input#password").val()},

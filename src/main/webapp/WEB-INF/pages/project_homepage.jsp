@@ -26,77 +26,132 @@
     <link href="<%=basePath %>/css/style.min862f.css?v=4.1.0" rel="stylesheet">
 </head>
 
-<body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
-<div class="animated fadeInDown">
-    <div class="col-md-9 form-group" style="margin-top: 20px">
-        <div class="col-md-2 col-md-offset-4">
-            <a href="user-jmpCurrentProjectList"><img src="<%=basePath %>/img/Home1.png" height="160px"><br/></a>
-            <span style="color:#365063 ">当前项目</span><br/>
-            <span style="color:black">目前有</span>
-            <span style="color: #ff0000">
-                <s:if test='#session.countnow==null'>
-                    <s:property value="0"/>
-                </s:if>
-                <s:else>
-                    <s:property value="#session.countnow"/>
-                </s:else>
-            </span>
-            <span style="color:black">个项目</span>
+<body class="fixed-sidebar  gray-bg" style="overflow:hidden">
+<div id="wrapper" style="padding: 0px" class="wrapper wrapper-content animated fadeInDown gray-bg">
+
+    <div id="next1" style="width: 100%;margin: 0 auto;font-weight: 400" class="gray-bg">
+        <div class=" row wrapper white-bg" >
+            <ol class="breadcrumb" style="margin-left: 50px">
+                <li style="font-size: 15px">
+                    <strong>
+                        <a href="user-jmpHomepage"><span class="lzf_b">后台管理系统首页</span></a>
+                    </strong>
+                </li>
+            </ol>
         </div>
-        <div class="col-md-2">
-            <a href="user-jmpCompletedProjectList"><img src="<%=basePath %>/img/Home2.jpg" height="160px"><br/></a>
-            <span style="color:#365063 ">历史项目</span><br/>
-            <span style="color:black">完成了</span>
-            <span style="color: #ff0000">
-                <s:if test='#session.counthistory==null'>
-                    <s:property value="0"/>
-                </s:if>
-                <s:else>
-                   <s:property value="#session.counthistory"/>
-                </s:else>
-            </span>
-            <span style="color:black">个项目</span>
-        </div>
-        <div class="col-md-2 ">
-            <a href="library-get"><img src="<%=basePath %>/img/Home3.jpg" height="160px"></a><br/>
-            <span style="color:#365063 ">共享知识</span><br/>
-            <span style="color:black">收藏了</span>
-            <a href="library-Mycollect"><span style="color: #ff0000" class="lzf_a">${sessionScope.Mycollectcount}</span></a>
-            <span style="color:black">个构件库</span>
-        </div>
-        <div class="col-md-2 ">
-            <a href="user-jmpMyprofile"><img src="<%=basePath %>/img/Home4.jpg" height="160px"><br/></a>
-            <span style="color:#365063 ">个人中心</span><br/>
-            <span style="color:black">收到了</span>
-            <span style="color: #ff0000">
-                <s:if test='#session.nowNews==null'>
-                    <s:property value="0"/>
-                </s:if>
-                <s:else>
-                    <s:property value="#session.nowNews"/>
-                </s:else>
-            </span>
-            <span style="color:black">条邀请</span>
-        </div>
-    </div>
-    <div class="col-md-9 form-group">
-        <table>
-            <tr><td>&nbsp</td></tr>
-            <tr><td>&nbsp</td></tr>
-            <tr><td>&nbsp</td></tr>
-        </table>
-        <span class="col-md-6 col-md-offset-4">创建一个项目成为组长，或者接受别人的项目邀请成为组员就可以参与项目需求文档的编写啦！</span>
-        <a href="user-jmpNewproject"><img class="col-md-offset-1" src="<%=basePath %>/img/u7.png"></a>
-        <div class="row J_mainContent" id="content-main">
-            <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="" frameborder="0" data-id="" seamless></iframe>
+        <div id="main" style="margin-top:10px">
+            <div id="head" style="width:100%;height: 70px;font-size:x-small;margin: 0 auto">
+                <div style="float: left;height: 60px;padding: 20px 20px 0px 20px" class="col-md-4">
+                    <div style="float: left;margin: 0px 0px 0px 50px">
+                        <div id="choose_menu">
+                            <div style="font-size: 18px;color: black"><button class="btn-warning btn">用户常规管理</button></div>
+                        </div>
+                    </div>
+                    <div style="float: left;font-size:18px;width: 30px;text-align: center">|</div>
+                    <div style="float: left">
+                        <div style="float: left;font-size:18px;text-align: left;color: black"><button class="btn-primary btn">构件管理</button></div>
+                    </div>
+                    <div style="float: left;font-size:18px;width: 30px;text-align: center">|</div>
+                    <div style="float: left">
+                        <div style="float: left;font-size:18px;width: 100px;text-align: left;color: black"><button class="btn-primary btn">操作日志</button></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="view" style="padding: 0px 70px 0px 70px;margin-top:30px">
+                <div class="row">
+                    <div id="div1" class="col-sm-4">
+                        <div class="contact-box">
+                            <div>
+                                <div style="margin: 10px 10px 10px 15px;float: left"><img src="/img/user_manager.png" height="125" width="125"/></div>
+                                <div style="margin: 10px;float: left">
+                                    <h3>用户信息管理</h3>
+                                    <br/>
+                                    <p> 审查用户信息，管理用户</p>
+                                    <p>账号，可删除系统内用户账号</p>
+                                </div>
+                                <div style="clear: both;margin: 0px 10px 0px 10px">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="div2" class="col-sm-4">
+                        <div class="contact-box">
+                            <div>
+                                <div style="margin: 10px 10px 10px 15px;float: left"><img src="/img/user_manager.png" height="125" width="125"/></div>
+                                <div style="margin: 10px;float: left">
+                                    <h3>机构申请管理</h3>
+                                    <br/>
+                                    <p> 审查用户的机构申请请求</p>
+                                    <p>通过后即成立机构</p>
+                                </div>
+                                <div style="clear: both;margin: 0px 10px 0px 10px">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="div3" class="col-sm-4">
+                        <div class="contact-box">
+                            <div>
+                                <div style="margin: 10px 10px 10px 15px;float: left"><img src="/img/user_manager.png" height="125" width="125"/></div>
+                                <div style="margin: 10px;float: left">
+                                    <h3>机构管理</h3>
+                                    <br/>
+                                    <p>查看机构成员与项目</p>
+                                    <p>可重新任命机构管理员</p>
+                                </div>
+                                <div style="clear: both;margin: 0px 10px 0px 10px">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="div4" class="col-sm-4">
+                        <div class="contact-box">
+                            <div>
+                                <div style="margin: 10px 10px 10px 15px;float: left"><img src="/img/user_manager.png" height="125" width="125"/></div>
+                                <div style="margin: 10px;float: left">
+                                    <h3>用户积分管理</h3>
+                                    <br/>
+                                    <p>查看用户积分的获取与使用记录</p>
+                                    <p>可以修改用户当前积分</p>
+                                </div>
+                                <div style="clear: both;margin: 0px 10px 0px 10px">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="div5" class="col-sm-4">
+                        <div class="contact-box">
+                            <div>
+                                <div style="margin: 10px 10px 10px 15px;float: left"><img src="/img/user_manager.png" height="125" width="125"/></div>
+                                <div style="margin: 10px;float: left">
+                                    <h3>文档评论管理</h3>
+                                    <br/>
+                                    <p>可查看该系统所有文档下评论</p>
+                                    <p>删除评论不受时间限制</p>
+                                </div>
+                                <div style="clear: both;margin: 0px 10px 0px 10px">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-<script src="<%=basePath %>/js/jquery.min.js?v=2.1.4"></script>
-<script src="<%=basePath %>/js/bootstrap.min.js?v=3.3.6"></script>
-<script src="<%=basePath %>/js/content.min.js?v=1.0.0"></script>
-<script src="<%=basePath %>/js/plugins/toastr/toastr.min.js"></script>
-<script src="<%=basePath %>/js/mjy.js"></script>
+<script src="/js/jquery.min.js?v=2.1.4"></script>
+<script src="/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="/js/plugins/layer/layer.min.js"></script>
+<script src="/js/hplus.min.js?v=4.1.0"></script>
+<script type="text/javascript" src="/js/contabs.min.js"></script>
+<script src="/js/plugins/pace/pace.min.js"></script>
+<script src="/js/content.min.js?v=1.0.0"></script>
+<script>
+    $(document).ready(function(){$(".contact-box").each(function(){animationHover(this,"pulse")})});
+</script>
 </body>
 
 

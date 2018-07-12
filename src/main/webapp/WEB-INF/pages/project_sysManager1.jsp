@@ -36,7 +36,7 @@
         <ol class="breadcrumb" style="margin-left: 40px">
             <li style="font-size: 15px">
                 <strong>
-                    <a href="user-jmpHomepage">首页</a> >><a href="user-jmpSysManager1">系统管理</a>>>机构申请
+                    <a href="user-jmpHomepage">后台管理系统首页</a> >><a href="user-jmpSysManager1">机构申请管理</a>
                 </strong>
             </li>
         </ol>

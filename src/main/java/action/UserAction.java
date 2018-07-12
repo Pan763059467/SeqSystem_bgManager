@@ -41,19 +41,13 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
 
     public String login() {
         dataMap = new HashMap<String, Object>();
-        userDao = new UserDaoImp();
         adminDao = new AdminDaoImp();
         System.out.println(admin.getName()+admin.getPassword());
         boolean res = adminDao.login(admin.getName(),admin.getPassword());
         System.out.println(res);
         dataMap.put("res", res);
         if(res==true) {
-            int orgManager=1;
-            int sysManager=2;
-            session.put("user",admin);
-            session.put("sysManager",sysManager);
-            session.put("orgManager",orgManager);
-            System.out.println(admin+"and"+sysManager+"and"+orgManager);
+            session.put("admin",admin);
         }
         return "RES";
     }
@@ -160,11 +154,7 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
     }
 
     public String jmpLogin(){
-        session.put("user",null);
-        session.put("sysManager",0);
-        session.put("orgManager",0);
-        session.put("project",null);
-        session.put("PM",null);
+        session.put("admin",null);
         return "loginPage";
     }
     public String jmpMyprofile(){
@@ -177,15 +167,6 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
         return "replacepasswordPage";
     }
     public String jmpHomepage() {
-        userDao = new UserDaoImp();
-        user = (UserEntity)session.get("user");
-        session.put("countnow",userDao.projectNumberNow(user.getId_user()));
-        session.put("counthistory",userDao.projectNumberHistory(user.getId_user()));
-        session.put("nowNews",userDao.nowNews(user.getId_user()));
-        dataMap = new HashMap<String, Object>();
-        userDao = new UserDaoImp();
-        int Mycollectcount = userDao.Mycollectcount((((UserEntity)session.get("user")).getId_user()));
-        session.put("Mycollectcount",Mycollectcount);
         return "homePage";
     }
 
