@@ -24,7 +24,8 @@
     background-position-x: center;
     background-position-y: center;
     background-repeat:no-repeat;
-    height: 190px;
+    background-size: 200px;
+    height: 100px;
 }
 
 .loginLine

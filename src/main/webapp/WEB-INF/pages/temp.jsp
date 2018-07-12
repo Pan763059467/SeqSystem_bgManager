@@ -38,13 +38,13 @@
                     <a id="yourName" class="dropdown J_tabClose" data-toggle="dropdown">${sessionScope.admin.name}<span class="caret"></span>
                     </a>
                     <ul  role="menu" class="dropdown-menu dropdown-menu-right">
-                        <li  class="J_tabShowActive"><a id="test1"  class="J_menuItem" href="user-jmpMyprofile">用户常规管理</a>
+                        <li  class="J_tabShowActive"><a id="test1"  class="J_menuItem" href="#">用户常规管理</a>
                         </li>
                         <li class="divider"></li>
                         <li class="J_tabShowActive"><a id="test2" class="J_menuItem" href="user-jmpSysManager1">构件管理</a>
                         </li>
                         <li class="divider"></li>
-                        <li class="J_tabShowActive"><a id="test3" class="J_menuItem" href="Organization-jmpOrgManager1">操作日志</a>
+                        <li class="J_tabShowActive"><a id="test3" class="J_menuItem" href="#">操作日志</a>
                         </li>
                         <li class="divider"></li>
                         <li class="J_tabCloseAll"><a class="J_menuItem" href="login-jmpLogin">安全退出</a>

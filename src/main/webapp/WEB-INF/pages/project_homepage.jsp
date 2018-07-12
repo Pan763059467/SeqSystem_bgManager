@@ -39,107 +39,121 @@
                 </li>
             </ol>
         </div>
-        <div id="main" style="margin-top:10px">
-            <div id="head" style="width:100%;height: 70px;font-size:x-small;margin: 0 auto">
-                <div style="float: left;height: 60px;padding: 20px 20px 0px 20px" class="col-md-4">
-                    <div style="float: left;margin: 0px 0px 0px 50px">
-                        <div id="choose_menu">
-                            <div style="font-size: 18px;color: black"><button class="btn-warning btn">用户常规管理</button></div>
+        <div class="row m-t-sm">
+            <div class="col-sm-12">
+                <div class="row wrapper white-bg " style="margin: -5px 30px 0px 30px;min-height: 600px" >
+                    <div class="panel blank-panel">
+                        <div class="panel-heading">
+                            <div class="panel-options">
+                                <ul class="nav nav-tabs">
+                                <li class="active">
+                                    <a href="#tab-1" data-toggle="tab">用户常规管理</a>
+                                </li>
+                                <li>
+                                    <a href="#tab-2" data-toggle="tab">构件管理</a>
+                                </li>
+                                <li>
+                                    <a href="#tab-3" data-toggle="tab">操作日志</a>
+                                </li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                    <div style="float: left;font-size:18px;width: 30px;text-align: center">|</div>
-                    <div style="float: left">
-                        <div style="float: left;font-size:18px;text-align: left;color: black"><button class="btn-primary btn">构件管理</button></div>
-                    </div>
-                    <div style="float: left;font-size:18px;width: 30px;text-align: center">|</div>
-                    <div style="float: left">
-                        <div style="float: left;font-size:18px;width: 100px;text-align: left;color: black"><button class="btn-primary btn">操作日志</button></div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="view" style="padding: 0px 70px 0px 70px;margin-top:30px">
-                <div class="row">
-                    <div id="div1" class="col-sm-4">
-                        <div class="contact-box">
-                            <div>
-                                <div style="margin: 10px 10px 10px 15px;float: left"><img src="/img/user_manager.png" height="125" width="125"/></div>
-                                <div style="margin: 10px;float: left">
-                                    <h3>用户信息管理</h3>
-                                    <br/>
-                                    <p> 审查用户信息，管理用户</p>
-                                    <p>账号，可删除系统内用户账号</p>
+                        <div class="panel-body ">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab-1">
+                                <div id="view" style="padding: 0px 20px 0px 20px;margin-top:30px">
+                                    <div class="row">
+                                        <div id="div1" class="col-sm-4">
+                                            <div class="contact-box">
+                                                <div>
+                                                    <div style="margin: 10px 10px 10px 15px;float: left"><img src="/img/user_manager.png" height="125" width="125"/></div>
+                                                    <div style="margin: 10px;float: left">
+                                                        <h3>用户信息管理</h3>
+                                                        <br/>
+                                                        <p> 审查用户信息，管理用户</p>
+                                                        <p>账号，可删除系统内用户账号</p>
+                                                    </div>
+                                                    <div style="clear: both;margin: 0px 10px 0px 10px">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="div2" class="col-sm-4" href="user-jmpSysManager1">
+                                            <div class="contact-box">
+                                                <div>
+                                                    <div style="margin: 10px 10px 10px 15px;float: left"><img src="/img/org_apply_manager.png" height="125" width="125"/></div>
+                                                    <div style="margin: 10px;float: left">
+                                                        <h3>机构申请管理</h3>
+                                                        <br/>
+                                                        <p> 审查用户的机构申请请求</p>
+                                                        <p>通过后即成立机构</p>
+                                                    </div>
+                                                    <div style="clear: both;margin: 0px 10px 0px 10px">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="div3" class="col-sm-4">
+                                            <div class="contact-box">
+                                                <div>
+                                                    <div style="margin: 10px 10px 10px 15px;float: left"><img src="/img/org_manager.png" height="125" width="125"/></div>
+                                                    <div style="margin: 10px;float: left">
+                                                        <h3>机构管理</h3>
+                                                        <br/>
+                                                        <p>查看机构成员与项目</p>
+                                                        <p>可重新任命机构管理员</p>
+                                                    </div>
+                                                    <div style="clear: both;margin: 0px 10px 0px 10px">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="div4" class="col-sm-4">
+                                            <div class="contact-box">
+                                                <div>
+                                                    <div style="margin: 10px 10px 10px 15px;float: left"><img src="/img/score_manager.png" height="125" width="125"/></div>
+                                                    <div style="margin: 10px;float: left">
+                                                        <h3>用户积分管理</h3>
+                                                        <br/>
+                                                        <p>查看用户积分的获取与使用记录</p>
+                                                        <p>可以修改用户当前积分</p>
+                                                    </div>
+                                                    <div style="clear: both;margin: 0px 10px 0px 10px">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="div5" class="col-sm-4">
+                                            <div class="contact-box">
+                                                <div>
+                                                    <div style="margin: 10px 10px 10px 15px;float: left"><img src="/img/comment_manager.png" height="125" width="125"/></div>
+                                                    <div style="margin: 10px;float: left">
+                                                        <h3>文档评论管理</h3>
+                                                        <br/>
+                                                        <p>可查看该系统所有文档下评论</p>
+                                                        <p>删除评论不受时间限制</p>
+                                                    </div>
+                                                    <div style="clear: both;margin: 0px 10px 0px 10px">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div style="clear: both;margin: 0px 10px 0px 10px">
-                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab-2">
+                            </div>
+                            <div class="tab-pane" id="tab-3">
                             </div>
                         </div>
                     </div>
-                    <div id="div2" class="col-sm-4">
-                        <div class="contact-box">
-                            <div>
-                                <div style="margin: 10px 10px 10px 15px;float: left"><img src="/img/user_manager.png" height="125" width="125"/></div>
-                                <div style="margin: 10px;float: left">
-                                    <h3>机构申请管理</h3>
-                                    <br/>
-                                    <p> 审查用户的机构申请请求</p>
-                                    <p>通过后即成立机构</p>
-                                </div>
-                                <div style="clear: both;margin: 0px 10px 0px 10px">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="div3" class="col-sm-4">
-                        <div class="contact-box">
-                            <div>
-                                <div style="margin: 10px 10px 10px 15px;float: left"><img src="/img/user_manager.png" height="125" width="125"/></div>
-                                <div style="margin: 10px;float: left">
-                                    <h3>机构管理</h3>
-                                    <br/>
-                                    <p>查看机构成员与项目</p>
-                                    <p>可重新任命机构管理员</p>
-                                </div>
-                                <div style="clear: both;margin: 0px 10px 0px 10px">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="div4" class="col-sm-4">
-                        <div class="contact-box">
-                            <div>
-                                <div style="margin: 10px 10px 10px 15px;float: left"><img src="/img/user_manager.png" height="125" width="125"/></div>
-                                <div style="margin: 10px;float: left">
-                                    <h3>用户积分管理</h3>
-                                    <br/>
-                                    <p>查看用户积分的获取与使用记录</p>
-                                    <p>可以修改用户当前积分</p>
-                                </div>
-                                <div style="clear: both;margin: 0px 10px 0px 10px">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="div5" class="col-sm-4">
-                        <div class="contact-box">
-                            <div>
-                                <div style="margin: 10px 10px 10px 15px;float: left"><img src="/img/user_manager.png" height="125" width="125"/></div>
-                                <div style="margin: 10px;float: left">
-                                    <h3>文档评论管理</h3>
-                                    <br/>
-                                    <p>可查看该系统所有文档下评论</p>
-                                    <p>删除评论不受时间限制</p>
-                                </div>
-                                <div style="clear: both;margin: 0px 10px 0px 10px">
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <script src="/js/jquery.min.js?v=2.1.4"></script>
 <script src="/js/bootstrap.min.js?v=3.3.6"></script>
 <script src="/js/plugins/metisMenu/jquery.metisMenu.js"></script>
