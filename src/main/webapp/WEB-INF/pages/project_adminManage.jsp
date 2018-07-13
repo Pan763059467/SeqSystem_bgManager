@@ -52,7 +52,6 @@
         <div class="ibox float-e-margins">
             <div class="ibox-title">
                 <div style="float: left;margin-left: 5px"><span><strong>新增管理员</strong></span></div>
-                <div id="test1" style="float: left;margin-left: 10px"><button id="addManager_button" type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal">确认新增</button></div>
             </div>
             <div style="padding-left: 80px" class="ibox-content">
                 <table class="table" style="width:400px;border-left: none;border-right: none">
@@ -66,11 +65,12 @@
                     <tr >
                         <th style="width: 150px;text-align: center">密码:</th>
                         <th>
-                            <input name="password" id="password"  type="password" class="form-control loginLine " style="font-size:13px" placeholder="请输入密码" maxlength="22" required="">
+                            <input name="password" id="password"  type="text" class="form-control loginLine " style="font-size:13px" placeholder="请输入密码" maxlength="22" required="">
                         </th>
                     </tr>
                     </tbody>
                 </table>
+                <div id="test1" style="margin-left: 200px" ><button id="addManager_button" style="height: 50px;width: 80px" type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal">确认新增</button></div>
             </div>
         </div>
         <div class="ibox float-e-margins"></div>
@@ -81,10 +81,10 @@
             <div style="float: left;margin-left: 5px"><div style="float: left;margin-left: 5px"><span><strong>当前管理员</strong></span></div></div>
         </div>
         <div class="bootstrap-table ibox-content">
-            <table id="info" data-toggle="table"
+            <table id="ManagerInfo" data-toggle="table"
                    data-classes="table table-no-bordered"
                    data-sort-order="desc"
-                   data-url="project-showList"
+                   data-url="adminManage-showList"
                    data-click-to-select="true"
                    data-search="true"
                    data-show-refresh="true"
@@ -165,29 +165,18 @@
     })
 </script>
 <script>
-    $('#finishingTask').bootstrapTable({
+    $('#ManagerInfo').bootstrapTable({
             columns: [
                 {
-                    title: '机构编码',
-                    field: 'ID_ORGANIZATION',
+                    title: '管理员编号',
+                    field: 'id_admin',
                     align: 'center',
                     sortable: true,
                     valign: 'middle'
                 },
                 {
-                    field: 'ORGANIZATIONNAME',
-                    title: '机构名称',
-                    sortable: true,
-                    align: 'center'
-                }, {
-                    field: 'ADMIN_NME',
-                    title: '管理员',
-                    sortable: true,
-                    align: 'center'
-                },
-                {
-                    field: 'NUM_USER',
-                    title: '机构人数',
+                    field: 'name',
+                    title: '管理员名称',
                     sortable: true,
                     align: 'center'
                 },
@@ -201,285 +190,24 @@
             ]
         }
     );
-    $('#info').bootstrapTable({
-            columns: [
-                {
-                    field: 'MESSAGE',
-                    title: '消息',
-                    sortable: true,
-                    align: 'center',
-                },
-                {
-                    field: 'DATE',
-                    title: '时间',
-                    sortable: true,
-                    align: 'center'
-                },
-                {
-                    field: 'operate',
-                    title: '操作',
-                    align: 'right',
-                    events: "NewActionEvents",
-                    formatter: "operateFormatter"
-                }
-            ]
-        }
-    );
-    $('#info1').bootstrapTable({
-            columns: [
-                {
-                    field: 'CONTENT',
-                    title: '消息',
-                    sortable: true,
-                    align: 'center'
-                },
-                {
-                    field: 'DATE',
-                    title: '时间',
-                    sortable: true,
-                    sortOrder: "desc",
-                    align: 'center'
-                },
-            ]
-        }
-    );
     /**
-     * @return {string}
+     *
      */
 
     $.ajax(
         {
             type:"GET",
-            url:"personalcenter-showList",
+            url:"adminManage-showList",
             dataType:"json",
             success:function(json){
-                var proList = JSON.parse(json.listorg);
+                var ManagerList = JSON.parse(json.res);
                 //finishingTask为table的id
-                $('#finishingTask').bootstrapTable('load',proList);
+                $('#ManagerInfo').bootstrapTable('load',ManagerList);
             },
             error:function(){
                 alert("错误");
             }
         }
     )
-
-    $.ajax(
-        {
-            type:"GET",
-            url:"infomation-showInfo",
-            dataType:"json",
-            success:function(json){
-                var infolist = JSON.parse(json.listinfo);
-                //finishingTask为table的id
-                $('#info').bootstrapTable('load',infolist);
-            },
-            error:function(){
-                alert("错误");
-            }
-        }
-    )
-
-    $.ajax(
-        {
-            type:"GET",
-            url:"history-showHistory",
-            dataType:"json",
-            success:function(json){
-                var History = JSON.parse(json.listHistory);
-                //finishingTask为table的id
-                $('#info1').bootstrapTable('load',History);
-            },
-            error:function(){
-                alert("错误");
-            }
-        }
-    )
-    /**
-     *个人机构
-     * */
-    function AddFunctionAlty(value,row,index) {
-        return '<a class="exit zfont3">退出</a>'
-    }
-    window.actionEvents = {
-        'click .exit': function (e, value, row, index) {
-            swal({
-                title: "您确定要退出这个机构吗",
-                text: "点击确定后讲退出机构，请谨慎操作！",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "确定",
-                cancelButtonText: "取消",
-                closeOnConfirm: false
-            }, function () {
-                var id = row.ID_ORGANIZATION;
-                var ID_ORGANIZATION = parseInt(id);
-                $.ajax({
-                    url: "personalcenter-quitorg?ID_ORGANIZATION=" + ID_ORGANIZATION,
-                    dataType: "json",
-                    type: "Post",
-                    async: "false",
-                    success: function (result) {
-                        if (result.res === true){
-                            swal({
-                                title: "退出成功",
-                                type: "success",
-                                confirmButtonColor: "#18a689",
-                                confirmButtonText: "OK"
-                            },function(){
-                                location.href = "user-jmpMyprofile";
-                            })
-                        }
-                        else swal("退出失败！", "机构管理员不能退出自己的机构", "error");
-                    }, error: function () {
-                        swal("退出！", "请检查你的网络", "error");
-                    }
-                })
-            })
-            //修改操作
-        }
-    };
-
-    /**
-     * 消息中心
-     * @param value
-     * @param row
-     * @param index
-     * @returns {string}
-     */
-    function operateFormatter(value,row,index) {
-        return[
-            '<a class="agree" style="padding-left: 10px"><button class="btn btn-info text-center btn-xs " >同意</button></a>',
-            '<a class="refuse" style="padding-left: 10px"><button class="btn btn-info text-center btn-xs " >拒绝</button></a>'
-        ].join('');
-    }
-    window.NewActionEvents = {
-        'click .agree': function (e, value, row, index) {
-            //修改操作
-            swal({
-                title: "您确定要接受这个邀请吗",
-                text: "点击确定将接受这个邀请！",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#18a689",
-                confirmButtonText: "确定",
-                cancelButtonText: "取消",
-                closeOnConfirm: false
-            }, function () {
-                var id_ORG = row.ID_ORGANIZATION;
-                var ID_ORGANIZATION = parseInt(id_ORG);
-                var ID_PROJECT = parseInt(row.ID_PROJECT);
-                if (isNaN(ID_ORGANIZATION)) {
-                    $.ajax({
-                        url: "infomation-Accept?ID_PROJECT=" + ID_PROJECT,
-                        dataType: "json",
-                        type: "Post",
-                        async: "false",
-                        success: function (result) {
-                            if (result.res === true) {
-                                swal({
-                                    title: "同意成功",
-                                    type: "success",
-                                    confirmButtonColor: "#18a689",
-                                    confirmButtonText: "OK"
-                                }, function () {
-                                    location.href = "user-jmpMyprofile";
-                                })
-                            }
-                            else swal("接受失败！", "接受失败", "failed");
-                        }, error: function () {
-                            swal("接收失败！", "请检查你的网络", "failed");
-                        }
-                    })
-                }
-                else if (isNaN(ID_PROJECT)) {
-                    $.ajax({
-                        url: "infomation-Accept?ID_ORGANIZATION=" + ID_ORGANIZATION,
-                        dataType: "json",
-                        type: "Post",
-                        async: "false",
-                        success: function (result) {
-                            if (result.res === true) {
-                                swal({
-                                    title: "同意成功",
-                                    type: "success",
-                                    confirmButtonColor: "#18a689",
-                                    confirmButtonText: "OK"
-                                }, function () {
-                                    location.href = "user-jmpMyprofile";
-                                })
-                            }
-                            else swal("接受失败！", "接受失败", "failed");
-                        }, error: function () {
-                            swal("接收失败！", "请检查你的网络", "failed");
-                        }
-                    })
-                }
-            })
-        },
-        'click .refuse': function (e, value, row, index) {
-            //修改操作
-            swal({
-                title: "您确定要拒绝这个邀请吗",
-                text: "点击确定将拒绝这个邀请！",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "确定",
-                cancelButtonText: "取消",
-                closeOnConfirm: false
-            }, function () {
-                var id_ORG = row.ID_ORGANIZATION;
-                var ID_ORGANIZATION = parseInt(id_ORG);
-                var ID_PROJECT = parseInt(row.ID_PROJECT);
-                if (isNaN(ID_ORGANIZATION)) {
-                    $.ajax({
-                        url: "infomation-Refuse?ID_PROJECT=" + ID_PROJECT,
-                        dataType: "json",
-                        type: "Post",
-                        async: "false",
-                        success: function (result) {
-                            if (result.res === true) {
-                                swal({
-                                    title: "拒绝成功",
-                                    type: "success",
-                                    confirmButtonColor: "#18a689",
-                                    confirmButtonText: "OK"
-                                }, function () {
-                                    location.href = "user-jmpMyprofile";
-                                })
-                            }
-                            else swal("拒绝失败！", "拒绝失败", "failed");
-                        }, error: function () {
-                            swal("拒绝失败！", "请检查你的网络", "failed");
-                        }
-                    })
-                }
-                else if (isNaN(ID_PROJECT)) {
-                    $.ajax({
-                        url: "infomation-Refuse?ID_ORGANIZATION=" + ID_ORGANIZATION,
-                        dataType: "json",
-                        type: "Post",
-                        async: "false",
-                        success: function (result) {
-                            if (result.res === true) {
-                                swal({
-                                    title: "拒绝成功",
-                                    type: "success",
-                                    confirmButtonColor: "#18a689",
-                                    confirmButtonText: "OK"
-                                }, function () {
-                                    location.href = "user-jmpMyprofile";
-                                })
-                            }
-                            else swal("拒绝失败！", "拒绝失败", "failed");
-                        }, error: function () {
-                            swal("拒绝失败！", "请检查你的网络", "failed");
-                        }
-                    })
-                }
-            })
-        }
-    }
 </script>
 </html>

@@ -7,6 +7,7 @@ import entity.postmailEntity;
 import util.MailUtil;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class AdminDaoImp extends DAO<AdminEntity> implements AdminDao {
     @Override
@@ -75,5 +76,11 @@ public class AdminDaoImp extends DAO<AdminEntity> implements AdminDao {
         System.out.println(name + password);
         update(sql, name, password);
         return true;
+    }
+
+    public List<AdminEntity> getALL() {
+        String sql="select * from administrator where sp=0";
+        List<AdminEntity> ManagerList = getForList(sql);
+        return ManagerList;
     }
 }

@@ -236,7 +236,7 @@
             </result>
             <interceptor-ref name="myStack"/>
 
-            <allowed-methods>jmpAdminManage,addManager</allowed-methods>
+            <allowed-methods>jmpAdminManage,addManager,showList</allowed-methods>
         </action>
 
     </package>

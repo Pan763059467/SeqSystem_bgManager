@@ -1,5 +1,6 @@
 package action;
 
+import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
@@ -11,6 +12,7 @@ import org.apache.struts2.interceptor.SessionAware;
 
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class AdminManageAction extends ActionSupport implements RequestAware, SessionAware, ModelDriven<AdminEntity>, Preparable {
@@ -31,6 +33,17 @@ public class AdminManageAction extends ActionSupport implements RequestAware, Se
             System.out.println("put newadmin in session");
         }
         return "success";
+    }
+
+    public String showList(){
+        dataMap = new HashMap<String, Object>();
+        adminDao = new AdminDaoImp();
+        List<AdminEntity> list = adminDao.getALL();
+        Gson gson = new Gson();
+        String json = gson.toJson(list);
+        dataMap.put("res",json);
+        System.out.println(list);
+        return SUCCESS;
     }
 
 
