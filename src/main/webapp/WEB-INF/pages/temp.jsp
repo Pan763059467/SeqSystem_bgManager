@@ -38,7 +38,7 @@
                     <a id="yourName" class="dropdown J_tabClose" data-toggle="dropdown">${sessionScope.admin.name}<span class="caret"></span>
                     </a>
                     <ul  role="menu" class="dropdown-menu dropdown-menu-right">
-                        <li  class="J_tabShowActive"><a id="test1"  class="J_menuItem" href="#">操作日志</a>
+                        <li  class="J_tabShowActive"><a id="test1"  class="J_menuItem" href="user-jmpOperationLog">操作日志</a>
                         </li>
                         <li class="divider"></li>
                         <li class="J_tabShowActive"><a id="test2" class="J_menuItem" href="user-jmpSysManager1">管理员管理</a>

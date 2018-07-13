@@ -53,7 +53,7 @@
                                     <a href="#tab-2" data-toggle="tab">构件管理</a>
                                 </li>
                                 <li>
-                                    <a href="#tab-3" data-toggle="tab">操作日志</a>
+                                    <a href="#tab-3" data-toggle="tab">评论管理</a>
                                 </li>
                                 </ul>
                             </div>
@@ -149,7 +149,6 @@
                                         <div class="bootstrap-table">
                                             <table id="LogList"
                                                    data-toggle="table"
-                                                   data-url="showExitOrg-showList"
                                                    data-click-to-select="true"
                                                    data-search="true"
                                                    data-show-refresh="true"

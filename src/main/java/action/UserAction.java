@@ -247,7 +247,9 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
     public String jmpCompletedProjectList() {
         return "completedProjectList";
     }
-
+    public String jmpOperationLog() {
+        return "OperationLog";
+    }
     @Override
     public AdminEntity getModel() {
         return admin;
