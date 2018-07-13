@@ -3,6 +3,8 @@ package dao;
 import entity.AdminEntity;
 import entity.postmailEntity;
 
+import java.util.List;
+
 public interface AdminDao {
         boolean login(String name,String password);
         boolean SPreplacepassword(String name,String password2,String password3);
@@ -11,4 +13,5 @@ public interface AdminDao {
         boolean postmail(postmailEntity info, String title);
         boolean addManager(String name,String password);
 
+        List<AdminEntity> getALL();
 }

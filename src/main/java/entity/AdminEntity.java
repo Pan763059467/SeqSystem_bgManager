@@ -7,13 +7,13 @@ public class AdminEntity {
     private String name;
     private String password;
     private String mail;
-    private char sp;
+    private int sp;
 
-    public char getSp() {
+    public int getSp() {
         return sp;
     }
 
-    public void setSp(char sp) {
+    public void setSp(int sp) {
         this.sp = sp;
     }
 
@@ -49,7 +49,7 @@ public class AdminEntity {
         this.mail = mail;
     }
 
-    public AdminEntity(int id_admin, String name, String password, String mail,char sp) {
+    public AdminEntity(int id_admin, String name, String password, String mail,int sp) {
         this.id_admin = id_admin;
         this.name = name;
         this.password = password;
