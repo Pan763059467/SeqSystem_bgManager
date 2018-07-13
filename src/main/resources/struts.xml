@@ -216,5 +216,14 @@
         <interceptor-ref name="myStack"/>
             <allowed-methods>showHistory</allowed-methods>
         </action>
+
+        <action name="adminLog-*" class="action.AdminLogAction" method="{1}">
+            <result name="success" type="json">
+                <param name="root">dataMap</param>
+            </result>
+            <interceptor-ref name="myStack"/>
+            <allowed-methods>logList</allowed-methods>
+        </action>
+
     </package>
 </struts>

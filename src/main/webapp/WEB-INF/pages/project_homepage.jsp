@@ -59,7 +59,7 @@
                             </div>
                         </div>
                         <div class="panel-body ">
-                        <div class="tab-content">
+                            <div class="tab-content">
                             <div class="tab-pane active" id="tab-1">
                                 <div id="view" style="padding: 0px 20px 0px 20px;margin-top:30px">
                                     <div class="row">
@@ -144,9 +144,33 @@
                             <div class="tab-pane" id="tab-2">
                             </div>
                             <div class="tab-pane" id="tab-3">
+                                <div class="ibox float-e-margins">
+                                    <div class="ibox-content">
+                                        <div class="bootstrap-table">
+                                            <table id="LogList"
+                                                   data-toggle="table"
+                                                   data-url="showExitOrg-showList"
+                                                   data-click-to-select="true"
+                                                   data-search="true"
+                                                   data-show-refresh="true"
+                                                   data-show-toggle="true"
+                                                   data-show-columns="true"
+                                                   data-toolbar="#toolbar"
+                                                   data-query-params="quefryParams"
+                                                   data-pagination="true"
+                                                   data-halign="center"
+                                                   data-striped="true"
+                                                   data-page-size="6"
+                                                   data-height="410"
+                                                   data-page-list="All"
+                                            >
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -154,20 +178,59 @@
     </div>
 </div>
 
-<script src="/js/jquery.min.js?v=2.1.4"></script>
-<script src="/js/bootstrap.min.js?v=3.3.6"></script>
-<script src="/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="/js/plugins/layer/layer.min.js"></script>
-<script src="/js/hplus.min.js?v=4.1.0"></script>
-<script type="text/javascript" src="/js/contabs.min.js"></script>
-<script src="/js/plugins/pace/pace.min.js"></script>
-<script src="/js/content.min.js?v=1.0.0"></script>
-<script>
-    $(document).ready(function(){$(".contact-box").each(function(){animationHover(this,"pulse")})});
-</script>
+<script src="<%=basePath%>/js/jquery.min.js?v=2.1.4"></script>
+<script src="<%=basePath%>/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="<%=basePath%>/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="<%=basePath%>/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="<%=basePath%>/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="<%=basePath%>/js/plugins/layer/layer.min.js"></script>
+<script src="<%=basePath%>/js/hplus.min.js?v=4.1.0"></script>
+<script type="text/javascript" src="<%=basePath%>/js/contabs.min.js"></script>
+<script src="<%=basePath%>/js/plugins/pace/pace.min.js"></script>
+<script src="<%=basePath%>/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+<script src="<%=basePath%>/js/mjy.js"></script>
+<script src="<%=basePath%>/js/plugins/suggest/bootstrap-suggest.min.js"></script>
+<script src="<%=basePath%>/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
 </body>
-
-
-<!-- Mirrored from www.zi-han.net/theme/hplus/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:17:11 GMT -->
+<script>
+    $('#LogList').bootstrapTable({
+            columns: [
+                {
+                    title: '操作人',
+                    field: 'admin_name',
+                    align: 'center',
+                    sortable: true,
+                    align: 'middle'
+                },
+                {
+                    title: '操作内容',
+                    field: 'content',
+                    sortable: true,
+                    align: 'center'
+                }, {
+                    title: '操作时间',
+                    field: 'date',
+                    sortable: true,
+                    align: 'center'
+                }
+            ]
+        }
+    )
+    $.ajax(
+        {
+            type:"GET",
+            url:"adminLog-logList",
+            dataType:"json",
+            success:function(json){
+                var adminlog = JSON.parse(json.res);
+                //finishingTask为table的id
+                $('#LogList').bootstrapTable('load',adminlog);
+            },
+            error:function(){
+                alert("错误");
+            }
+        }
+    )
+</script>
 </html>

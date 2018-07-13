@@ -95,7 +95,7 @@
                     field: 'name',
                     align: 'center',
                     sortable: true,
-                    valign: 'middle'
+                    align: 'middle'
                 },
                 {
                     field: 'user_name',

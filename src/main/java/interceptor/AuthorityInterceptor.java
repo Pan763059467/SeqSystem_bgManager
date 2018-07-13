@@ -1,19 +1,12 @@
 package interceptor;
 
-
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionInvocation;
 import entity.AdminEntity;
-import entity.UserEntity;
+
 import org.apache.struts2.ServletActionContext;
-import java.beans.EventHandler;
-import java.util.Map;
-import java.util.Objects;
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 public class AuthorityInterceptor extends AbstractInterceptor{
