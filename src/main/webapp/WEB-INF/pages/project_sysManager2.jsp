@@ -32,33 +32,39 @@
         <ol class="breadcrumb" style="margin-left: 40px">
             <li style="font-size: 15px">
                 <strong>
-                    <a href="user-jmpHomepage">首页</a> >><a href="user-jmpSysManager1">系统管理</a>>>已有机构
+                    <a href="user-jmpHomepage">后台管理系统首页</a> >>已有机构
                 </strong>
             </li>
         </ol>
     </div>
-
-
-    <div class="form-group col-md-2">
-        <ul class="nav">
-            <li>
-                <a href="user-jmpSysManager1"><button class="btn-primary btn">机构申请</button></a>
-            </li>
-            <li>
-                <a href="user-jmpSysManager2"><button class="btn-warning btn">已有机构</button></a>
-            </li>
-        </ul>
+    <div class="form-group col-md-1">
     </div>
     <div style="margin:16px 0px 0px -60px" class="col-md-10">
-        <div class="ibox-title">
-            <h5>当前机构</h5>
+        <div class="panel">
+            <div class="panel-heading">
+            <div class="panel-options col-md-4">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="project_detail.html#tab-1" data-toggle="tab">当前机构</a>
+                    </li>
+                </ul>
+            </div>
+            <div style="float: left;margin-top: 10px" class="col-md-4">
+            </div>
+            <div style="float: right;width: 300px" class="col-md-4">
+                <select id="gender" class="form-control" name="gender">
+                    <option name="" disabled  selected="selected" >选择机构</option>
+                    <s:iterator value="list">
+                        <option name="displayOrg" class="orgName"><s:property value="NAME"/> </option>
+                    </s:iterator>
+                </select>
+            </div>
         </div>
-        <div class="ibox float-e-margins">
+            <div class="panel-body">
             <div class="ibox-content">
                 <div class="bootstrap-table">
-                    <table id="finishingTask"
+                    <table id="showAdminOrg"
                            data-toggle="table"
-                           data-url="showExitOrg-showList"
                            data-click-to-select="true"
                            data-search="true"
                            data-show-refresh="true"
@@ -77,6 +83,7 @@
                 </div>
             </div>
         </div>
+        </div>
     </div>
 </div>
 <script src="<%=basePath%>/js/jquery.min.js?v=2.1.4"></script>
@@ -88,59 +95,73 @@
 <script src="<%=basePath%>/js/mjy.js"></script>
 </body>
 <script>
-    $('#finishingTask').bootstrapTable({
+    $(document).ready(function(){
+        $("option.orgName").click(function () {
+                alert(2)
+                var element = $(this).val();
+                Ffive(element);
+            }
+        );
+    });
+    $('#showAdminOrg').bootstrapTable({
             columns: [
                 {
-                    title: '机构名',
+                    title: '成员姓名',
                     field: 'name',
                     align: 'center',
                     sortable: true,
-                    align: 'middle'
+                    valign: 'middle'
                 },
                 {
-                    field: 'user_name',
-                    title: '机构管理员',
-                    sortable: true,
-                    align: 'center'
-                }, {
-                    field: 'id_organization',
-                    title: '机构编码',
-                    sortable: true,
-                    align: 'center'
-                },{
-                    field: 'time',
-                    title: '成立时间',
+                    field: 'mail',
+                    title: '邮箱',
                     sortable: true,
                     align: 'center'
                 },
                 {
-                    field: 'num_user',
-                    title: '机构人数',
-                    sortable: true,
-                    align: 'center',
-                }, {
-                    field: 'num_project',
-                    title: '项目数',
+                    field: 'statu',
+                    title: '职务',
                     sortable: true,
                     align: 'center'
                 }
             ]
         }
-    )
-    $.ajax(
-        {
-            type:"GET",
-            url:"showExitOrg-showList",
-            dataType:"json",
-            success:function(json){
-                var exitOrgList = JSON.parse(json.res);
-                //finishingTask为table的id
-                $('#finishingTask').bootstrapTable('load',exitOrgList);
-            },
-            error:function(){
-                alert("错误");
+    );
+    function Ffive(element){
+        $.ajax(
+            {
+                url:"Organization-showAdminOrg",
+                data: {NAME: element},
+                dataType:"json",
+                type: "Get",
+                async: "false",
+                success:function(json){
+                    var showAdminOrg = JSON.parse(json.res);
+                    //finishingTask为table的id
+                    $('#showAdminOrg').bootstrapTable('load',showAdminOrg);
+                },
+                error:function(){
+                    alert(" 错误");
+                }
             }
-        }
-    )
+        )
+    }
+
+    function operateFormatter(value,row,index) {
+        return[
+            '<a class="grant" style="padding-left: 10px"><button class="btn btn-info text-center btn-xs " >机构转移</button></a>',
+            '<a class="delete" style="padding-left: 10px"><button class="btn btn-info text-center btn-xs " >踢出机构</button></a>'
+        ].join('');
+    }
+    function rename(value,row,index) {
+        var state=parseInt(row.STATE);
+        if(state==0)
+            return '未接受';
+        else if(state==1)
+            return '已同意';
+        else if(state==-1)
+            return ['已拒绝',
+                '<a class="reAgree" style="padding-left: 10px"><button class="btn btn-info text-center btn-xs " >重新邀请</button></a>'].join('');
+    }
 </script>
 </html>

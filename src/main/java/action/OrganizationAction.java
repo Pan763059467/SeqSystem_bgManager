@@ -9,12 +9,15 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
+import dao.AdminOrgDao;
 import dao.OrganizationDao;
 import dao.ShowOrgProjectDao;
 import dao.UserDao;
+import daoImp.AdminOrgDaoImp;
 import daoImp.OrganizationDaoImp;
 import daoImp.ShowOrgProjectDaoImp;
 import daoImp.UserDaoImp;
+import entity.AdminOrgEntity;
 import entity.OrganizationEntity;
 import entity.ShowOrgProjectEntity;
 import entity.UserEntity;
@@ -32,6 +35,7 @@ public class OrganizationAction extends ActionSupport implements RequestAware, S
     private Map<String, Object> session;
     private Map<String, Object> request;
     private Map<String, Object> dataMap;
+
     public String quitorg(){
         organizationdao = new OrganizationDaoImp();
         UserEntity user = (UserEntity) session.get("user");
@@ -43,11 +47,21 @@ public class OrganizationAction extends ActionSupport implements RequestAware, S
     public String jmpOrgManager1(){
         dataMap = new HashMap<String, Object>();
         organizationdao = new OrganizationDaoImp();
-        UserEntity seesionUser=(UserEntity)session.get("user");
-        List<OrganizationEntity> list = organizationdao.getMyOrg(seesionUser.getId_user());
+        List<OrganizationEntity> list = organizationdao.getAllOrg();
         ActionContext.getContext().getValueStack().set("list",list);
+        System.out.println(list+"OrgAction");
         return "OrgManager1Page";
+}
+
+    public String jmpSysManager2(){
+        dataMap = new HashMap<String, Object>();
+        organizationdao = new OrganizationDaoImp();
+        List<OrganizationEntity> list = organizationdao.getAllOrg();
+        ActionContext.getContext().getValueStack().set("list",list);
+        System.out.println(list+"OrgAction");
+        return "SysManager2Page";
     }
+
     public String showAllMember(){
         dataMap = new HashMap<String, Object>();
         UserDao userdao = new UserDaoImp();
@@ -60,6 +74,16 @@ public class OrganizationAction extends ActionSupport implements RequestAware, S
         return "display";
     }
 
+    public String showAdminOrg(){
+        dataMap = new HashMap<String, Object>();
+        AdminOrgDao adminOrgDao = new AdminOrgDaoImp();
+        List<AdminOrgEntity> AdminOrg = adminOrgDao.getAllMember(organization.getNAME());
+        System.out.println(AdminOrg);
+        Gson gson = new Gson();
+        String json = gson.toJson(AdminOrg);
+        dataMap.put("res",json);
+        return "display";
+    }
     public String showAllProject(){
         dataMap = new HashMap<String, Object>();
         ShowOrgProjectDao showOrgProjectDao = new ShowOrgProjectDaoImp();

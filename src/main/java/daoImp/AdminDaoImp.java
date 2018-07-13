@@ -6,12 +6,20 @@ import entity.AdminEntity;
 import entity.postmailEntity;
 import util.MailUtil;
 
+import java.sql.Timestamp;
+
 public class AdminDaoImp extends DAO<AdminEntity> implements AdminDao {
     @Override
     public boolean login(String name, String password) {
         String sql="SELECT COUNT(*) from administrator WHERE NAME=? and PASSWORD=?";
         int count=Integer.valueOf(getForValue(sql,name,password).toString());
         if(count==1) {
+            String sql1="SELECT ID_ADMIN FROM administrator where name=?";
+            int id_admin = Integer.valueOf(getForValue(sql1,name).toString());
+            Timestamp createDate = new Timestamp(new java.util.Date().getTime());
+            String content = "管理员" + name + "于" + createDate + "登录管理系统";
+            String sql2 = "insert into admin_log(ID_ADMIN,CONTENT,DATE) value(?,?,?)";
+            update(sql2,id_admin,content,createDate);
             return true;
         }
         else return false;

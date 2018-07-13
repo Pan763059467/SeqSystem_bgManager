@@ -67,6 +67,13 @@ public class OrganizationDaoImp extends DAO<OrganizationEntity> implements Organ
         return AdminName;
     }
 
+    @Override
+    public List<OrganizationEntity> getAllOrg() {
+        String sql = "select NAME from ORGANIZATION";
+        List<OrganizationEntity> MyOrgList = getForList(sql);
+        return MyOrgList;
+    }
+
 
     @Override
     public boolean isIn(int id_user,int id_org) {

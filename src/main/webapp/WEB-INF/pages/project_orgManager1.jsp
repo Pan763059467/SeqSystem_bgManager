@@ -138,25 +138,6 @@
     </div>
 </div>
 
-
-<div  class="modal inmodal" id="invite" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content animated bounceInRight">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
-                </button>
-                <h4 class="modal-title">邀请用户</h4>
-            </div>
-            <div class="modal-body">
-                <div class="form-group"><label>用户名</label> <input id="user_name" type="text" placeholder="请输入用户名" maxlength="15" class="form-control" required="required"></div>
-            </div>
-            <div class="modal-footer">
-                <button id="cancel-invite"type="button" class="btn btn-white" data-dismiss="modal">取消</button>
-                <button id="invite-button" type="button" class="btn btn-primary">邀请</button>
-            </div>
-        </div>
-    </div>
-</div>
 <script src="<%=basePath%>/js/jquery.min.js?v=2.1.4"></script>
 <script src="<%=basePath%>/js/bootstrap.min.js?v=3.3.6"></script>
 <script src="<%=basePath%>/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
@@ -177,7 +158,6 @@
     $(document).ready(function(){
         $("option.orgName").click(function () {
             var element = $(this).val();
-            console.log(element);
             Ffive(element);
             Ffive2(element);
             }
@@ -217,7 +197,7 @@
     $('#showOperate').bootstrapTable({
             columns: [
                 {
-                    title: '姓名',
+                        title: '姓名',
                     field: 'USER_NAME',
                     align: 'center',
                     sortable: true,

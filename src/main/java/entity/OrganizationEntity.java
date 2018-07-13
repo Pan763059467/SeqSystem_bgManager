@@ -7,6 +7,15 @@ public class OrganizationEntity {
     private String NAME;
     private int ID_USER;
     private Date TIME;
+    private char statu;
+
+    public char getStatu() {
+        return statu;
+    }
+
+    public void setStatu(char statu) {
+        this.statu = statu;
+    }
 
     public int getID_ORGANIZATION() {
         return ID_ORGANIZATION;
@@ -40,13 +49,14 @@ public class OrganizationEntity {
         this.TIME = TIME;
     }
 
-    public OrganizationEntity(int ID_ORGANIZATION, String NAME, int ID_USER, Date TIME) {
+    public OrganizationEntity() {
+    }
+
+    public OrganizationEntity(int ID_ORGANIZATION, String NAME, int ID_USER, Date TIME, char statu) {
         this.ID_ORGANIZATION = ID_ORGANIZATION;
         this.NAME = NAME;
         this.ID_USER = ID_USER;
         this.TIME = TIME;
-    }
-
-    public OrganizationEntity() {
+        this.statu = statu;
     }
 }
