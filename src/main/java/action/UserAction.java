@@ -5,17 +5,13 @@ import com.opensymphony.xwork2.Preparable;
 import dao.AdminDao;
 import dao.PersonalCenterDao;
 import dao.UserDao;
-import daoImp.SysManagerDaoImp;
 import daoImp.UserDaoImp;
 import daoImp.AdminDaoImp;
 import entity.*;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
+
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -35,6 +31,7 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
     private String newPassword;
     private Map<String, Object> dataMap;
     private String verification;
+    private String formerPassword;
 
     private AdminDao adminDao;
     private AdminEntity admin;
@@ -89,7 +86,7 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
         }
         return SUCCESS;
     }*/
-    public String replacepassword(){
+    public String SPreplacepassword(){
         dataMap = new HashMap<String,Object>();
         adminDao = new AdminDaoImp();
         int temp = (int)session.get("replaceverification");
@@ -97,7 +94,7 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
         System.out.println(admin.getName()+" "+" "+newPassword+" "+"session注册码:"+session.get("replaceverification")+" "+admin.getMail());
         if(sessionReplaceVerification.equals(verification) && !verification.equals("")){
             System.out.println("verificationSuccess");
-            boolean res = adminDao.replacepassword(admin.getName(),tempPassword,newPassword);
+            boolean res = adminDao.SPreplacepassword(admin.getName(),tempPassword,newPassword);
             dataMap.put("res",res);
         }
         else{
@@ -105,6 +102,16 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
             dataMap.put("consequence",res);
             System.out.println(res);
         }
+        return SUCCESS;
+    }
+
+    public String replacepassword(){
+        dataMap = new HashMap<String, Object>();
+        adminDao = new AdminDaoImp();
+        System.out.println(admin.getName()+" "+formerPassword+" "+tempPassword+" "+newPassword);
+        boolean res = adminDao.replacepassword(admin.getName(),formerPassword,tempPassword,newPassword);
+        System.out.println(res);
+        dataMap.put("res", res);
         return SUCCESS;
     }
 
@@ -212,6 +219,9 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
     public String jmpReplacepassword(){
         return "replacepasswordPage";
     }
+    public String jmpSPReplacepassword(){
+        return "spreplacepasswordPage";
+    }
     public String jmpHomepage() {
         return "homePage";
     }
@@ -278,6 +288,9 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
         this.dataMap = dataMap;
     }
 
+    public void setFormerPassword(String formerPassword) {
+        this.formerPassword = formerPassword;
+    }
     public void setTempPassword(String tempPassword) {
         this.tempPassword = tempPassword;
     }

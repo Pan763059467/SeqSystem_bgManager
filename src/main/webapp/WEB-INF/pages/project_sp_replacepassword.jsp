@@ -29,33 +29,37 @@
     <script>if(window.top !== window.self){ window.top.location = window.location;}</script>
 </head>
 <body class="gray-bg loginBackground" >
-<div class="middle-box text-center loginscreen  animated fadeInDown ">
-    <div class="loginForm" style="height: 450px">
-        <div class="text-center loginLogo" >
+    <div class="middle-box text-center loginscreen  animated fadeInDown ">
+        <div class="loginForm">
+            <div class="text-center loginLogo" >
+            </div>
+            <form class="cmxform" id="signupForm">
+                <div class="form-group col-sm-8 col-md-offset-2 loginLine">
+                    <input name="email" id="email"  class="form-control loginLine valiadate" style="font-size:12px" placeholder="请输入邮箱" >
+                </div>
+                <div class="form-group col-sm-8 col-md-offset-2 loginLine">
+                    <input name="name" id="name" type="text" aria-required="true" aria-invalid="true" class="form-control loginLine valiadate" style="font-size:12px" placeholder="输入管理员账号" required="">
+                </div>
+                <div class="form-group col-sm-8 col-md-offset-2 loginLine">
+                    <input name="password1" id="password1" type="password" class="form-control loginLine valiadate" style="font-size:12px" maxlength="22" placeholder="请设置密码（长度为6-22个字符）" required="">
+                </div>
+                <div class="form-group col-sm-8 col-md-offset-2 loginLine">
+                    <input name="password2" id="password2" type="password" class="form-control loginLine valiadate" style="font-size:12px" maxlength="22" placeholder="请再次输入密码确认" required="">
+                </div>
+                <div class="form-group col-sm-5 col-md-offset-2 loginLine">
+                    <input name="verification" id="verification"  type="verification" class="form-control loginLine valiadate" style="font-size:12px" placeholder="请填写验证码" required="">
+                </div>
+                <div class="form-group">
+                    <input id="replacepassword_email" type="button" class="btn btn-w-m btn-default" style="color:#333333;margin-left:-30px;margin-top:4px;height: 30px;width: 15px;font-size:12px"  onclick="sendCode(this)" value="获取邮箱验证码"/>
+                </div>
+                <h6>&nbsp;</h6>
+                <div style="width: 300px" class="form-group col-sm-8  col-md-offset-2 loginLine">
+                    <button id="replacepassword_button" class="btn btn-w-m btn-Bblack btn-sm">修改密码</button>
+                    <a href="login-jmpLogin"><small>取消修改，点我登录</small></a>
+                </div>
+            </form>
         </div>
-        <form class="cmxform" id="signupForm">
-            <div class="form-group col-sm-8 col-md-offset-2 loginLine">
-                <input name="name" id="name" type="text" aria-required="true" aria-invalid="true" class="form-control loginLine valiadate" style="font-size:12px" placeholder="输入管理员账号" required="">
-            </div>
-            <div class="form-group col-sm-8 col-md-offset-2 loginLine">
-                <input name="password0" id="password0" type="password" class="form-control loginLine valiadate" style="font-size:12px" maxlength="22" placeholder="请输入原密码" required="">
-            </div>
-            <div class="form-group col-sm-8 col-md-offset-2 loginLine">
-                <input name="password1" id="password1" type="password" class="form-control loginLine valiadate" style="font-size:12px" maxlength="22" placeholder="请输入新密码（长度为6-22个字符）" required="">
-            </div>
-            <div class="form-group col-sm-8 col-md-offset-2 loginLine">
-                <input name="password2" id="password2" type="password" class="form-control loginLine valiadate" style="font-size:12px" maxlength="22" placeholder="请再次输入密码确认" required="">
-            </div>
-            <h6>&nbsp;</h6>
-            <div style="width: 300px; margin-left:30px" class="form-group col-sm-8  col-md-offset-2 loginLine">
-                <button id="replacepassword_button" class="btn btn-w-m btn-Bblack btn-sm">修改密码</button>
-            </div>
-            <div class="form-group col-sm-8  col-md-offset-2 loginLine" >
-                <p class="text-muted text-center" > <a href="login-jmpLogin"><small>点我登录</small></a> | <a href="login-jmpSPReplacepassword"><small>超级管理员</small></a></p>
-            </div>
-        </form>
     </div>
-</div>
 <script src="<%=basePath%>/js/jquery.min.js?v=2.1.4"></script>
 <script src="<%=basePath%>/js/bootstrap.min.js?v=3.3.6"></script>
 <script src="<%=basePath%>/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
@@ -124,6 +128,7 @@
                     minlength: "验证码为6位",
                     maxlength: "验证码为6位"
                 },
+                email: "请输入一个正确的邮箱"
             }
         });
     });
@@ -143,18 +148,22 @@
         }
         else{
             $.ajax({
-                url: "login-replacepassword",
+                url: "login-SPreplacepassword",
                 data: {
                     name: $("input#name").val(),
-                    formerPassword:$("input#password0").val(),
+                    mail: $("input#email").val(),
                     tempPassword: $("input#password1").val(),
                     newPassword: $("input#password2").val(),
+                    verification: $("input#verification").val()
                 },
                 dataType: "json",
                 type: "Post",
                 async: "false",
                 success: function (result) {
-                    if (result.res === true) {
+                    if (result.consequence === "error") {
+                        swal("修改密码失败！", "请获取正确验证码", "error");
+                    }
+                    else if (result.res === true) {
                         swal({
                             title: "修改成功!",
                             text: "点击下方按钮回登陆页面",
@@ -166,7 +175,7 @@
                         })
                     }
                     else if (result.res === false)
-                        swal("修改密码失败！", "请确认原密码。", "error");
+                        swal("修改密码失败！", "请确认用户名与邮箱是否匹配。", "error");
                 },
                 error: function () {
                     swal("修改密码失败！", "服务器异常。", "error");
@@ -197,6 +206,29 @@
         }
     }
 
+    //发送验证码
+    $("input#replacepassword_email").click(function () {
+        $.ajax({
+            url: "login-postReplacepassword",
+            data: {mail: $("input#email").val(),name: $("input#name").val()},
+            dataType: "json",
+            type: "Post",
+            async: "false",
+            success: function (result) {
+                if (result.res === true) {
+                    showtoast("success", "发送成功", "操作成功")
+                }
+                else if(result.consequence === false )
+                    showtoast("error", "发送失败", "请检查输入的邮箱是否有效并保证网络通畅")
+                else
+                    showtoast("error", "发送失败", "服务器异常")
+
+            },
+            error: function (result) {
+                showtoast("error", "发送失败", "请检查输入的邮箱与用户名是否正确并保证网络通畅")
+            }
+        })
+    })
 </script>
 
 

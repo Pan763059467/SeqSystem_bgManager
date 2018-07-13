@@ -7,6 +7,15 @@ public class AdminEntity {
     private String name;
     private String password;
     private String mail;
+    private char sp;
+
+    public char getSp() {
+        return sp;
+    }
+
+    public void setSp(char sp) {
+        this.sp = sp;
+    }
 
     public int getId_admin() {
         return id_admin;
@@ -40,11 +49,12 @@ public class AdminEntity {
         this.mail = mail;
     }
 
-    public AdminEntity(int id_admin, String name, String password, String mail) {
+    public AdminEntity(int id_admin, String name, String password, String mail,char sp) {
         this.id_admin = id_admin;
         this.name = name;
         this.password = password;
         this.mail = mail;
+        this.sp = sp;
     }
 
     public AdminEntity() {
