@@ -17,11 +17,24 @@ public class AdminDaoImp extends DAO<AdminEntity> implements AdminDao {
         else return false;
     }
 
-    public boolean replacepassword(String name, String password2, String password3) {
+    public boolean SPreplacepassword(String name, String password2, String password3) {
         if (password2.equals(password3)) {
-            String sql = "update administrator set password=? where name=?";
+            String sql = "update administrator set password=? where name=? and sp=1";
             update(sql, password2, name);
             return true;
+        } else return false;
+    }
+
+    public boolean replacepassword(String name, String password1,String password2, String password3) {
+        String sql0="SELECT COUNT(*) from administrator WHERE NAME=? and PASSWORD=?";
+        int count=Integer.valueOf(getForValue(sql0,name,password1).toString());
+        if(count == 1){
+            if (password2.equals(password3)) {
+            String sql = "update administrator set password=? where name=? and sp=0";
+            update(sql, password2, name);
+            return true;
+            }
+            else return false;
         } else return false;
     }
 
@@ -48,4 +61,5 @@ public class AdminDaoImp extends DAO<AdminEntity> implements AdminDao {
         else
             return false;
     }
+
 }
