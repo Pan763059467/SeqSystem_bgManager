@@ -42,17 +42,18 @@
     <div style="margin:16px 0px 0px -60px" class="col-md-10">
         <div class="panel">
             <div class="panel-heading">
-            <div class="panel-options col-md-4">
+            <div class="panel-options col-md-2">
                 <ul class="nav nav-tabs">
                     <li class="active">
                         <a href="project_detail.html#tab-1" data-toggle="tab">当前机构</a>
                     </li>
                 </ul>
             </div>
-            <div style="float: left;margin-top: 10px" class="col-md-4">
+            <div style="float: left;margin-top: 10px" class="col-md-6">
+                <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#invite">解散机构</button>
             </div>
             <div style="float: right;width: 300px" class="col-md-4">
-                <select id="gender" class="form-control" name="gender">
+                <select id="gender" class="form-control" name="gender" onchange="orgName()">
                     <option name="" disabled  selected="selected" >选择机构</option>
                     <s:iterator value="list">
                         <option name="displayOrg" class="orgName"><s:property value="NAME"/> </option>
@@ -94,15 +95,7 @@
 <script src="<%=basePath%>/js/plugins/toastr/toastr.min.js"></script>
 <script src="<%=basePath%>/js/mjy.js"></script>
 </body>
-<script>
-    $(document).ready(function(){
-        $("option.orgName").click(function () {
-                alert(2)
-                var element = $(this).val();
-                Ffive(element);
-            }
-        );
-    });
+<script type="text/javascript">
     $('#showAdminOrg').bootstrapTable({
             columns: [
                 {
@@ -122,12 +115,39 @@
                     field: 'statu',
                     title: '职务',
                     sortable: true,
-                    align: 'center'
+                    align: 'center',
+                    formatter: "rename"
+                },{
+                    field:'operate',
+                    title:'操作',
+                    align:'center',
+                    sortable: true,
+                    events: "actionEvents",
+                    formatter: "operateFormatter"
                 }
             ]
         }
     );
-    function Ffive(element){
+    function operateFormatter(value,row,index) {
+        return[
+            '<a class="grant" style="padding-left: 10px"><button class="btn btn-info text-center btn-xs " >任命管理</button></a>',
+        ].join('');
+    }
+    function rename(value,row,index) {
+        var statu=parseInt(row.statu);
+        if(statu==0)
+            return '成员';
+        else if(statu==1)
+            return '机构管理员';
+        else if(statu==2)
+            return '机构副管理员';
+    }
+    function orgName() {
+        var objs = document.getElementById("gender");
+        var element = objs.value;
+        ALLMember(element)
+    }
+    function ALLMember(element){
         $.ajax(
             {
                 url:"Organization-showAdminOrg",
@@ -145,23 +165,6 @@
                 }
             }
         )
-    }
-
-    function operateFormatter(value,row,index) {
-        return[
-            '<a class="grant" style="padding-left: 10px"><button class="btn btn-info text-center btn-xs " >机构转移</button></a>',
-            '<a class="delete" style="padding-left: 10px"><button class="btn btn-info text-center btn-xs " >踢出机构</button></a>'
-        ].join('');
-    }
-    function rename(value,row,index) {
-        var state=parseInt(row.STATE);
-        if(state==0)
-            return '未接受';
-        else if(state==1)
-            return '已同意';
-        else if(state==-1)
-            return ['已拒绝',
-                '<a class="reAgree" style="padding-left: 10px"><button class="btn btn-info text-center btn-xs " >重新邀请</button></a>'].join('');
     }
 </script>
 </html>

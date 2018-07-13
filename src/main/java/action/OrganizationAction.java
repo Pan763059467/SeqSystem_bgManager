@@ -87,7 +87,6 @@ public class OrganizationAction extends ActionSupport implements RequestAware, S
     public String showAllProject(){
         dataMap = new HashMap<String, Object>();
         ShowOrgProjectDao showOrgProjectDao = new ShowOrgProjectDaoImp();
-        System.out.println(organization.getNAME());
         List<ShowOrgProjectEntity> orgProject = showOrgProjectDao.getOrgPro(organization.getNAME());
         Gson gson = new Gson();
         String json = gson.toJson(orgProject);

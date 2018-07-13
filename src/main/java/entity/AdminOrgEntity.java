@@ -4,7 +4,7 @@ public class AdminOrgEntity {
     private int id_org_member;
     private int id_user;
     private int id_organization;
-    private char statu;
+    private int statu;
     private String name;
     private String mail;
 
@@ -32,11 +32,11 @@ public class AdminOrgEntity {
         this.id_organization = id_organization;
     }
 
-    public char getStatu() {
+    public int getStatu() {
         return statu;
     }
 
-    public void setStatu(char statu) {
+    public void setStatu(int statu) {
         this.statu = statu;
     }
 
@@ -56,15 +56,15 @@ public class AdminOrgEntity {
         this.mail = mail;
     }
 
-    public AdminOrgEntity() {
-    }
-
-    public AdminOrgEntity(int id_org_member, int id_user, int id_organization, char statu, String name, String mail) {
+    public AdminOrgEntity(int id_org_member, int id_user, int id_organization, int statu, String name, String mail) {
         this.id_org_member = id_org_member;
         this.id_user = id_user;
         this.id_organization = id_organization;
         this.statu = statu;
         this.name = name;
         this.mail = mail;
+    }
+
+    public AdminOrgEntity() {
     }
 }
