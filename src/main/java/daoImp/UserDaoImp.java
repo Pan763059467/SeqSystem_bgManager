@@ -153,4 +153,13 @@ public class UserDaoImp extends DAO<UserEntity> implements UserDao {
         String name = getForValue(sql,id_user);
         return name;
     }
+
+    @Override
+    public List<UserEntity> getAllUser() {
+        String sql1="select * from user";
+        List<UserEntity> list = getForList(sql1);
+        return list;
+    }
+
+
 }

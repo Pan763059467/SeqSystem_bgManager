@@ -69,21 +69,23 @@
                             <div class="tab-pane active" id="tab-1">
                                 <div id="view" style="padding: 0px 20px 0px 20px;margin-top:30px">
                                     <div class="row">
-                                        <div id="div1" class="col-sm-4">
-                                            <div class="contact-box">
-                                                <div>
-                                                    <div style="margin: 10px 10px 10px 15px;float: left"><img src="/img/user_manager.png" height="125" width="125"/></div>
-                                                    <div style="margin: 10px;float: left">
-                                                        <h3>用户信息管理</h3>
-                                                        <br/>
-                                                        <p> 审查用户信息，管理用户</p>
-                                                        <p>账号，可删除系统内用户账号</p>
-                                                    </div>
-                                                    <div style="clear: both;margin: 0px 10px 0px 10px">
+                                        <a href="user-jmpUserManager">
+                                            <div id="div1" class="col-sm-4">
+                                                <div class="contact-box">
+                                                    <div>
+                                                        <div style="margin: 10px 10px 10px 15px;float: left"><img src="/img/user_manager.png" height="125" width="125"/></div>
+                                                        <div style="margin: 10px;float: left">
+                                                            <h3>用户信息管理</h3>
+                                                            <br/>
+                                                            <p> 审查用户信息，管理用户</p>
+                                                            <p>账号，可删除系统内用户账号</p>
+                                                        </div>
+                                                        <div style="clear: both;margin: 0px 10px 0px 10px">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </a>
                                         <a href="user-jmpSysManager1"><div id="div2" class="col-sm-4">
                                             <div class="contact-box">
                                                 <div>

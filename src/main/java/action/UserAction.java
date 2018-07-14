@@ -1,4 +1,5 @@
 package action;
+import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
@@ -12,6 +13,7 @@ import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -97,6 +99,16 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
         System.out.println(res);
         dataMap.put("res", res);
         return SUCCESS;
+    }
+
+    public String showAllUser(){
+        dataMap = new HashMap<>();
+        UserDao userDao = new UserDaoImp();
+        List<UserEntity> allUser = userDao.getAllUser();
+        Gson gson = new Gson();
+        String json = gson.toJson(allUser);
+        dataMap.put("res",json);
+        return "RES";
     }
 
 
@@ -202,6 +214,10 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
     }
     public String jmpOperationLog() {
         return "OperationLog";
+    }
+
+    public String jmpUserManager(){
+        return "UserManagerPage";
     }
 
     @Override
