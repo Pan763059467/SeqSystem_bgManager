@@ -17,13 +17,16 @@
     <![endif]-->
 
     <link rel="shortcut icon" href="<%=basePath%>/example/favicon.ico">
-    <link href="<%=basePath%>/css/bootstrap.min.css" rel="stylesheet">
     <link href="<%=basePath%>/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
     <link href="<%=basePath%>/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
     <link href="<%=basePath%>/css/animate.min.css" rel="stylesheet">
     <link href="<%=basePath%>/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <!-- bootstrap-table -->
     <link href="<%=basePath%>/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
     <link href="<%=basePath%>/css/z_style.css" rel="stylesheet">
+    <link href="<%=basePath%>/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <!-- Sweet Alert -->
+    <link href="<%=basePath%>/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 </head>
 
 <body class="gray-bg">
@@ -73,10 +76,17 @@
 <script src="<%=basePath%>/js/jquery.min.js?v=2.1.4"></script>
 <script src="<%=basePath%>/js/bootstrap.min.js?v=3.3.6"></script>
 <script src="<%=basePath%>/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
-<script src="<%=basePath%>/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
-<script src="<%=basePath%>/js/content.min.js?v=1.0.0"></script>
-<script src="<%=basePath%>/js/plugins/toastr/toastr.min.js"></script>
+<script src="<%=basePath%>/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="<%=basePath%>/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="<%=basePath%>/js/plugins/layer/layer.min.js"></script>
+<script src="<%=basePath%>/js/hplus.min.js?v=4.1.0"></script>
+<script type="text/javascript" src="<%=basePath%>/js/contabs.min.js"></script>
+<script src="<%=basePath%>/js/plugins/pace/pace.min.js"></script>
+<script src="<%=basePath%>/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
 <script src="<%=basePath%>/js/mjy.js"></script>
+<script src="<%=basePath%>/js/plugins/suggest/bootstrap-suggest.min.js"></script>
+<script src="<%=basePath%>/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
 </body>
 <script>
     $('#userList').bootstrapTable({
@@ -102,7 +112,9 @@
                     field: 'flag',
                     title: '状态',
                     sortable: true,
-                    align: 'center'
+                    align: 'center',
+                    events: "actionEvents",
+                    formatter: "rename"
                 }
             ]
         }
@@ -122,5 +134,90 @@
             }
         }
     )
+    function rename(value, row, index) {
+        var flag=parseInt(row.flag);
+        if(flag==0)
+            return ['正常使用',
+                '<a class="lock" style="padding-left: 10px"><button class="btn btn-info text-center btn-xs " >封停</button></a>'].join('');
+        else if(flag==1)
+            return ['已封停',
+                '<a class="unlock" style="padding-left: 10px"><button class="btn btn-info text-center btn-xs " >解封</button></a>'].join('');
+    }
+    window.actionEvents = {
+        'click .lock': function(e, value, row, index) {
+            //锁定操作
+            var id_user = parseInt(row.id_user);
+            var user_name = row.name;
+            swal(
+                {
+                    title: "您确定要锁定该用户吗",
+                    text: "请谨慎操作！",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#18a689",
+                    confirmButtonText: "锁定",
+                    cancelButtonText: "取消",
+                    closeOnConfirm: false
+                },function () {
+                    $.ajax({
+                        type: "GET",
+                        url: "N_user-lock",
+                        data: {id_user: id_user},
+                        dataType: "json",
+                        success: function (json) {
+                            swal({
+                                title: "锁定成功",
+                                text: "点击返回管理页面！",
+                                type:"success",
+                                confirmButtonColor: "#18a689",
+                                confirmButtonText: "OK"
+                            },function(){
+                                location.href = "user-jmpUserManager";
+                            })
+                        },
+                        error: function (result) {
+                            swal("操作失败！", "出现未知错误，请重试。", "error");
+                        }
+                    })
+                })
+        },
+        'click .unlock': function(e, value, row, index) {
+            //解锁操作
+            var id_user = parseInt(row.id_user);
+            var user_name = row.name;
+            swal(
+                {
+                    title: "您确定要解锁该用户吗",
+                    text: "请谨慎操作！",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#18a689",
+                    confirmButtonText: "解锁",
+                    cancelButtonText: "取消",
+                    closeOnConfirm: false
+                },function () {
+                    $.ajax({
+                        type: "GET",
+                        url: "N_user-unlock",
+                        data: {id_user: id_user},
+                        dataType: "json",
+                        success: function (json) {
+                            swal({
+                                title: "解锁成功",
+                                text: "点击返回管理页面！",
+                                type:"success",
+                                confirmButtonColor: "#18a689",
+                                confirmButtonText: "OK"
+                            },function(){
+                                location.href = "user-jmpUserManager";
+                            })
+                        },
+                        error: function (result) {
+                            swal("操作失败！", "出现未知错误，请重试。", "error");
+                        }
+                    })
+                })
+        }
+    };
 </script>
 </html>

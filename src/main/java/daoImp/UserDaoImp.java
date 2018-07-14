@@ -55,10 +55,30 @@ public class UserDaoImp extends DAO<UserEntity> implements UserDao {
             return false;
     }
 
-    public boolean replacePassword(String name, String password2, String password3) {
+    public boolean changePassword(String name, String password2, String password3) {
         if (password2.equals(password3)) {
             String sql = "update USER set password=? where name=?";
             update(sql, password2, name);
+            return true;
+        } else return false;
+    }
+
+    public boolean lock(int id_user) {
+        String sql="SELECT COUNT(*) from USER WHERE id_user=?";
+        int count=Integer.valueOf(getForValue(sql,id_user).toString());
+        if (count==1) {
+            String sql1 = "update USER set flag=1 where id_user=?";
+            update(sql1,id_user);
+            return true;
+        } else return false;
+    }
+
+    public boolean unlock(int id_user) {
+        String sql="SELECT COUNT(*) from USER WHERE id_user=?";
+        int count=Integer.valueOf(getForValue(sql,id_user).toString());
+        if (count==1) {
+            String sql1 = "update USER set flag=0 where id_user=?";
+            update(sql1,id_user);
             return true;
         } else return false;
     }

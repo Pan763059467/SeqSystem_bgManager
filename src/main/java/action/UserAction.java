@@ -111,7 +111,6 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
         return "RES";
     }
 
-
     public String postVerification(){
         userDao = new UserDaoImp();
         dataMap = new HashMap<String, Object>();
