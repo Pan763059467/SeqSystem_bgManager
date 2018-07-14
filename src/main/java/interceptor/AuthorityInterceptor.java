@@ -8,6 +8,7 @@ import entity.AdminEntity;
 
 import org.apache.struts2.ServletActionContext;
 import javax.servlet.http.HttpSession;
+import java.util.Objects;
 
 public class AuthorityInterceptor extends AbstractInterceptor{
         //拦截action处理的拦截方法
@@ -19,6 +20,15 @@ public class AuthorityInterceptor extends AbstractInterceptor{
             AdminEntity admin= (AdminEntity) session.getAttribute("cur_admin");
             String method =  invocation.getProxy().getMethod();
             if(admin!=null){
+                if(Objects.equals(method, "jmpAdminManage")){
+                    int rank=(int)session.getAttribute("admin_rank");
+                    if(rank==1)
+                        return invocation.invoke();
+                    else{
+                        ((ActionSupport) invocation.getAction()).addActionError("sorry,you don't have permission!");
+                        return Action.LOGIN;
+                    }
+                }
                 return invocation.invoke();
             }
             System.out.println(method+"/"+admin+"/before_interceptor");

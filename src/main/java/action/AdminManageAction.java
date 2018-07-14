@@ -30,10 +30,6 @@ public class AdminManageAction extends ActionSupport implements RequestAware, Se
         AdminEntity seesionAdmin=(AdminEntity)session.get("cur_admin");
         boolean res=adminDao.addManager(seesionAdmin.getId_admin(),admin.getName(),admin.getPassword());
         dataMap.put("res", res);
-        if(res==true) {
-            session.put("admin",admin);
-            System.out.println("put newadmin in session");
-        }
         return "success";
     }
 
@@ -69,7 +65,7 @@ public class AdminManageAction extends ActionSupport implements RequestAware, Se
     }
 
 
-    public String jmpAdminManage(){
+    public String jmpAdminManager(){
         return "AdminManage";
     }
 
