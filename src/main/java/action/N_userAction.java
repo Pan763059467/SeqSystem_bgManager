@@ -3,7 +3,9 @@ package action;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
+import dao.AdminDao;
 import dao.UserDao;
+import daoImp.AdminDaoImp;
 import daoImp.UserDaoImp;
 import entity.AdminEntity;
 import entity.UserEntity;
@@ -20,10 +22,12 @@ public class N_userAction extends ActionSupport implements RequestAware, Session
     private Map<String, Object> dataMap;
     private UserDao userDao;
 
+
     public String lock(){
         dataMap = new HashMap<>();
         UserDao userDao = new UserDaoImp();
-        boolean res = userDao.lock(user.getId_user());
+        AdminEntity seesionAdmin=(AdminEntity)session.get("cur_admin");
+        boolean res = userDao.lock(user.getId_user(),seesionAdmin.getId_admin());
         dataMap.put("res", res);
         return SUCCESS;
     }
@@ -31,7 +35,8 @@ public class N_userAction extends ActionSupport implements RequestAware, Session
     public String unlock(){
         dataMap = new HashMap<>();
         UserDao userDao = new UserDaoImp();
-        boolean res = userDao.unlock(user.getId_user());
+        AdminEntity seesionAdmin=(AdminEntity)session.get("cur_admin");
+        boolean res = userDao.unlock(user.getId_user(),seesionAdmin.getId_admin());
         dataMap.put("res", res);
         return SUCCESS;
     }
@@ -47,12 +52,16 @@ public class N_userAction extends ActionSupport implements RequestAware, Session
     }
 
     @Override
-    public void setRequest(Map<String, Object> map) {
-
+    public void setSession(Map<String, Object> session) {
+        this.session = session;
     }
 
     @Override
-    public void setSession(Map<String, Object> map) {
+    public void setRequest(Map<String, Object> request) {
+        this.request = request;
+    }
 
+    public Map<String, Object> getDataMap() {
+        return dataMap;
     }
 }

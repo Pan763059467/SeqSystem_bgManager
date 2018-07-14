@@ -13,8 +13,8 @@ public interface UserDao {
 	boolean changePassword(String name,String password2,String password3);
 
 	boolean edit(String username,String qq,String address,String tel,String introduce,String gender);
-	boolean lock(int id_user);
-	boolean unlock(int id_user);
+	boolean lock(int id_user,int SP_id);
+	boolean unlock(int id_user,int SP_id);
 	UserEntity getOne(String name);
 
     List<UserEntity> getAll();

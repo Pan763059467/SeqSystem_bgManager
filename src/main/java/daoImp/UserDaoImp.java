@@ -7,6 +7,7 @@ import entity.postmailEntity;
 import util.MailUtil;
 
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -63,20 +64,40 @@ public class UserDaoImp extends DAO<UserEntity> implements UserDao {
         } else return false;
     }
 
-    public boolean lock(int id_user) {
+    public boolean lock(int id_user,int SP_id) {
         String sql="SELECT COUNT(*) from USER WHERE id_user=?";
         int count=Integer.valueOf(getForValue(sql,id_user).toString());
         if (count==1) {
+            //操作日志
+            String sp_sql="SELECT NAME FROM administrator where id_admin=?";
+            String sql0="SELECT NAME FROM user where id_user=?";
+            String name = String.valueOf(getForValue(sql0,id_user).toString());
+            String name_SPadmin = String.valueOf(getForValue(sp_sql,SP_id).toString());
+            Timestamp createDate = new Timestamp(new java.util.Date().getTime());
+            String content = "管理员" + name_SPadmin + "于" + createDate + "封禁" + name + "用户" ;
+            String sql2 = "insert into admin_log(ID_ADMIN,CONTENT,DATE,ID_USER) value(?,?,?,?)";
+            update(sql2,SP_id,content,createDate,id_user);
+
             String sql1 = "update USER set flag=1 where id_user=?";
             update(sql1,id_user);
             return true;
         } else return false;
     }
 
-    public boolean unlock(int id_user) {
+    public boolean unlock(int id_user,int SP_id) {
         String sql="SELECT COUNT(*) from USER WHERE id_user=?";
         int count=Integer.valueOf(getForValue(sql,id_user).toString());
         if (count==1) {
+            //操作日志
+            String sp_sql="SELECT NAME FROM administrator where id_admin=?";
+            String sql0="SELECT NAME FROM user where id_user=?";
+            String name = String.valueOf(getForValue(sql0,id_user).toString());
+            String name_SPadmin = String.valueOf(getForValue(sp_sql,SP_id).toString());
+            Timestamp createDate = new Timestamp(new java.util.Date().getTime());
+            String content = "管理员" + name_SPadmin + "于" + createDate + "解封" + name + "用户" ;
+            String sql2 = "insert into admin_log(ID_ADMIN,CONTENT,DATE,ID_USER) value(?,?,?,?)";
+            update(sql2,SP_id,content,createDate,id_user);
+
             String sql1 = "update USER set flag=0 where id_user=?";
             update(sql1,id_user);
             return true;
