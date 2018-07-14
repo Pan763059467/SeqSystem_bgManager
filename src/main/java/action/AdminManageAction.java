@@ -27,7 +27,8 @@ public class AdminManageAction extends ActionSupport implements RequestAware, Se
         System.out.println("start addManager");
         dataMap = new HashMap<String, Object>();
         adminDao = new AdminDaoImp();
-        boolean res=adminDao.addManager(admin.getName(),admin.getPassword());
+        AdminEntity seesionAdmin=(AdminEntity)session.get("cur_admin");
+        boolean res=adminDao.addManager(seesionAdmin.getId_admin(),admin.getName(),admin.getPassword());
         dataMap.put("res", res);
         if(res==true) {
             session.put("admin",admin);
@@ -50,8 +51,18 @@ public class AdminManageAction extends ActionSupport implements RequestAware, Se
     public String replacePassword(){
         dataMap = new HashMap<String, Object>();
         adminDao = new AdminDaoImp();
-        System.out.println(admin.getName()+" "+newPassword+" adaasdasdaf "+admin.getId_admin()+" "+admin.getName());
-        boolean res = adminDao.replacePassword(admin.getName(),newPassword);
+        AdminEntity seesionAdmin=(AdminEntity)session.get("cur_admin");
+        boolean res = adminDao.replacePassword(seesionAdmin.getId_admin(),admin.getName(),newPassword);
+        System.out.println(res);
+        dataMap.put("res", res);
+        return SUCCESS;
+    }
+
+    public String deleteManager(){
+        dataMap = new HashMap<String, Object>();
+        adminDao = new AdminDaoImp();
+        AdminEntity seesionAdmin=(AdminEntity)session.get("cur_admin");
+        boolean res = adminDao.deleteManager(seesionAdmin.getId_admin(),admin.getId_admin());
         System.out.println(res);
         dataMap.put("res", res);
         return SUCCESS;

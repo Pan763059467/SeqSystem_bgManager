@@ -47,7 +47,7 @@ public class AdminDaoImp extends DAO<AdminEntity> implements AdminDao {
         } else return false;
     }
 
-    public boolean replacePassword(String name, String password) {
+    public boolean replacePassword(int SP_id, String name, String password) {
         String sql0="SELECT COUNT(*) from administrator WHERE NAME=? and sp=0";
         int count=Integer.valueOf(getForValue(sql0,name).toString());
         if(count == 1){
@@ -56,10 +56,12 @@ public class AdminDaoImp extends DAO<AdminEntity> implements AdminDao {
                 //操作
                 String sql1="SELECT ID_ADMIN FROM administrator where name=?";
                 int id_admin = Integer.valueOf(getForValue(sql1,name).toString());
+                String sp_sql="SELECT NAME FROM administrator where id_admin=?";
+                String name_SPadmin = String.valueOf(getForValue(sp_sql,SP_id).toString());
                 Timestamp createDate = new Timestamp(new java.util.Date().getTime());
-                String content = "管理员" + name + "于" + createDate + "登录管理系统";
-                String sql2 = "insert into admin_log(ID_ADMIN,CONTENT,DATE) value(?,?,?)";
-                update(sql2,id_admin,content,createDate);
+                String content = "超级管理员" + name_SPadmin + "于" + createDate + "重置管理员" + name + "密码";
+                String sql2 = "insert into admin_log(ID_ADMIN,CONTENT,DATE,ID_ADMIN_P) value(?,?,?,?)";
+                update(sql2,SP_id,content,createDate,id_admin);
                 return true;
         } else return false;
     }
@@ -88,10 +90,34 @@ public class AdminDaoImp extends DAO<AdminEntity> implements AdminDao {
             return false;
     }
 
-    public boolean addManager(String name, String password) {
+    public boolean addManager(int SP_id,String name, String password) {
         String sql = "insert into administrator(name,password) values(?,?)";
         System.out.println(name + password);
         update(sql, name, password);
+        //操作
+        String sql1="SELECT ID_ADMIN FROM administrator where name=?";
+        int id_admin = Integer.valueOf(getForValue(sql1,name).toString());
+        String sp_sql="SELECT NAME FROM administrator where id_admin=?";
+        String name_SPadmin = String.valueOf(getForValue(sp_sql,SP_id).toString());
+        Timestamp createDate = new Timestamp(new java.util.Date().getTime());
+        String content = "超级管理员" + name_SPadmin + "于" + createDate + "新增管理员" + name;
+        String sql2 = "insert into admin_log(ID_ADMIN,CONTENT,DATE,ID_ADMIN_P) value(?,?,?,?)";
+        update(sql2,SP_id,content,createDate,id_admin);
+        return true;
+    }
+
+    public boolean deleteManager(int SP_id,int id_admin) {
+        //操作
+        String sp_sql="SELECT NAME FROM administrator where id_admin=?";
+        String name = String.valueOf(getForValue(sp_sql,id_admin).toString());
+        String name_SPadmin = String.valueOf(getForValue(sp_sql,SP_id).toString());
+        Timestamp createDate = new Timestamp(new java.util.Date().getTime());
+        String content = "超级管理员" + name_SPadmin + "于" + createDate + "删除第" + id_admin + "号管理员" + name;
+        String sql2 = "insert into admin_log(ID_ADMIN,CONTENT,DATE,ID_ADMIN_P) value(?,?,?,?)";
+        update(sql2,SP_id,content,createDate,id_admin);
+        //最后删除
+        String sql1="delete FROM administrator where id_admin=?";
+        update(sql1,id_admin);
         return true;
     }
 
