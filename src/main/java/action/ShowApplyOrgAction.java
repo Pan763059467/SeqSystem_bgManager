@@ -10,6 +10,7 @@ import dao.ShowApplyOrgDao;
 import daoImp.ApplyOrganizationDaoImp;
 import daoImp.HistoryInfoDaoImp;
 import daoImp.ShowApplyOrgDaoImp;
+import entity.AdminEntity;
 import entity.ShowApplyOrganizationEntity;
 import entity.UserEntity;
 import org.apache.struts2.interceptor.RequestAware;
@@ -57,7 +58,8 @@ public class ShowApplyOrgAction extends ActionSupport implements RequestAware,Se
         ShowApplyOrgDao = new ShowApplyOrgDaoImp();
         HistoryInfoDaoImp history = new HistoryInfoDaoImp();
         ShowApplyOrganization = ShowApplyOrgDao.getOne(id_org_apply);
-        List<ShowApplyOrganizationEntity> list=ShowApplyOrgDao.createOrg(ShowApplyOrganization);
+        AdminEntity admin = (AdminEntity)session.get("cur_admin");
+        List<ShowApplyOrganizationEntity> list=ShowApplyOrgDao.createOrg(ShowApplyOrganization,admin.getName(),admin.getId_admin());
         String content = "机构："+ShowApplyOrganization.getOrg_name()+" 审核已通过";
         Date dt=new Date();
         history.hasAcceptorGrantORG( ShowApplyOrganization.getId_user(),content, dt,ShowApplyOrganization.getOrg_name());
@@ -78,7 +80,9 @@ public class ShowApplyOrgAction extends ActionSupport implements RequestAware,Se
         ShowApplyOrgDao = new ShowApplyOrgDaoImp();
         HistoryInfoDaoImp history = new HistoryInfoDaoImp();
         ShowApplyOrganization = ShowApplyOrgDao.getOne(id_org_apply);
-        ShowApplyOrgDao.refuseOrg(ShowApplyOrganization);
+        AdminEntity admin = (AdminEntity)session.get("cur_admin");
+        System.out.println(admin);
+        ShowApplyOrgDao.refuseOrg(ShowApplyOrganization,admin.getName(),admin.getId_admin());
         List<ShowApplyOrganizationEntity> list=ShowApplyOrgDao.getALL();
         String content = "管理员未通过机构："+ShowApplyOrganization.getOrg_name()+" 的申请";
         Date dt=new Date();
@@ -103,12 +107,12 @@ public class ShowApplyOrgAction extends ActionSupport implements RequestAware,Se
     }
 
     @Override
-    public void setRequest(Map<String, Object> map) {
+    public void setRequest(Map<String, Object> request) {
         this.request = request;
     }
 
     @Override
-    public void setSession(Map<String, Object> map) {
+    public void setSession(Map<String, Object> session) {
         this.session = session;
     }
     public Map<String, Object> getDataMap() {

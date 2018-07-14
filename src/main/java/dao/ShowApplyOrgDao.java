@@ -9,6 +9,6 @@ public interface ShowApplyOrgDao {
     List<ShowApplyOrganizationEntity> getALL();
     List<ShowApplyOrganizationEntity> getOthers();
     ShowApplyOrganizationEntity getOne(int id);
-    List<ShowApplyOrganizationEntity> createOrg(ShowApplyOrganizationEntity create);
-    boolean refuseOrg(ShowApplyOrganizationEntity refuse);
+    List<ShowApplyOrganizationEntity> createOrg(ShowApplyOrganizationEntity create,String admin_name,int id_admin);
+    boolean refuseOrg(ShowApplyOrganizationEntity refuse,String admin_name,int id_admin);
 }

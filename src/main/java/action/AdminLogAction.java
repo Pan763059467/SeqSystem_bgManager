@@ -31,7 +31,6 @@ public class AdminLogAction extends ActionSupport implements RequestAware,Sessio
         Gson gson = new Gson();
         String json = gson.toJson(list);
         dataMap.put("res",json);
-        System.out.println(list);
         return SUCCESS;
     }
     @Override
