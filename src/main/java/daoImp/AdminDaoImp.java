@@ -83,4 +83,11 @@ public class AdminDaoImp extends DAO<AdminEntity> implements AdminDao {
         List<AdminEntity> ManagerList = getForList(sql);
         return ManagerList;
     }
+
+    @Override
+    public AdminEntity getOne(String admin_name) {
+        String sql="select * from administrator where name=?";
+        AdminEntity admin = get(sql,admin_name);
+        return admin;
+    }
 }

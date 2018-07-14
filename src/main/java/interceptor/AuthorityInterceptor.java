@@ -16,7 +16,7 @@ public class AuthorityInterceptor extends AbstractInterceptor{
             //取得请求相关的ActionContext实例
             HttpSession session= ServletActionContext.getRequest().getSession();
             //取出名为user的session属性
-            AdminEntity admin= (AdminEntity) session.getAttribute("admin");
+            AdminEntity admin= (AdminEntity) session.getAttribute("cur_admin");
             String method =  invocation.getProxy().getMethod();
             if(admin!=null){
                 return invocation.invoke();
