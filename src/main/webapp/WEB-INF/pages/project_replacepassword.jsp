@@ -143,7 +143,7 @@
         }
         else{
             $.ajax({
-                url: "login-replacepassword",
+                url: "login-changePassword",
                 data: {
                     name: $("input#name").val(),
                     formerPassword:$("input#password0").val(),
@@ -166,7 +166,7 @@
                         })
                     }
                     else if (result.res === false)
-                        swal("修改密码失败！", "请确认原密码。", "error");
+                        swal("修改密码失败！", "请确认账户，密码。", "error");
                 },
                 error: function () {
                     swal("修改密码失败！", "服务器异常。", "error");

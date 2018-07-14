@@ -55,7 +55,7 @@ public class UserDaoImp extends DAO<UserEntity> implements UserDao {
             return false;
     }
 
-    public boolean replacepassword(String name, String password2, String password3) {
+    public boolean replacePassword(String name, String password2, String password3) {
         if (password2.equals(password3)) {
             String sql = "update USER set password=? where name=?";
             update(sql, password2, name);

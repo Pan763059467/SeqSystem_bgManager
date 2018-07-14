@@ -106,6 +106,33 @@
         </div>
         <br>
     </div>
+    <div style="padding: 20px" class="col-md-6">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <div style="float: left;margin-left: 5px"><span><strong>重置管理员密码</strong></span></div>
+            </div>
+            <div style="padding-left: 80px" class="ibox-content">
+                <table class="table" style="width:400px;border-left: none;border-right: none">
+                    <tbody>
+                    <tr >
+                        <th style="width: 150px;text-align: center">管理员名:</th>
+                        <th>
+                            <input name="name" id="name1" type="username" class="form-control loginLine " style="font-size:13px" placeholder="请输入待重置管理员的账户" maxlength="15" required="">
+                        </th>
+                    </tr>
+                    <tr >
+                        <th style="width: 150px;text-align: center">密码:</th>
+                        <th>
+                            <input name="password" id="password1"  type="text" class="form-control loginLine " style="font-size:13px" placeholder="请输入新密码" maxlength="22" required="">
+                        </th>
+                    </tr>
+                    </tbody>
+                </table>
+                <div id="test2" style="margin-left: 200px" ><button id="replaceManager_button" style="height: 50px;width: 80px" type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal">确认重置</button></div>
+            </div>
+        </div>
+        <div class="ibox float-e-margins"></div>
+    </div>
 </div>
 <script src="<%=basePath%>/js/jquery.min.js?v=2.1.4"></script>
 <script src="<%=basePath%>/js/bootstrap.min.js?v=3.3.6"></script>
@@ -152,13 +179,55 @@
                                 confirmButtonColor: "#18a689",
                                 confirmButtonText: "OK"
                             },function(){
-                                location.href = "user-jmpAdminManage";
+                                location.href = "adminManage-jmpAdminManage";
                             })
                         }
                         else swal("增加失败！", "操作失败", "success");
                     },
                     error: function () {
                         swal("增加失败！", "请检查你的网络", "success");
+                    }
+                })
+            })
+    })
+</script>
+<script>
+    $("button#replaceManager_button").click(function (){
+        swal(
+            {
+                title: "您确认重置管理员吗？",
+                text: "确认请点击重置",
+                type: "",
+                showCancelButton: true,
+                confirmButtonColor: "#18a689",
+                confirmButtonText: "重置",
+                cancelButtonText: "取消",
+                closeOnConfirm: false
+            },function () {
+                $.ajax({
+                    url: "adminManage-replacePassword",
+                    data: {
+                        name: $("input#name1").val(),
+                        newPassword: $("input#password1").val(),
+                    },
+                    dataType: "json",
+                    type: "Post",
+                    async: "false",
+                    success: function (result) {
+                        if (result.res == true){
+                            swal({
+                                title: "重置成功",
+                                type:"success",
+                                confirmButtonColor: "#18a689",
+                                confirmButtonText: "OK"
+                            },function(){
+                                location.href = "adminManage-jmpAdminManage";
+                            })
+                        }
+                        else swal("重置失败！", "操作失败", "success");
+                    },
+                    error: function () {
+                        swal("重置失败！", "请检查你的网络", "success");
                     }
                 })
             })

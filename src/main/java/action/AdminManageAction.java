@@ -18,6 +18,7 @@ import java.util.Map;
 public class AdminManageAction extends ActionSupport implements RequestAware, SessionAware, ModelDriven<AdminEntity>, Preparable {
     private AdminDao adminDao;
     private AdminEntity admin;
+    private String newPassword;
     private Map<String,Object> session;
     private Map<String, Object> dataMap;
     private Map<String,Object> request;
@@ -43,6 +44,16 @@ public class AdminManageAction extends ActionSupport implements RequestAware, Se
         String json = gson.toJson(list);
         dataMap.put("res",json);
         System.out.println(list);
+        return SUCCESS;
+    }
+
+    public String replacePassword(){
+        dataMap = new HashMap<String, Object>();
+        adminDao = new AdminDaoImp();
+        System.out.println(admin.getName()+" "+newPassword+" adaasdasdaf "+admin.getId_admin()+" "+admin.getName());
+        boolean res = adminDao.replacePassword(admin.getName(),newPassword);
+        System.out.println(res);
+        dataMap.put("res", res);
         return SUCCESS;
     }
 
@@ -77,6 +88,9 @@ public class AdminManageAction extends ActionSupport implements RequestAware, Se
 
     public void setDataMap(Map<String, Object> dataMap) {
         this.dataMap = dataMap;
+    }
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
     }
 
 }

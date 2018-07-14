@@ -87,11 +87,11 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
         return SUCCESS;
     }
 
-    public String replacepassword(){
+    public String changePassword(){
         dataMap = new HashMap<String, Object>();
         adminDao = new AdminDaoImp();
         System.out.println(admin.getName()+" "+formerPassword+" "+tempPassword+" "+newPassword);
-        boolean res = adminDao.replacepassword(admin.getName(),formerPassword,tempPassword,newPassword);
+        boolean res = adminDao.changePassword(admin.getName(),formerPassword,tempPassword,newPassword);
         System.out.println(res);
         dataMap.put("res", res);
         return SUCCESS;

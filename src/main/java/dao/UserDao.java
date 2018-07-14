@@ -10,7 +10,7 @@ public interface UserDao {
 
 	boolean registration(String name,String password1,String password2, String mail);
 	boolean postmail(postmailEntity info, String title);
-	boolean replacepassword(String name,String password2,String password3);
+	boolean replacePassword(String name,String password2,String password3);
 
 	boolean edit(String username,String qq,String address,String tel,String introduce,String gender);
 
