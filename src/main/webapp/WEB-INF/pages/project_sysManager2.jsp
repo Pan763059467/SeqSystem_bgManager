@@ -176,11 +176,55 @@
             }
         )
     }
+    window.actionEvents = {
+        'click .grant': function(e, value, row, index) {
+            //转移机构管理权限
+            var id_user = parseInt(row.id_user);
+            var user_name = row.name;
+            var currentOrg=$("#gender").val();
+            if(row.statu === 1){
+                swal("该用户已经是机构管理员！", "请选择其他用户", "error");
+            }
+            else {
+                swal(
+                    {
+                        title: "您确定任命此用户为该机构管理员吗",
+                        text: "请谨慎操作！",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确定",
+                        cancelButtonText: "取消",
+                        closeOnConfirm: false
+                    }, function () {
+                        $.ajax({
+                            type: "GET",
+                            url: "orgInvite-grantOrg",
+                            data: {ID_USER: id_user, USER_NAME: user_name, ORG_NAME: currentOrg},
+                            dataType: "json",
+                            success: function () {
+                                swal({
+                                    title: "操作完成",
+                                    text: "点击返回首页！",
+                                    type: "success",
+                                    confirmButtonColor: "#18a689",
+                                    confirmButtonText: "OK"
+                                }, function () {
+                                    location.href = "user-jmpHomepage";
+                                })
+                            },
+                            error: function (result) {
+                                swal("操作失败！", "服务器异常。", "error");
+                            }
+                        })
+                    })
+            }
+        }
+    };
 </script>
 <script>
     $("button#disbandment-button").click(function () {
         var currentOrg = $("#gender").val();
-        alert(currentOrg);
         if(currentOrg === "" || currentOrg === null){
             swal("请先选择机构！", "选择机构在右侧选项框", "error");
         }
@@ -213,7 +257,7 @@
                                         confirmButtonColor: "#18a689",
                                         confirmButtonText: "OK"
                                     },function(){
-                                        location.href = "user-jmpSysManager2";
+                                        location.href = "user-jmpHomepage";
                                     })
                                 }
                                 else swal("解散失败！", "未在系统中找到该机构", "error");

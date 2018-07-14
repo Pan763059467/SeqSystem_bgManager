@@ -129,55 +129,43 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div id="div5" class="col-sm-4">
-                                            <div class="contact-box">
-                                                <div>
-                                                    <div style="margin: 10px 10px 10px 15px;float: left"><img src="/img/comment_manager.png" height="125" width="125"/></div>
-                                                    <div style="margin: 10px;float: left">
-                                                        <h3>文档评论管理</h3>
-                                                        <br/>
-                                                        <p>可查看该系统所有文档下评论</p>
-                                                        <p>删除评论不受时间限制</p>
-                                                    </div>
-                                                    <div style="clear: both;margin: 0px 10px 0px 10px">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
                             <div class="tab-pane" id="tab-2">
-                                <div class="tab-pane active" id="tab-7">
-                                    <div style="margin:-30px 0px 0px 0px">
-                                        <div class="ibox float-e-margins">
-                                            <div class="ibox-content">
-                                                <div class="bootstrap-table" >
-                                                    <table id="showOrgApply"
-                                                           data-toggle="table"
-                                                           data-url="showApplyOrg-showList"
-                                                           data-click-to-select="true"
-                                                           data-search="true"
-                                                           data-show-refresh="true"
-                                                           data-show-toggle="true"
-                                                           data-show-columns="true"
-                                                           data-toolbar="#toolbar"
-                                                           data-query-params="quefryParams"
-                                                           data-pagination="true"
-                                                           data-halign="center"
-                                                           data-striped="true"
-                                                           data-page-size="6"
-                                                           data-height="410"
-                                                           data-page-list="All"
-                                                    >
-                                                    </table>
-                                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab-3">
+                                <div id="div5" class="col-sm-4">
+                                    <div class="contact-box">
+                                        <div>
+                                            <div style="margin: 10px 10px 10px 15px;float: left"><img src="/img/comment_manager.png" height="125" width="125"/></div>
+                                            <div style="margin: 10px;float: left">
+                                                <h3>文档评论管理</h3>
+                                                <br/>
+                                                <p>可查看该系统所有文档下评论</p>
+                                                <p>删除评论不受时间限制</p>
+                                            </div>
+                                            <div style="clear: both;margin: 0px 10px 0px 10px">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="tab-pane" id="tab-3">
+                                <div id="div6" class="col-sm-4">
+                                    <div class="contact-box">
+                                        <div>
+                                            <div style="margin: 10px 10px 10px 15px;float: left"><img src="/img/comment_manager.png" height="125" width="125"/></div>
+                                            <div style="margin: 10px;float: left">
+                                                <h3>构件评论管理</h3>
+                                                <br/>
+                                                <p>可查看该系统所有文档下评论</p>
+                                                <p>删除评论不受时间限制</p>
+                                            </div>
+                                            <div style="clear: both;margin: 0px 10px 0px 10px">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

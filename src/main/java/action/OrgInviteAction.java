@@ -11,6 +11,7 @@ import daoImp.HistoryInfoDaoImp;
 import daoImp.OrgInviteDaoImp;
 import daoImp.OrganizationDaoImp;
 import daoImp.UserDaoImp;
+import entity.AdminEntity;
 import entity.OrgInviteEntity;
 import entity.UserEntity;
 import org.apache.struts2.interceptor.RequestAware;
@@ -70,19 +71,9 @@ public class OrgInviteAction extends ActionSupport implements RequestAware, Sess
     public String grantOrg() {
         dataMap = new HashMap<String, Object>();
         orgInviteDao = new OrgInviteDaoImp();
-        HistoryInfoDaoImp history = new HistoryInfoDaoImp();
-        UserDao userDao = new UserDaoImp();
-        UserEntity sessionUser = (UserEntity) session.get("user");
-        boolean res = orgInviteDao.grantOrg(sessionUser.getId_user(), orgInvite.getID_USER(), orgInvite.getORG_NAME());
-        if (res) {
-            int orgManager = userDao.orgManager(sessionUser.getId_user());
-            String advance_name = userDao.FindName(sessionUser.getId_user());
-            String current_name = userDao.FindName(orgInvite.getID_USER());
-            session.put("orgManager", orgManager);
-            String content = advance_name+"任命"+current_name+"为"+orgInvite.getORG_NAME()+"机构管理员";
-            Date dt=new Date();
-            history.hasAcceptorGrantORG( orgInvite.getID_USER(),content, dt,orgInvite.getORG_NAME());
-        }
+        AdminEntity admin;
+        admin = (AdminEntity) session.get("cur_admin");
+        boolean res = orgInviteDao.grantOrg(orgInvite.getID_USER(), orgInvite.getORG_NAME(),admin.getName(),admin.getId_admin());
         dataMap.put("res",res);
         return SUCCESS;
     }
