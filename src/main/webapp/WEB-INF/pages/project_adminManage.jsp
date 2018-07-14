@@ -47,9 +47,8 @@
             </li>
         </ol>
     </div>
-
     <div style="padding: 20px" class="col-md-6">
-        <div class="ibox float-e-margins">
+        <div id="addAdmin"><div class="ibox float-e-margins">
             <div class="ibox-title">
                 <div style="float: left;margin-left: 5px"><span><strong>新增管理员</strong></span></div>
             </div>
@@ -70,10 +69,38 @@
                     </tr>
                     </tbody>
                 </table>
-                <div id="test1" style="margin-left: 200px" ><button id="addManager_button" style="height: 50px;width: 80px" type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal">确认新增</button></div>
+                <div id="test1" style="margin-left: 200px" >
+                    <button id="addManager_button" style="height: 30px;width: 80px" type="button" class="btn btn-info text-center btn-xs" data-toggle="modal" data-target="#myModal">确认新增</button>
+                </div>
             </div>
-        </div>
-        <div class="ibox float-e-margins"></div>
+        </div></div>
+        <div id="rePassword">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <div style="float: left;margin-left: 5px"><span><strong>重置管理员密码</strong></span></div>
+                </div>
+                <div style="padding-left: 80px" class="ibox-content">
+                    <table class="table" style="width:400px;border-left: none;border-right: none">
+                        <tbody>
+                        <tr >
+                            <th style="width: 150px;text-align: center">管理员名:</th>
+                            <th>
+                                <input name="name" id="name1" type="username" class="form-control loginLine " style="font-size:13px" placeholder="请输入待重置管理员的账户" maxlength="15" required="">
+                            </th>
+                        </tr>
+                        <tr >
+                            <th style="width: 150px;text-align: center">密码:</th>
+                            <th>
+                                <input name="password" id="password1"  type="text" class="form-control loginLine " style="font-size:13px" placeholder="请输入新密码" maxlength="22" required="">
+                            </th>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div id="test2" style="margin-left: 200px" ><button id="replaceManager_button" style="height: 30px;width: 80px" type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal">确认重置</button></div>
+                </div>
+            </div>
+            <div class="ibox float-e-margins"></div>
+        </div></div>
     </div>
     <div style="float: right;padding: 20px" class="col-md-6 ">
         <div class="ibox float-e-margins">
@@ -84,7 +111,6 @@
             <table id="ManagerInfo" data-toggle="table"
                    data-classes="table table-no-bordered"
                    data-sort-order="desc"
-                   data-url="adminManage-showList"
                    data-click-to-select="true"
                    data-search="true"
                    data-show-refresh="true"
@@ -96,42 +122,13 @@
                    data-halign="center"
                    data-striped="true"
                    data-page-size="5"
-                   data-height="400"
-                   data-pagination-v-align="top"
-                   data-sort-stable="true"
-                   data-page-list="[8]"
+                   data-height="480"
+                   data-page-list="All"
             >
             </table>
         </div>
         </div>
         <br>
-    </div>
-    <div style="padding: 20px" class="col-md-6">
-        <div class="ibox float-e-margins">
-            <div class="ibox-title">
-                <div style="float: left;margin-left: 5px"><span><strong>重置管理员密码</strong></span></div>
-            </div>
-            <div style="padding-left: 80px" class="ibox-content">
-                <table class="table" style="width:400px;border-left: none;border-right: none">
-                    <tbody>
-                    <tr >
-                        <th style="width: 150px;text-align: center">管理员名:</th>
-                        <th>
-                            <input name="name" id="name1" type="username" class="form-control loginLine " style="font-size:13px" placeholder="请输入待重置管理员的账户" maxlength="15" required="">
-                        </th>
-                    </tr>
-                    <tr >
-                        <th style="width: 150px;text-align: center">密码:</th>
-                        <th>
-                            <input name="password" id="password1"  type="text" class="form-control loginLine " style="font-size:13px" placeholder="请输入新密码" maxlength="22" required="">
-                        </th>
-                    </tr>
-                    </tbody>
-                </table>
-                <div id="test2" style="margin-left: 200px" ><button id="replaceManager_button" style="height: 50px;width: 80px" type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal">确认重置</button></div>
-            </div>
-        </div>
-        <div class="ibox float-e-margins"></div>
     </div>
 </div>
 <script src="<%=basePath%>/js/jquery.min.js?v=2.1.4"></script>
@@ -179,13 +176,13 @@
                                 confirmButtonColor: "#18a689",
                                 confirmButtonText: "OK"
                             },function(){
-                                location.href = "adminManage-jmpAdminManage";
+                                location.href = "adminManage-jmpAdminManager";
                             })
                         }
-                        else swal("增加失败！", "操作失败", "success");
+                        else swal("增加失败！", "操作失败", "error");
                     },
                     error: function () {
-                        swal("增加失败！", "请检查你的网络", "success");
+                        swal("增加失败！", "请检查你的网络", "error");
                     }
                 })
             })
@@ -221,13 +218,13 @@
                                 confirmButtonColor: "#18a689",
                                 confirmButtonText: "OK"
                             },function(){
-                                location.href = "adminManage-jmpAdminManage";
+                                location.href = "adminManage-jmpAdminManager";
                             })
                         }
-                        else swal("重置失败！", "操作失败", "success");
+                        else swal("重置失败！", "操作失败", "error");
                     },
                     error: function () {
-                        swal("重置失败！", "请检查你的网络", "success");
+                        swal("重置失败！", "请检查你的网络", "error");
                     }
                 })
             })
@@ -312,7 +309,7 @@
                             confirmButtonColor: "#18a689",
                             confirmButtonText: "OK"
                         },function(){
-                            location.href = "adminManage-jmpAdminManage";
+                            location.href = "adminManage-jmpAdminManager";
                         })
                     },
                     error: function (result) {

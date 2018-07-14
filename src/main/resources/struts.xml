@@ -239,7 +239,7 @@
             </result>
             <interceptor-ref name="myStack"/>
 
-            <allowed-methods>jmpAdminManage,addManager,showList,replacePassword,deleteManager</allowed-methods>
+            <allowed-methods>jmpAdminManager,addManager,showList,replacePassword,deleteManager</allowed-methods>
         </action>
 
         <action name="N_user-*" class="action.N_userAction" method="{1}">
