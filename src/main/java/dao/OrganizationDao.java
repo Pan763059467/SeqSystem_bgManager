@@ -21,4 +21,5 @@ public interface OrganizationDao {
     String findAdminName(int ID_ORGANIZATION);
 
     List<OrganizationEntity> getAllOrg();
+    boolean disbandOrg(String org_name,String admin_name,int id_admin);
 }

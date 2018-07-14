@@ -7,10 +7,12 @@ package daoImp;
 
 import dao.DAO;
 import dao.OrganizationDao;
+import dao.UserDao;
 import entity.ApplyOrganizationEntity;
 import entity.OrganizationEntity;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 public class OrganizationDaoImp extends DAO<OrganizationEntity> implements OrganizationDao {
@@ -72,6 +74,25 @@ public class OrganizationDaoImp extends DAO<OrganizationEntity> implements Organ
         String sql = "select NAME from ORGANIZATION";
         List<OrganizationEntity> MyOrgList = getForList(sql);
         return MyOrgList;
+    }
+
+    @Override
+    public boolean disbandOrg(String org_name,String admin_name,int id_admin) {
+        String sql1 = "select ID_ORGANIZATION from organization where NAME=?";
+        String sql2 = "update project set ID_ORGANIZATION=null where ID_ORGANIZATION=?";
+        String sql3 = "delete from org_user_apply where ID_ORGANIZATION=?";
+        String sql4 = "delete from org_member where ID_ORGANIZATION=?";
+        String sql5 = "delete from organization where ID_ORGANIZATION=?";
+        String sql6 = "insert into admin_log(ID_ADMIN,CONTENT,DATE) value(?,?,?)";
+        Timestamp NowTime = new Timestamp(new java.util.Date().getTime());
+        String content = "管理员"+admin_name+"于"+NowTime+"解散机构："+org_name;
+        int id_org = Integer.valueOf(getForValue(sql1,org_name).toString());
+        update(sql2,id_org);
+        update(sql3,id_org);
+        update(sql4,id_org);
+        update(sql5,id_org);
+        update(sql6,id_admin,content,NowTime);
+        return true;
     }
 
 

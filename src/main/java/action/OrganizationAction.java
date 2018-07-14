@@ -17,10 +17,7 @@ import daoImp.AdminOrgDaoImp;
 import daoImp.OrganizationDaoImp;
 import daoImp.ShowOrgProjectDaoImp;
 import daoImp.UserDaoImp;
-import entity.AdminOrgEntity;
-import entity.OrganizationEntity;
-import entity.ShowOrgProjectEntity;
-import entity.UserEntity;
+import entity.*;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
@@ -49,7 +46,6 @@ public class OrganizationAction extends ActionSupport implements RequestAware, S
         organizationdao = new OrganizationDaoImp();
         List<OrganizationEntity> list = organizationdao.getAllOrg();
         ActionContext.getContext().getValueStack().set("list",list);
-        System.out.println(list+"OrgAction");
         return "OrgManager1Page";
 }
 
@@ -58,32 +54,30 @@ public class OrganizationAction extends ActionSupport implements RequestAware, S
         organizationdao = new OrganizationDaoImp();
         List<OrganizationEntity> list = organizationdao.getAllOrg();
         ActionContext.getContext().getValueStack().set("list",list);
-        System.out.println(list+"OrgAction");
         return "SysManager2Page";
-    }
-
-    public String showAllMember(){
-        dataMap = new HashMap<String, Object>();
-        UserDao userdao = new UserDaoImp();
-        UserEntity seesionUser=(UserEntity)session.get("user");
-        List<UserEntity> orgMember = userdao.getOrgAllMem(seesionUser.getId_user(),organization.getNAME());
-        Gson gson = new Gson();
-        String json = gson.toJson(orgMember);
-        System.out.println("OrgAllMember"+json);
-        dataMap.put("res",json);
-        return "display";
     }
 
     public String showAdminOrg(){
         dataMap = new HashMap<String, Object>();
         AdminOrgDao adminOrgDao = new AdminOrgDaoImp();
         List<AdminOrgEntity> AdminOrg = adminOrgDao.getAllMember(organization.getNAME());
-        System.out.println(AdminOrg);
         Gson gson = new Gson();
         String json = gson.toJson(AdminOrg);
         dataMap.put("res",json);
         return "display";
     }
+
+    public String disbandOrg(){
+        dataMap = new HashMap<String, Object>();
+        AdminEntity admin;
+        admin = (AdminEntity) session.get("cur_admin");
+        OrganizationDao organizationDao = new OrganizationDaoImp();
+        System.out.println("#"+organization.getNAME()+"#"+admin.getName()+"#"+admin.getId_admin());
+        boolean res = organizationDao.disbandOrg(organization.getNAME(),admin.getName(),admin.getId_admin());
+        dataMap.put("res",res);
+        return "RES";
+    }
+
     public String showAllProject(){
         dataMap = new HashMap<String, Object>();
         ShowOrgProjectDao showOrgProjectDao = new ShowOrgProjectDaoImp();

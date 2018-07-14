@@ -35,7 +35,7 @@
             <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header"><a  href="user-jmpTemp"><img src="<%=basePath %>/img/logo.png" style="height: 50px;margin: 10px 0px 5px 50px;"> </a></div>
                 <ul class="nav navbar-top-links navbar-right">
-                    <a id="yourName" class="dropdown J_tabClose" data-toggle="dropdown">${sessionScope.admin.name}<span class="caret"></span>
+                    <a id="yourName" class="dropdown J_tabClose" data-toggle="dropdown">${sessionScope.cur_admin.name}<span class="caret"></span>
                     </a>
                     <ul  role="menu" class="dropdown-menu dropdown-menu-right">
                         <li  class="J_tabShowActive"><a id="test1"  class="J_menuItem" href="user-jmpOperationLog">操作日志</a>

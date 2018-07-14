@@ -15,4 +15,5 @@ public interface AdminDao {
         boolean addManager(String name,String password);
 
         List<AdminEntity> getALL();
+        AdminEntity getOne(String admin_name);
 }
