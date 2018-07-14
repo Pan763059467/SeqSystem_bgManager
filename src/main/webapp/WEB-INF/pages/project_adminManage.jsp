@@ -254,7 +254,7 @@
                     title: '操作',
                     align: 'center',
                     events: "actionEvents",
-                    formatter: "AddFunctionAlty"
+                    formatter: "operateFormatter"
                 }
             ]
         }
@@ -278,5 +278,49 @@
             }
         }
     )
+
+    function operateFormatter(value,row,index) {
+        return[
+            '<a class="delete" style="padding-left: 10px"><button class="btn btn-info text-center btn-xs " >删除</button></a>',
+        ].join('');
+    }
+    window.actionEvents = {
+        'click .delete': function (e, value, row, index) {
+            var id_admin = parseInt(row.id_admin);
+            var admin_name = row.name;
+            //删除操作
+            swal({
+                title: "您确定要删除这个管理员吗",
+                text: "点击确定将删除这个管理员！",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#18a689",
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+                closeOnConfirm: false
+            }, function () {
+                $.ajax({
+                    type: "GET",
+                    url: "adminManage-deleteManager",
+                    data: {id_admin: id_admin},
+                    dataType: "json",
+                    success: function () {
+                        swal({
+                            title: "删除成功",
+                            text: "点击返回管理页面！",
+                            type:"success",
+                            confirmButtonColor: "#18a689",
+                            confirmButtonText: "OK"
+                        },function(){
+                            location.href = "adminManage-jmpAdminManage";
+                        })
+                    },
+                    error: function (result) {
+                        swal("操作失败！", "出现未知错误，请重试。", "error");
+                    }
+                })
+            })
+        }
+    }
 </script>
 </html>
