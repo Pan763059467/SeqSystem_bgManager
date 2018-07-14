@@ -60,8 +60,8 @@
                            data-pagination="true"
                            data-halign="center"
                            data-striped="true"
-                           data-page-size="6"
-                           data-height="410"
+                           data-page-size="7"
+                           data-height="400"
                            data-page-list="All"
                     >
                     </table>
