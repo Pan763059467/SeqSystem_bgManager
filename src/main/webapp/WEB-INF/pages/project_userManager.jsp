@@ -138,7 +138,7 @@
         var flag=parseInt(row.flag);
         if(flag==0)
             return ['正常使用',
-                '<a class="lock" style="padding-left: 10px"><button class="btn btn-info text-center btn-xs " >封停</button></a>'].join('');
+                '<a class="lock" style="padding-left: 10px"><button class="btn btn-info text-center btn-xs " >封禁</button></a>'].join('');
         else if(flag==1)
             return ['已封停',
                 '<a class="unlock" style="padding-left: 10px"><button class="btn btn-info text-center btn-xs " >解封</button></a>'].join('');
@@ -150,12 +150,12 @@
             var user_name = row.name;
             swal(
                 {
-                    title: "您确定要锁定该用户吗",
+                    title: "您确定要封禁该用户吗",
                     text: "请谨慎操作！",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#18a689",
-                    confirmButtonText: "锁定",
+                    confirmButtonText: "封禁",
                     cancelButtonText: "取消",
                     closeOnConfirm: false
                 },function () {
@@ -166,7 +166,7 @@
                         dataType: "json",
                         success: function (json) {
                             swal({
-                                title: "锁定成功",
+                                title: "封禁成功",
                                 text: "点击返回管理页面！",
                                 type:"success",
                                 confirmButtonColor: "#18a689",
@@ -187,12 +187,12 @@
             var user_name = row.name;
             swal(
                 {
-                    title: "您确定要解锁该用户吗",
+                    title: "您确定要解封该用户吗",
                     text: "请谨慎操作！",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#18a689",
-                    confirmButtonText: "解锁",
+                    confirmButtonText: "解封",
                     cancelButtonText: "取消",
                     closeOnConfirm: false
                 },function () {
@@ -203,7 +203,7 @@
                         dataType: "json",
                         success: function (json) {
                             swal({
-                                title: "解锁成功",
+                                title: "解封成功",
                                 text: "点击返回管理页面！",
                                 type:"success",
                                 confirmButtonColor: "#18a689",
