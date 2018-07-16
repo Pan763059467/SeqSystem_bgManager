@@ -32,7 +32,7 @@
         <ol class="breadcrumb" style="margin-left: 40px">
             <li style="font-size: 15px">
                 <strong>
-                    <a href="user-jmpHomepage">首页</a> >> 操作日志
+                    <a href="user-jmpHomepage">后台管理系统首页</a> >> 操作日志
                 </strong>
             </li>
         </ol>
