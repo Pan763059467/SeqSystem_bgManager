@@ -78,6 +78,7 @@ public class N_userAction extends ActionSupport implements RequestAware, Session
         System.out.println(user.getId_user()+" " + user.getName());
         return SUCCESS;
     }
+
     @Override
     public UserEntity getModel() {
         return user;

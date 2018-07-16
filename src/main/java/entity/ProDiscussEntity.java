@@ -1,6 +1,7 @@
 package entity;
 
 import java.io.File;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -12,9 +13,11 @@ import java.util.List;
 public class ProDiscussEntity {
     private int id_pro_discuss;
     private int id_user;
-    private String name;
+    private String user_name;
+    private String pro_name;
+    private String doc_name;
     private int id_catalog;
-    private  Date time;
+    private Timestamp time;
     private String content;
 
     private int id_Project;
@@ -22,6 +25,30 @@ public class ProDiscussEntity {
     private List<File> MyFile;
     private List<String> MyFileFileName;
     private List<AccessoryEntity> accessoryEntityList;
+
+    public String getUser_name() {
+        return user_name;
+    }
+
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
+    }
+
+    public String getPro_name() {
+        return pro_name;
+    }
+
+    public void setPro_name(String pro_name) {
+        this.pro_name = pro_name;
+    }
+
+    public String getDoc_name() {
+        return doc_name;
+    }
+
+    public void setDoc_name(String doc_name) {
+        this.doc_name = doc_name;
+    }
 
     public int getId_pro_discuss() {
         return id_pro_discuss;
@@ -47,11 +74,11 @@ public class ProDiscussEntity {
         this.id_catalog = id_catalog;
     }
 
-    public Date getTime() {
+    public Timestamp getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(Timestamp time) {
         this.time = time;
     }
 
@@ -61,14 +88,6 @@ public class ProDiscussEntity {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public int getId_Project() {
@@ -111,10 +130,12 @@ public class ProDiscussEntity {
         this.accessoryEntityList = accessoryEntityList;
     }
 
-    public ProDiscussEntity(int id_pro_discuss, int id_user, String name, int id_catalog, Date time, String content, int id_Project, int id_Document, List<File> myFile, List<String> myFileFileName, List<AccessoryEntity> accessoryEntityList) {
+    public ProDiscussEntity(int id_pro_discuss, int id_user, String user_name, String pro_name, String doc_name, int id_catalog, Timestamp time, String content, int id_Project, int id_Document, List<File> myFile, List<String> myFileFileName, List<AccessoryEntity> accessoryEntityList) {
         this.id_pro_discuss = id_pro_discuss;
         this.id_user = id_user;
-        this.name = name;
+        this.user_name = user_name;
+        this.pro_name = pro_name;
+        this.doc_name = doc_name;
         this.id_catalog = id_catalog;
         this.time = time;
         this.content = content;
@@ -133,7 +154,9 @@ public class ProDiscussEntity {
         return "ProDiscussEntity{" +
                 "id_pro_discuss=" + id_pro_discuss +
                 ", id_user=" + id_user +
-                ", name='" + name + '\'' +
+                ", user_name='" + user_name + '\'' +
+                ", pro_name='" + pro_name + '\'' +
+                ", doc_name='" + doc_name + '\'' +
                 ", id_catalog=" + id_catalog +
                 ", time=" + time +
                 ", content='" + content + '\'' +

@@ -25,5 +25,9 @@ public interface ProDiscussDao {
 
     void delete(int id_pro_discuss);
 
+    boolean deleteDiscuss(int sp_id,int id_pro_discuss,int id_user);
+
     int getCatalogDisNum(int id_catalog);
+
+    List<ProDiscussEntity> getALL();
 }

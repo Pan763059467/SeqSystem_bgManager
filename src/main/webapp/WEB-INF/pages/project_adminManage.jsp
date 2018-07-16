@@ -70,7 +70,7 @@
                     </tr>
                     </tbody>
                 </form>
-                <div id="test1" style="margin-left: 200px;margin-top: 10px" >
+                <div id="test1" style="margin-left: 200px;margin-top: 15px" >
                     <button id="addManager_button" style="height: 30px;width: 80px" type="button" class="btn btn-info text-center btn-xs" data-toggle="modal" data-target="#myModal">确认新增</button>
                 </div>
             </div>
@@ -98,7 +98,7 @@
                         </tr>
                         </tbody>
                     </form>
-                    <div id="test2" style="margin-left: 200px;margin-top: 10px" ><button id="replaceManager_button" style="height: 30px;width: 80px" type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal">确认重置</button></div>
+                    <div id="test2" style="margin-left: 200px;margin-top: 15px" ><button id="replaceManager_button" style="height: 30px;width: 80px" type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal">确认重置</button></div>
                 </div>
             </div>
             <div class="ibox float-e-margins"></div>
@@ -124,7 +124,7 @@
                    data-halign="center"
                    data-striped="true"
                    data-page-size="5"
-                   data-height="480"
+                   data-height="510"
                    data-page-list="All"
             >
             </table>

@@ -139,7 +139,7 @@
                             <div class="tab-pane" id="tab-2">
                             </div>
                             <div class="tab-pane" id="tab-3">
-                                <div id="div5" class="col-sm-4">
+                                <a href="user-jmpDocDisManager"><div id="div5" class="col-sm-4">
                                     <div class="contact-box">
                                         <div>
                                             <div style="margin: 10px 10px 10px 15px;float: left"><img src="/img/comment_manager.png" height="125" width="125"/></div>
@@ -154,6 +154,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                </a>
                                 <div id="div6" class="col-sm-4">
                                     <div class="contact-box">
                                         <div>

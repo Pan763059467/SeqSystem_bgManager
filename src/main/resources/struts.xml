@@ -58,9 +58,10 @@
             <result name="RES" type="json"><param name="root">dataMap</param></result>
             <result name="UserManagerPage">/WEB-INF/pages/project_userManager.jsp</result>
             <result name="pointsManagerPage">/WEB-INF/pages/project_pointsManager.jsp</result>
+            <result name="DocDisManagerPage">/WEB-INF/pages/project_doc_discuss.jsp</result>
         <interceptor-ref name="myStack"/>
             <allowed-methods>
-                jmpPointManager,changePassword,showAllUser,jmpUserManager,jmpOperationLog,jmpMyprofile,jmpMycollect,jmpHomepage,jmpSysManager1,jmpSysManager2,jmpNewproject,jmpTemp,jmpCasecomponent,jmpUsercomponent,jmpCurrentProjectList,jmpCompletedProjectList
+                jmpDocDisManager,jmpPointManager,changePassword,showAllUser,jmpUserManager,jmpOperationLog,jmpMyprofile,jmpMycollect,jmpHomepage,jmpSysManager1,jmpSysManager2,jmpNewproject,jmpTemp,jmpCasecomponent,jmpUsercomponent,jmpCurrentProjectList,jmpCompletedProjectList
             </allowed-methods>
         </action>
 
@@ -252,6 +253,15 @@
             <interceptor-ref name="myStack"/>
 
             <allowed-methods>saveRecordId,jmpPointsRecordPage,showPointsRecord,addPoints,lock,unlock</allowed-methods>
+        </action>
+
+        <action name="doc_dis-*" class="action.DocDiscussAction" method="{1}">
+            <result name="success" type="json">
+                <param name="root">dataMap</param>/
+            </result>
+            <result name="RES" type="json"><param name="root">dataMap</param></result>
+            <interceptor-ref name="myStack"/>
+            <allowed-methods>docDisList,deleteDiscuss</allowed-methods>
         </action>
     </package>
 </struts>

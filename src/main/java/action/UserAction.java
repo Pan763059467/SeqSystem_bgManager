@@ -222,6 +222,9 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
     public String jmpPointManager(){
         return "pointsManagerPage";
     }
+    public String jmpDocDisManager(){
+        return "DocDisManagerPage";
+    }
     @Override
     public AdminEntity getModel() {
         return admin;

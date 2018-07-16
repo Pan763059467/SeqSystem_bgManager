@@ -39,9 +39,16 @@ public class AdminDaoImp extends DAO<AdminEntity> implements AdminDao {
         int count=Integer.valueOf(getForValue(sql0,name,password1,0).toString());
         if(count == 1){
             if (password2.equals(password3)) {
-            String sql = "update administrator set password=? where name=?";
-            update(sql, password2, name);
-            return true;
+                String sql1="SELECT ID_ADMIN FROM administrator where name=?";
+                int id_admin = Integer.valueOf(getForValue(sql1,name).toString());
+                Timestamp createDate = new Timestamp(new java.util.Date().getTime());
+                String content = "管理员" + name + "于" + createDate + "重置密码";
+                String sql2 = "insert into admin_log(ID_ADMIN,CONTENT,DATE,ID_ADMIN_P) value(?,?,?,?)";
+                update(sql2,id_admin,content,createDate,id_admin);
+                //
+                String sql = "update administrator set password=? where name=?";
+                update(sql, password2, name);
+                return true;
             }
             else return false;
         } else return false;
