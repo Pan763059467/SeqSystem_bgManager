@@ -30,7 +30,7 @@
 </head>
 <body class="gray-bg loginBackground" >
 <div class="middle-box text-center loginscreen  animated fadeInDown ">
-    <div class="loginForm" style="height: 450px">
+    <div class="loginForm" >
         <div class="text-center loginLogo" >
         </div>
         <form class="cmxform" id="signupForm">
@@ -47,10 +47,10 @@
                 <input name="password2" id="password2" type="password" class="form-control loginLine valiadate" style="font-size:12px" maxlength="22" placeholder="请再次输入密码确认" required="">
             </div>
             <h6>&nbsp;</h6>
-            <div style="width: 300px; margin-left:30px" class="form-group col-sm-8  col-md-offset-2 loginLine">
+            <div class="form-group">
                 <button id="replacepassword_button" class="btn btn-w-m btn-Bblack btn-sm">修改密码</button>
             </div>
-            <div class="form-group col-sm-8  col-md-offset-2 loginLine" >
+            <div class="form-group" >
                 <p class="text-muted text-center" > <a href="login-jmpLogin"><small>点我登录</small></a> | <a href="login-jmpSPReplacepassword"><small>超级管理员</small></a></p>
             </div>
         </form>
@@ -73,6 +73,7 @@
 <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
 <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
 <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+<script src="<%=basePath%>/js/md5.js"></script>
 </body>
 <script>
     //表单验证
@@ -88,41 +89,38 @@
                     required: true,
                     minlength: 2
                 },
-                password1: {
+                password0: {
                     required: true,
                     minlength: 6
+                },
+                password1: {
+                    required: true,
+                    minlength: 6,
+                    strongPsw: strongPsw(pswLevel)
                 },
                 password2: {
                     required: true,
                     minlength: 6,
                     equalTo: "#password1"
                 },
-                email: {
-                    required: true,
-                    email: true
-                },
-                verification: {
-                    required: true,
-                    minlength: 6
-                }
             },messages: {
                 name: {
-                    required: "请输入用户名",
+                    required: "请输入管理员名",
                     minlength: "用户名长度不能小于 2 位"
                 },
-                password1: {
-                    required: "请输入密码",
+                password0: {
+                    required: "请输入原密码",
                     minlength: "密码长度不能小于 6 位"
                 },
+                password1: {
+                    required: "请输入新密码",
+                    minlength: "密码长度不能小于 6 位",
+                    strongPsw:"密码须包含两种字符以上"
+                },
                 password2: {
-                    required: "请输入密码",
+                    required: "请输入正确的新密码",
                     minlength: "密码长度不能小于 6 位",
                     equalTo: "两次密码输入不一致"
-                },
-                verification: {
-                    required: "请输入验证码",
-                    minlength: "验证码为6位",
-                    maxlength: "验证码为6位"
                 },
             }
         });
@@ -142,13 +140,19 @@
 
         }
         else{
+            var md5PWD0 = $("input#password0").val();
+            var formerPassword = hex_md5(md5PWD0);
+            var md5PWD1 = $("input#password1").val();
+            var tempPassword= hex_md5(md5PWD1);
+            var md5PWD2 = $("input#password2").val();
+            var newPassword = hex_md5(md5PWD2);
             $.ajax({
                 url: "login-changePassword",
                 data: {
                     name: $("input#name").val(),
-                    formerPassword:$("input#password0").val(),
-                    tempPassword: $("input#password1").val(),
-                    newPassword: $("input#password2").val(),
+                    formerPassword:formerPassword,
+                    tempPassword: tempPassword,
+                    newPassword: newPassword
                 },
                 dataType: "json",
                 type: "Post",

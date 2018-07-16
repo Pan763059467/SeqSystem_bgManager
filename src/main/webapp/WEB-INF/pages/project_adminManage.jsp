@@ -145,6 +145,7 @@
 <script src="<%=basePath%>/js/mjy.js"></script>
 <script src="<%=basePath%>/js/plugins/suggest/bootstrap-suggest.min.js"></script>
 <script src="<%=basePath%>/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="<%=basePath%>/js/md5.js"></script>
 </body>
 <script>
     $("button#addManager_button").click(function (){
@@ -159,11 +160,13 @@
                 cancelButtonText: "取消",
                 closeOnConfirm: false
             },function () {
+                var md5PWD = $("input#password").val();
+                var password = hex_md5(md5PWD);
                 $.ajax({
                     url: "adminManage-addManager",
                     data: {
                         name: $("input#name").val(),
-                        password: $("input#password").val(),
+                        password: password,
                     },
                     dataType: "json",
                     type: "Post",
@@ -201,11 +204,13 @@
                 cancelButtonText: "取消",
                 closeOnConfirm: false
             },function () {
+                var md5PWD = $("input#password1").val();
+                var newPassword = hex_md5(md5PWD);
                 $.ajax({
                     url: "adminManage-replacePassword",
                     data: {
                         name: $("input#name1").val(),
-                        newPassword: $("input#password1").val(),
+                        newPassword: newPassword,
                     },
                     dataType: "json",
                     type: "Post",
