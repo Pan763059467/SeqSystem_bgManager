@@ -82,27 +82,45 @@
         </div>
     </div>
     <div  class="modal inmodal" id="addPoints" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content animated bounceInRight">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
-                </button>
-                <h4 class="modal-title">赠送积分</h4>
-            </div>
-            <div class="modal-body">
-                <div class="form-group"><label>请输入给所有用户赠送积分的数量/个</label>
-                    <input id="points" type="text" maxlength="20" class="form-control" required="">
+        <div class="modal-dialog">
+            <div class="modal-content animated bounceInRight">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+                    </button>
+                    <h4 class="modal-title">赠送积分</h4>
                 </div>
-
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
-                <button id="Confirmation" type="button" class="btn btn-primary">赠送</button>
+                <div class="modal-body">
+                    <div class="form-group"><label>请输入给所有用户赠送积分的数量/个</label>
+                        <input id="points" type="text" maxlength="20" class="form-control" required="">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                    <button id="Confirmation" type="button" class="btn btn-primary">赠送</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+    <div  class="modal inmodal" id="Modified_Points" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content animated bounceInRight">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+                    </button>
+                    <h4 class="modal-title">修改用户积分</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group"><label>请输入修改后的积分/个</label>
+                        <input id="Modified_One" type="text" maxlength="20" class="form-control" required="">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                    <button id="Modified" type="button" class="btn btn-primary">修改</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script src="<%=basePath%>/js/jquery.min.js?v=2.1.4"></script>
@@ -169,7 +187,8 @@
     );
     function operateFormatter(value,row,index) {
         return[
-            '<a class="Modified" style="padding-left: 10px"><button class="btn btn-info text-center btn-xs " >修改积分</button></a>',
+            '<a class="Modified" style="padding-left: 10px"><button class="btn btn-info text-center btn-xs " data-toggle="modal" data-target="#Modified_Points">修改积分</button></a>',
+            '<a class="Record" style="padding-left: 10px"><button class="btn btn-info text-center btn-xs " >查看积分历史</button></a>'
         ].join('');
     }
 
@@ -177,53 +196,34 @@
 
     }
     window.actionEvents = {
-        'click .Modified': function(e, value, row, index) {
-            //转移机构管理权限
+        'click .Record': function (e, value, row, index) {
+            //查看用户积分记录
             var id_user = parseInt(row.id_user);
             var user_name = row.name;
-            var currentOrg=$("#gender").val();
-            if(row.statu === 1){
-                swal("该用户已经是机构管理员！", "请选择其他用户", "error");
-            }
-            else {
-                swal(
-                    {
-                        title: "您确定任命此用户为该机构管理员吗",
-                        text: "请谨慎操作！",
-                        type: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#DD6B55",
-                        confirmButtonText: "确定",
-                        cancelButtonText: "取消",
-                        closeOnConfirm: false
-                    }, function () {
-                        $.ajax({
-                            type: "GET",
-                            url: "orgInvite-grantOrg",
-                            data: {ID_USER: id_user, USER_NAME: user_name, ORG_NAME: currentOrg},
-                            dataType: "json",
-                            success: function () {
-                                swal({
-                                    title: "操作完成",
-                                    text: "点击返回首页！",
-                                    type: "success",
-                                    confirmButtonColor: "#18a689",
-                                    confirmButtonText: "OK"
-                                }, function () {
-                                    location.href = "user-jmpHomepage";
-                                })
-                            },
-                            error: function (result) {
-                                swal("操作失败！", "服务器异常。", "error");
-                            }
-                        })
-                    })
-            }
+            $.ajax(
+                {
+                    type:"GET",
+                    data: {
+                        id_user:id_user,
+                        name:user_name
+                    },
+                    url:"N_user-saveRecordId",
+                    dataType:"json",
+                    success:function(){
+                            location.href = "N_user-jmpPointsRecordPage";
+                    },
+                    error:function(){
+                        swal("查看记录失败！", "服务器异常。", "error");
+                    }
+                }
+            )
         }
-    };
+    }
 </script>
 <script>
     $("button#Confirmation").click(function () {
+        var points = $("input#points").val();
+        alert(points);
         swal(
                 {
                     title: "您确认给所有用户增送积分吗",
@@ -237,11 +237,8 @@
                 }, function () {
                     $.ajax(
                         {
-                            url: "user-addPoints",
-                            data: {
-                                points: $("input#points").val()
-                            },
-
+                            url: "N_user-addPoints",
+                            data: {points:points},
                             dataType: "json",
                             type: "Post",
                             async: "false",

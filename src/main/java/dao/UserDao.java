@@ -2,6 +2,7 @@ package dao;
 
 import java.util.List;
 
+import entity.PointsRecordEntity;
 import entity.UserEntity;
 import entity.postmailEntity;
 
@@ -32,5 +33,5 @@ public interface UserDao {
 
 	List<UserEntity> getAllUser();
 
-	boolean addPoints(int points);
+	boolean addPoints(int points,int id_admin,String name_admin);
 }

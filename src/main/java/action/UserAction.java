@@ -112,14 +112,6 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
         return "RES";
     }
 
-    public String addPoints(){
-        dataMap = new HashMap<>();
-        UserDao userdao =new UserDaoImp();
-        System.out.println(user.getPoints());
-        boolean res = userdao.addPoints(user.getPoints());
-        dataMap.put("res",res);
-        return "RES";
-    }
     public String postVerification(){
         userDao = new UserDaoImp();
         dataMap = new HashMap<String, Object>();

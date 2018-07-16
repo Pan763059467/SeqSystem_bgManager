@@ -14,7 +14,6 @@ public interface AdminDao {
         boolean postmail(postmailEntity info, String title);
         boolean addManager(int SP_id,String name,String password);
         boolean deleteManager(int SP_id,int id_admin);
-
         List<AdminEntity> getALL();
         AdminEntity getOne(String admin_name);
 }

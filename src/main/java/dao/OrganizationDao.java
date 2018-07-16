@@ -19,7 +19,6 @@ public interface OrganizationDao {
     List<OrganizationEntity> getMyOrg(int id);
     String findName(int ID_ORGANIZATION);  //获取机构ID对应的NAME
     String findAdminName(int ID_ORGANIZATION);
-
     List<OrganizationEntity> getAllOrg();
     boolean disbandOrg(String org_name,String admin_name,int id_admin);
 }

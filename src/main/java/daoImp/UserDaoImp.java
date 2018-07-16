@@ -2,6 +2,7 @@ package daoImp;
 
 import dao.DAO;
 import dao.UserDao;
+import entity.PointsRecordEntity;
 import entity.UserEntity;
 import entity.postmailEntity;
 import util.MailUtil;
@@ -203,11 +204,15 @@ public class UserDaoImp extends DAO<UserEntity> implements UserDao {
     }
 
     @Override
-    public boolean addPoints(int points) {
+    public boolean addPoints(int points,int id_admin,String name_admin) {
         String sql1="update user set points = points + ?";
+        String sql2 = "insert into admin_log(ID_ADMIN,CONTENT,DATE) value(?,?,?)";
+        Timestamp NowTime = new Timestamp(new java.util.Date().getTime());
+        String content = "管理员"+name_admin+"于"+NowTime+"向所有用户赠送"+points+"积分";
+        System.out.println("208$"+points);
         update(sql1,points);
+        update(sql2,id_admin,content,NowTime);
         return true;
     }
-
 
 }

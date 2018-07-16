@@ -1,12 +1,13 @@
 package entity;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class PointsRecordEntity {
     private int id_record;
     private int id_user;
     private String content;
-    private Date data;
+    private Timestamp date;
     private String name;
 
     public int getId_record() {
@@ -33,12 +34,12 @@ public class PointsRecordEntity {
         this.content = content;
     }
 
-    public Date getData() {
-        return data;
+    public Timestamp getDate() {
+        return date;
     }
 
-    public void setData(Date data) {
-        this.data = data;
+    public void setDate(Timestamp date) {
+        this.date = date;
     }
 
     public String getName() {
@@ -52,11 +53,11 @@ public class PointsRecordEntity {
     public PointsRecordEntity() {
     }
 
-    public PointsRecordEntity(int id_record, int id_user, String content, Date data, String name) {
+    public PointsRecordEntity(int id_record, int id_user, String content, Timestamp date, String name) {
         this.id_record = id_record;
         this.id_user = id_user;
         this.content = content;
-        this.data = data;
+        this.date = date;
         this.name = name;
     }
 }
