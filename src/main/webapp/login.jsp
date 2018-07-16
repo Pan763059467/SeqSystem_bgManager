@@ -48,9 +48,9 @@
             <div class="form-group">
                 <button id="login_button" class="btn btn-w-m btn-Bblack btn-sm" onclick="verification()">登 录</button>
             </div>
-        <div class="form-group" >
-            <p class="text-muted text-center" > <a href="login-jmpReplacepassword"><small>找回密码</small></a></p>
-        </div>
+            <div class="form-group" >
+                <p class="text-muted text-center" > <a href="login-jmpReplacepassword"><small>修改密码</small></a></p>
+            </div>
     </div>
 </div>
 <script src="<%=basePath%>/js/jquery.min.js?v=2.1.4"></script>
@@ -68,12 +68,15 @@
 <script src="<%=basePath%>/js/mjy.js"></script>
 <script src="<%=basePath%>/js/plugins/suggest/bootstrap-suggest.min.js"></script>
 <script src="<%=basePath%>/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="<%=basePath%>/js/md5.js"></script>
 </body>
 <script>
     function verification() {
+        var md5PWD = $("input#password").val();
+        var tempPassword = hex_md5(md5PWD);
             $.ajax({
                 url: "login-login",
-                data: {name: $("input#name").val(), password: $("input#password").val()},
+                data: {name: $("input#name").val(), password: tempPassword},
                 dataType: "json",
                 type: "Post",
                 async: "false",

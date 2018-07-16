@@ -60,6 +60,7 @@
             </form>
         </div>
     </div>
+
 <script src="<%=basePath%>/js/jquery.min.js?v=2.1.4"></script>
 <script src="<%=basePath%>/js/bootstrap.min.js?v=3.3.6"></script>
 <script src="<%=basePath%>/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
@@ -77,6 +78,7 @@
 <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
 <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
 <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+    <script src="<%=basePath%>/js/md5.js"></script>
 </body>
 <script>
     //表单验证
@@ -147,13 +149,17 @@
 
         }
         else{
+            var md5PWD0 = $("input#password1").val();
+            var tempPassword = hex_md5(md5PWD0);
+            var md5PWD1 = $("input#password2").val();
+            var newPassword= hex_md5(md5PWD1);
             $.ajax({
                 url: "login-SPreplacepassword",
                 data: {
                     name: $("input#name").val(),
                     mail: $("input#email").val(),
-                    tempPassword: $("input#password1").val(),
-                    newPassword: $("input#password2").val(),
+                    tempPassword: tempPassword,
+                    newPassword: newPassword,
                     verification: $("input#verification").val()
                 },
                 dataType: "json",
