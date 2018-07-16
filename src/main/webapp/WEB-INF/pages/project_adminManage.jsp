@@ -53,22 +53,23 @@
                 <div style="float: left;margin-left: 5px"><span><strong>新增管理员</strong></span></div>
             </div>
             <div style="padding-left: 80px" class="ibox-content">
-                <table class="table" style="width:400px;border-left: none;border-right: none">
+                <form class="form" id="addForm" style="width:400px;border-left: none;border-right: none">
                     <tbody>
                     <tr >
-                        <th style="width: 150px;text-align: center">新增用户名:</th>
+                        <th style="width: 150px;text-align: center">新增管理员名:</th>
                         <th>
-                            <input name="name" id="name" type="username" class="form-control loginLine " style="font-size:13px" placeholder="请输入新增管理员的账户" maxlength="15" required="">
+                            <input name="name" id="name" type="text" class="form-control loginLine valiadate" style="font-size:13px" placeholder="请输入新增管理员的账户" maxlength="15" required="">
                         </th>
                     </tr>
+                    <br/>
                     <tr >
                         <th style="width: 150px;text-align: center">密码:</th>
                         <th>
-                            <input name="password" id="password"  type="text" class="form-control loginLine " style="font-size:13px" placeholder="请输入密码" maxlength="22" required="">
+                            <input name="password" id="password"  type="text" class="form-control loginLine valiadate" style="font-size:13px" placeholder="请输入密码" maxlength="22" required="">
                         </th>
                     </tr>
                     </tbody>
-                </table>
+                </form>
                 <div id="test1" style="margin-left: 200px" >
                     <button id="addManager_button" style="height: 30px;width: 80px" type="button" class="btn btn-info text-center btn-xs" data-toggle="modal" data-target="#myModal">确认新增</button>
                 </div>
@@ -80,22 +81,23 @@
                     <div style="float: left;margin-left: 5px"><span><strong>重置管理员密码</strong></span></div>
                 </div>
                 <div style="padding-left: 80px" class="ibox-content">
-                    <table class="table" style="width:400px;border-left: none;border-right: none">
+                    <form class="form" id="replaceForm" style="width:400px;border-left: none;border-right: none">
                         <tbody>
                         <tr >
                             <th style="width: 150px;text-align: center">管理员名:</th>
                             <th>
-                                <input name="name" id="name1" type="username" class="form-control loginLine " style="font-size:13px" placeholder="请输入待重置管理员的账户" maxlength="15" required="">
+                                <input name="name" id="name1" type="text" class="form-control loginLine valiadate" style="font-size:13px" placeholder="请输入待重置管理员的账户" maxlength="15" required="">
                             </th>
                         </tr>
+                        <br/>
                         <tr >
                             <th style="width: 150px;text-align: center">密码:</th>
                             <th>
-                                <input name="password" id="password1"  type="text" class="form-control loginLine " style="font-size:13px" placeholder="请输入新密码" maxlength="22" required="">
+                                <input name="password" id="password1"  type="text" class="form-control loginLine valiadate" style="font-size:13px" placeholder="请输入新密码" maxlength="22" required="">
                             </th>
                         </tr>
                         </tbody>
-                    </table>
+                    </form>
                     <div id="test2" style="margin-left: 200px" ><button id="replaceManager_button" style="height: 30px;width: 80px" type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal">确认重置</button></div>
                 </div>
             </div>
@@ -137,17 +139,84 @@
 <script src="<%=basePath%>/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 <script src="<%=basePath%>/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 <script src="<%=basePath%>/js/plugins/layer/layer.min.js"></script>
-<script src="<%=basePath%>/js/hplus.min.js?v=4.1.0"></script>
 <script type="text/javascript" src="<%=basePath%>/js/contabs.min.js"></script>
 <script src="<%=basePath%>/js/plugins/pace/pace.min.js"></script>
 <script src="<%=basePath%>/js/plugins/sweetalert/sweetalert.min.js"></script>
 <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+<script src="<%=basePath%>/js/plugins/toastr/toastr.min.js"></script>
 <script src="<%=basePath%>/js/mjy.js"></script>
 <script src="<%=basePath%>/js/plugins/suggest/bootstrap-suggest.min.js"></script>
 <script src="<%=basePath%>/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
 <script src="<%=basePath%>/js/md5.js"></script>
+<script src="<%=basePath%>/js/passwordLevel.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
 </body>
+
 <script>
+    $.validator.setDefaults({
+        submitHandler: function() {
+        }
+    });
+    $.validator.addMethod("strongPsw", function(value, element) {
+        if(passwordLevel(value) === 1){return false;}
+        return true
+    }, "格式不符合");
+    $().ready(function() {
+        var password = $("input#password").val();
+        var pwdLevel = passwordLevel(password);
+// 在键盘按下并释放及提交后验证提交表单
+        $("#addForm").validate({
+            rules: {
+                name: {
+                    required: true,
+                    minlength: 2
+                },
+                password: {
+                    required: true,
+                    minlength: 6,
+                    strongPsw: pwdLevel
+                }
+            },messages: {
+                name: {
+                    required: "请输入管理员名",
+                    minlength: "用户名长度不能小于 2 位"
+                },
+                password: {
+                    required: "请输入新密码",
+                    minlength: "密码长度不能小于 6 位",
+                    strongPsw: "密码须包含两种字符以上"
+                }
+            }
+        });
+        var password1 = $("input#password1").val();
+        var pwdLevel1 = passwordLevel(password1);
+        $("#replaceForm").validate({
+            rules: {
+                name: {
+                    required: true,
+                    minlength: 2
+                },
+                password: {
+                    required: true,
+                    minlength: 6,
+                    strongPsw: pwdLevel1
+                }
+            }, messages: {
+                name: {
+                    required: "请输入管理员名",
+                    minlength: "用户名长度不能小于 2 位"
+                },
+                password: {
+                    required: "请输入新密码",
+                    minlength: "密码长度不能小于 6 位",
+                    strongPsw: "密码须包含两种字符以上"
+                }
+            }
+        });
+    });
+
+
     $("button#addManager_button").click(function (){
         swal(
             {
