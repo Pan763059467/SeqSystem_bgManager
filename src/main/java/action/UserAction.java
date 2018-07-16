@@ -5,7 +5,9 @@ import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
 import dao.AdminDao;
 import dao.PersonalCenterDao;
+import dao.ShowLibraryDiscussDao;
 import dao.UserDao;
+import daoImp.ShowLibraryDiscussDaoImp;
 import daoImp.UserDaoImp;
 import daoImp.AdminDaoImp;
 import entity.*;
@@ -112,6 +114,15 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
         return "RES";
     }
 
+    public String showAllLibDiscuss(){
+        dataMap = new HashMap<>();
+        ShowLibraryDiscussDao showdiscuss = new ShowLibraryDiscussDaoImp();
+        List<LibrarydiscussEntity> dicussList = showdiscuss.getAllDiscuss();
+        Gson gson = new Gson();
+        String json = gson.toJson(dicussList);
+        dataMap.put("res",json);
+        return "RES";
+    }
     public String postVerification(){
         userDao = new UserDaoImp();
         dataMap = new HashMap<String, Object>();
@@ -221,6 +232,10 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
     }
     public String jmpPointManager(){
         return "pointsManagerPage";
+    }
+
+    public String jmpLibraryDiscuss(){
+        return "LibraryDiscussPage";
     }
     @Override
     public AdminEntity getModel() {

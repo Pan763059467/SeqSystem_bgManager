@@ -58,9 +58,10 @@
             <result name="RES" type="json"><param name="root">dataMap</param></result>
             <result name="UserManagerPage">/WEB-INF/pages/project_userManager.jsp</result>
             <result name="pointsManagerPage">/WEB-INF/pages/project_pointsManager.jsp</result>
+            <result name="LibraryDiscussPage">/WEB-INF/pages/project_libraryDiscussManager.jsp</result>
         <interceptor-ref name="myStack"/>
             <allowed-methods>
-                jmpPointManager,changePassword,showAllUser,jmpUserManager,jmpOperationLog,jmpMyprofile,jmpMycollect,jmpHomepage,jmpSysManager1,jmpSysManager2,jmpNewproject,jmpTemp,jmpCasecomponent,jmpUsercomponent,jmpCurrentProjectList,jmpCompletedProjectList
+                showAllLibDiscuss,jmpLibraryDiscuss,jmpPointManager,changePassword,showAllUser,jmpUserManager,jmpOperationLog,jmpMyprofile,jmpMycollect,jmpHomepage,jmpSysManager1,jmpSysManager2,jmpNewproject,jmpTemp,jmpCasecomponent,jmpUsercomponent,jmpCurrentProjectList,jmpCompletedProjectList
             </allowed-methods>
         </action>
 
@@ -174,14 +175,6 @@
             <allowed-methods>collect,nocollect</allowed-methods>
         </action>
 
-        <action name="librarydiscuss-*" class="action.LibrarydiscussAction" method="{1}">
-            <result name="RES" type="json">
-                <param name="root">dataMap</param>
-            </result>
-        <interceptor-ref name="myStack"/>
-            <allowed-methods>commit,delete,image</allowed-methods>
-        </action>
-
         <action name="structure-*" class="action.StructureAction" method="{1}">
             <result name="RES" type="json"><param name="root">dataMap</param></result>
             <result name="get">/WEB-INF/pages/project_structure.jsp</result>
@@ -252,6 +245,16 @@
             <interceptor-ref name="myStack"/>
 
             <allowed-methods>saveRecordId,jmpPointsRecordPage,showPointsRecord,addPoints,lock,unlock</allowed-methods>
+        </action>
+
+        <action name="deleteDiscuss-*" class="action.DeleteLibDiscussAction" method="{1}">
+            <result name="success" type="json">
+                <param name="root">dataMap</param>/
+            </result>
+            <result name="RES" type="json"><param name="root">dataMap</param></result>
+            <interceptor-ref name="myStack"/>
+
+            <allowed-methods>deleteDiscuss</allowed-methods>
         </action>
     </package>
 </struts>

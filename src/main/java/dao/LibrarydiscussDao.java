@@ -8,4 +8,5 @@ public interface LibrarydiscussDao {
     List<LibrarydiscussEntity> getAll(int id_library,int num1,int num2);
     boolean insert(int id_user, int id_library,Date time,String content);
     boolean delete(int id_lib_discuss);
+    boolean deleteDiscuss(int id_lib_discuss,int id_user,int admin_id,String admin_name);
 }

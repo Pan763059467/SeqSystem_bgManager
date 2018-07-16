@@ -154,12 +154,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="div6" class="col-sm-4">
+                                <a href="user-jmpLibraryDiscuss"> <div id="div6" class="col-sm-4">
                                     <div class="contact-box">
                                         <div>
                                             <div style="margin: 10px 10px 10px 15px;float: left"><img src="/img/comment_manager.png" height="125" width="125"/></div>
                                             <div style="margin: 10px;float: left">
-                                                <h3>构件评论管理</h3>
+                                                <h3>构件库评论管理</h3>
                                                 <br/>
                                                 <p>可查看该系统所有文档下评论</p>
                                                 <p>删除评论不受时间限制</p>
@@ -169,6 +169,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                </a>
                             </div>
                         </div>
                     </div>

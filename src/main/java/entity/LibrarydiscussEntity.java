@@ -1,5 +1,6 @@
 package entity;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class LibrarydiscussEntity {
@@ -8,36 +9,9 @@ public class LibrarydiscussEntity {
     private int id_user;
     private int id_library;
     private String content;
-    private Date time;
-    private String name;
-
-    public LibrarydiscussEntity(int id_lib_discuss, int id_user, int id_library, String content, Date time, String name) {
-        this.id_lib_discuss = id_lib_discuss;
-        this.id_user = id_user;
-        this.id_library = id_library;
-        this.content = content;
-        this.time = time;
-        this.name = name;
-    }
-
-    public LibrarydiscussEntity() {
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Date getTime() {
-        return time;
-    }
-
-    public void setTime(Date time) {
-        this.time = time;
-    }
+    private Timestamp time;
+    private String user_name;
+    private String library_name;
 
     public int getId_lib_discuss() {
         return id_lib_discuss;
@@ -69,5 +43,42 @@ public class LibrarydiscussEntity {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Timestamp getTime() {
+        return time;
+    }
+
+    public void setTime(Timestamp time) {
+        this.time = time;
+    }
+
+    public String getUser_name() {
+        return user_name;
+    }
+
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
+    }
+
+    public String getLibrary_name() {
+        return library_name;
+    }
+
+    public void setLibrary_name(String library_name) {
+        this.library_name = library_name;
+    }
+
+    public LibrarydiscussEntity(int id_lib_discuss, int id_user, int id_library, String content, Timestamp time, String user_name, String library_name) {
+        this.id_lib_discuss = id_lib_discuss;
+        this.id_user = id_user;
+        this.id_library = id_library;
+        this.content = content;
+        this.time = time;
+        this.user_name = user_name;
+        this.library_name = library_name;
+    }
+
+    public LibrarydiscussEntity() {
     }
 }
