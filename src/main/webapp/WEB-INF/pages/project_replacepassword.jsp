@@ -70,10 +70,12 @@
 <script src="<%=basePath%>/js/mjy.js"></script>
 <script src="<%=basePath%>/js/plugins/suggest/bootstrap-suggest.min.js"></script>
 <script src="<%=basePath%>/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+
+<script src="<%=basePath%>/js/md5.js"></script>
+<script src="<%=basePath%>/js/passwordLevel.js"></script>
 <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
 <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
 <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
-<script src="<%=basePath%>/js/md5.js"></script>
 </body>
 <script>
     //表单验证
@@ -81,7 +83,13 @@
         submitHandler: function() {
         }
     });
+    $.validator.addMethod("strongPsw", function(value, element) {
+        if(passwordLevel(value) === 1){return false;}
+        return true
+    }, "格式不符合");
     $().ready(function() {
+        var password1 = $("input#password1").val();
+        var pwdLevel = passwordLevel(password1);
 // 在键盘按下并释放及提交后验证提交表单
         $("#signupForm").validate({
             rules: {
@@ -96,13 +104,13 @@
                 password1: {
                     required: true,
                     minlength: 6,
-                    strongPsw: strongPsw(pswLevel)
+                    strongPsw: pwdLevel
                 },
                 password2: {
                     required: true,
                     minlength: 6,
                     equalTo: "#password1"
-                },
+                }
             },messages: {
                 name: {
                     required: "请输入管理员名",
@@ -115,13 +123,13 @@
                 password1: {
                     required: "请输入新密码",
                     minlength: "密码长度不能小于 6 位",
-                    strongPsw:"密码须包含两种字符以上"
+                    strongPsw: "密码须包含两种字符以上"
                 },
                 password2: {
                     required: "请输入正确的新密码",
                     minlength: "密码长度不能小于 6 位",
                     equalTo: "两次密码输入不一致"
-                },
+                }
             }
         });
     });
