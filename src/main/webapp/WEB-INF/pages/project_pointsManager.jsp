@@ -35,7 +35,7 @@
         <ol class="breadcrumb" style="margin-left: 40px">
             <li style="font-size: 15px">
                 <strong>
-                    <a href="user-jmpHomepage">后台管理系统首页</a> >> 已有机构
+                    <a href="user-jmpHomepage">后台管理系统首页</a> >> 用户积分
                 </strong>
             </li>
         </ol>
@@ -48,26 +48,18 @@
             <div class="panel-options col-md-2">
                 <ul class="nav nav-tabs">
                     <li class="active">
-                        <a href="project_detail.html#tab-1" data-toggle="tab">当前机构</a>
+                        <a href="project_detail.html#tab-1" data-toggle="tab">用户积分列表</a>
                     </li>
                 </ul>
             </div>
             <div style="float: left;margin-top: 10px" class="col-md-6">
-                <button id="disbandment-button" type="button" class="btn btn-primary btn-xs">解散机构</button>
-            </div>
-            <div style="float: right;width: 300px" class="col-md-4">
-                <select id="gender" class="form-control" name="gender" onchange="orgName()">
-                    <option name="" disabled  selected="selected" >选择机构</option>
-                    <s:iterator value="list">
-                        <option name="displayOrg" class="orgName"><s:property value="NAME"/> </option>
-                    </s:iterator>
-                </select>
+                <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#addPoints">全员送积分</button>
             </div>
         </div>
             <div class="panel-body">
             <div class="ibox-content">
                 <div class="bootstrap-table">
-                    <table id="showAdminOrg"
+                    <table id="showAllUser"
                            data-toggle="table"
                            data-click-to-select="true"
                            data-search="true"
@@ -89,7 +81,30 @@
         </div>
         </div>
     </div>
+    <div  class="modal inmodal" id="addPoints" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+                </button>
+                <h4 class="modal-title">赠送积分</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group"><label>请输入给所有用户赠送积分的数量/个</label>
+                    <input id="points" type="text" maxlength="20" class="form-control" required="">
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                <button id="Confirmation" type="button" class="btn btn-primary">赠送</button>
+            </div>
+        </div>
+    </div>
 </div>
+</div>
+
 <script src="<%=basePath%>/js/jquery.min.js?v=2.1.4"></script>
 <script src="<%=basePath%>/js/bootstrap.min.js?v=3.3.6"></script>
 <script src="<%=basePath%>/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
@@ -106,10 +121,10 @@
 <script src="<%=basePath%>/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
 </body>
 <script type="text/javascript">
-    $('#showAdminOrg').bootstrapTable({
+    $('#showAllUser').bootstrapTable({
             columns: [
                 {
-                    title: '成员姓名',
+                    title: '用户名',
                     field: 'name',
                     align: 'center',
                     sortable: true,
@@ -122,11 +137,10 @@
                     align: 'center'
                 },
                 {
-                    field: 'statu',
-                    title: '职务',
+                    field: 'points',
+                    title: '当前积分',
                     sortable: true,
                     align: 'center',
-                    formatter: "rename"
                 },{
                     field:'operate',
                     title:'操作',
@@ -138,46 +152,32 @@
             ]
         }
     );
+    $.ajax(
+        {
+            type:"GET",
+            url:"user-showAllUser",
+            dataType:"json",
+            success:function(json){
+                var allUser = JSON.parse(json.res);
+                //finishingTask为table的id
+                $('#showAllUser').bootstrapTable('load',allUser);
+            },
+            error:function(){
+                alert("错误");
+            }
+        }
+    );
     function operateFormatter(value,row,index) {
         return[
-            '<a class="grant" style="padding-left: 10px"><button class="btn btn-info text-center btn-xs " >任命管理</button></a>',
+            '<a class="Modified" style="padding-left: 10px"><button class="btn btn-info text-center btn-xs " >修改积分</button></a>',
         ].join('');
     }
-    function rename(value,row,index) {
-        var statu=parseInt(row.statu);
-        if(statu==0)
-            return '成员';
-        else if(statu==1)
-            return '机构管理员';
-        else if(statu==2)
-            return '机构副管理员';
-    }
-    function orgName() {
-        var objs = document.getElementById("gender");
-        var element = objs.value;
-        ALLMember(element)
-    }
+
     function ALLMember(element){
-        $.ajax(
-            {
-                url:"Organization-showAdminOrg",
-                data: {NAME: element},
-                dataType:"json",
-                type: "Get",
-                async: "false",
-                success:function(json){
-                    var showAdminOrg = JSON.parse(json.res);
-                    //finishingTask为table的id
-                    $('#showAdminOrg').bootstrapTable('load',showAdminOrg);
-                },
-                error:function(){
-                    alert(" 错误");
-                }
-            }
-        )
+
     }
     window.actionEvents = {
-        'click .grant': function(e, value, row, index) {
+        'click .Modified': function(e, value, row, index) {
             //转移机构管理权限
             var id_user = parseInt(row.id_user);
             var user_name = row.name;
@@ -223,16 +223,11 @@
     };
 </script>
 <script>
-    $("button#disbandment-button").click(function () {
-        var currentOrg = $("#gender").val();
-        if(currentOrg === "" || currentOrg === null){
-            swal("请先选择机构！", "选择机构在右侧选项框", "error");
-        }
-        else {
-            swal(
+    $("button#Confirmation").click(function () {
+        swal(
                 {
-                    title: "您确定要解散该机构吗",
-                    text: "该操作不可取消",
+                    title: "您确认给所有用户增送积分吗",
+                    text: "确认请点击确定",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#18a689",
@@ -242,33 +237,33 @@
                 }, function () {
                     $.ajax(
                         {
-                            url: "Organization-disbandOrg",
+                            url: "user-addPoints",
                             data: {
-                                NAME: currentOrg
+                                points: $("input#points").val()
                             },
+
                             dataType: "json",
                             type: "Post",
                             async: "false",
                             success: function (result) {
                                 if (result.res === true) {
                                     swal({
-                                        title: "您已解散该机构",
+                                        title: "积分赠送成功！",
                                         type:"success",
                                         confirmButtonColor: "#18a689",
                                         confirmButtonText: "OK"
                                     },function(){
-                                        location.href = "user-jmpHomepage";
+                                        location.href = "user-jmpPointManager";
                                     })
                                 }
-                                else swal("解散失败！", "未在系统中找到该机构", "error");
+                                else swal("赠送失败！", "未知错误", "error");
                             },
                             error: function () {
-                                swal("解散失败！", "服务器异常。", "error");
+                                swal("赠送失败！", "服务器异常。", "error");
                             }
                         }
                     )
                 })
-        }
     })
 </script>
 </html>
