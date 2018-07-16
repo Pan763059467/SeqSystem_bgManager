@@ -53,7 +53,7 @@
                 </ul>
             </div>
             <div style="float: left;margin-top: 10px" class="col-md-6">
-                <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#addPoints">全员送积分</button>
+                <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#addPoints">赠送积分</button>
             </div>
         </div>
             <div class="panel-body">

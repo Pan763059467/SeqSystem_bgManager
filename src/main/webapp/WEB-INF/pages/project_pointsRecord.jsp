@@ -32,7 +32,7 @@
         <ol class="breadcrumb" style="margin-left: 40px">
             <li style="font-size: 15px">
                 <strong>
-                    <a href="user-jmpHomepage">后台管理系统首页</a> >> 用户积分记录
+                    <a href="user-jmpHomepage">后台管理系统首页</a> >> <a href="user-jmpPointManager">用户积分</a> >> ${sessionScope.record_user_name}的积分记录
                 </strong>
             </li>
         </ol>
