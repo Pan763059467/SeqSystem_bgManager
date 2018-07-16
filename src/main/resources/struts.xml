@@ -62,7 +62,7 @@
             <result name="LibraryDiscussPage">/WEB-INF/pages/project_libraryDiscussManager.jsp</result>
         <interceptor-ref name="myStack"/>
             <allowed-methods>
-                showAllLibDiscuss,jmpDocDisManager,jmpPointManager,changePassword,showAllUser,jmpUserManager,jmpOperationLog,jmpMyprofile,jmpMycollect,jmpHomepage,jmpSysManager1,jmpSysManager2,jmpNewproject,jmpTemp,jmpCasecomponent,jmpUsercomponent,jmpCurrentProjectList,jmpCompletedProjectList
+                jmpDocDisManager,showAllLibDiscuss,jmpLibraryDiscuss,jmpPointManager,changePassword,showAllUser,jmpUserManager,jmpOperationLog,jmpMyprofile,jmpMycollect,jmpHomepage,jmpSysManager1,jmpSysManager2,jmpNewproject,jmpTemp,jmpCasecomponent,jmpUsercomponent,jmpCurrentProjectList,jmpCompletedProjectList
             </allowed-methods>
         </action>
 
@@ -266,5 +266,6 @@
             <interceptor-ref name="myStack"/>
             <allowed-methods>docDisList,deleteDiscuss</allowed-methods>
         </action>
+
     </package>
 </struts>

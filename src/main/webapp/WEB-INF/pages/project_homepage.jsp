@@ -153,8 +153,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                </a>
+                                </div></a>
                                 <a href="user-jmpLibraryDiscuss"> <div id="div6" class="col-sm-4">
                                     <div class="contact-box">
                                         <div>
