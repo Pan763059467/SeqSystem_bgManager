@@ -31,4 +31,6 @@ public interface UserDao {
 	String FindName(int id_user);
 
 	List<UserEntity> getAllUser();
+
+	boolean addPoints(int points);
 }

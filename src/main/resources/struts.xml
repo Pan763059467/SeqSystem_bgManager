@@ -57,9 +57,10 @@
 
             <result name="RES" type="json"><param name="root">dataMap</param></result>
             <result name="UserManagerPage">/WEB-INF/pages/project_userManager.jsp</result>
+            <result name="pointsManagerPage">/WEB-INF/pages/project_pointsManager.jsp</result>
         <interceptor-ref name="myStack"/>
             <allowed-methods>
-                changePassword,showAllUser,jmpUserManager,jmpOperationLog,jmpMyprofile,jmpMycollect,jmpHomepage,jmpSysManager1,jmpSysManager2,jmpNewproject,jmpTemp,jmpCasecomponent,jmpUsercomponent,jmpCurrentProjectList,jmpCompletedProjectList
+                addPoints,jmpPointManager,changePassword,showAllUser,jmpUserManager,jmpOperationLog,jmpMyprofile,jmpMycollect,jmpHomepage,jmpSysManager1,jmpSysManager2,jmpNewproject,jmpTemp,jmpCasecomponent,jmpUsercomponent,jmpCurrentProjectList,jmpCompletedProjectList
             </allowed-methods>
         </action>
 

@@ -202,5 +202,12 @@ public class UserDaoImp extends DAO<UserEntity> implements UserDao {
         return list;
     }
 
+    @Override
+    public boolean addPoints(int points) {
+        String sql1="update user set points = points + ?";
+        update(sql1,points);
+        return true;
+    }
+
 
 }
