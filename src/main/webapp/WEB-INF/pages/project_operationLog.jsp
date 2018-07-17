@@ -16,14 +16,17 @@
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
 
-    <link rel="shortcut icon" href="<%=basePath%>/example/favicon.ico">
-    <link href="<%=basePath%>/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="<%=basePath %>/example/favicon.ico">
     <link href="<%=basePath%>/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
     <link href="<%=basePath%>/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
     <link href="<%=basePath%>/css/animate.min.css" rel="stylesheet">
     <link href="<%=basePath%>/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <!-- bootstrap-table -->
     <link href="<%=basePath%>/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
     <link href="<%=basePath%>/css/z_style.css" rel="stylesheet">
+    <link href="<%=basePath%>/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <!-- Sweet Alert -->
+    <link href="<%=basePath%>/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 </head>
 
 <body class="gray-bg">
@@ -44,6 +47,9 @@
     <div style="margin:16px 0px 0px -60px" class="col-md-10">
         <div class="ibox-title">
             <h5>操作历史 </h5>
+            <div style="float: left;" class="col-md-6">
+                <button id="export-button" type="button" class="btn btn-primary btn-xs" onclick="export_log()">导出日志</button>
+            </div>
         </div>
         <div class="ibox float-e-margins">
             <div class="ibox-content">
@@ -116,6 +122,21 @@
                 alert("错误");
             }
         }
-    )
+    );
+    function export_log(){
+        $.ajax(
+            {
+                type:"GET",
+                url:"adminLog-export",
+                dataType:"json",
+                success:function(json){
+                    showtoast("success", "导出成功", "请在D盘查看")
+                },
+                error:function(){
+                    alert("错误");
+                }
+            }
+        )
+    }
 </script>
 </html>

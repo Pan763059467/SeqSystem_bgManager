@@ -224,7 +224,7 @@
                 <param name="root">dataMap</param>
             </result>
             <interceptor-ref name="myStack"/>
-            <allowed-methods>logList</allowed-methods>
+            <allowed-methods>logList,export</allowed-methods>
         </action>
 
         <action name="adminManage-*" class="action.AdminManageAction" method="{1}">
