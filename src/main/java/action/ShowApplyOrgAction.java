@@ -60,7 +60,7 @@ public class ShowApplyOrgAction extends ActionSupport implements RequestAware,Se
         ShowApplyOrganization = ShowApplyOrgDao.getOne(id_org_apply);
         AdminEntity admin = (AdminEntity)session.get("cur_admin");
         List<ShowApplyOrganizationEntity> list=ShowApplyOrgDao.createOrg(ShowApplyOrganization,admin.getName(),admin.getId_admin());
-        String content = "机构："+ShowApplyOrganization.getOrg_name()+" 审核已通过";
+        String content = "机构："+ShowApplyOrganization.getOrg_name()+" 审核已通过,扣除5积分";
         Date dt=new Date();
         history.hasAcceptorGrantORG( ShowApplyOrganization.getId_user(),content, dt,ShowApplyOrganization.getOrg_name());
         Gson gson = new Gson();

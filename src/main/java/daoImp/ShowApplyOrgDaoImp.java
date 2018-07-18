@@ -37,6 +37,7 @@ public class ShowApplyOrgDaoImp extends DAO<ShowApplyOrganizationEntity> impleme
         String sql3="select ID_ORGANIZATION from ORGANIZATION where NAME=?";
         String sql4="insert into ORG_MEMBER (ID_USER,ID_ORGANIZATION,STATU) value(?,?,?)";
         String sql5="insert into admin_log(ID_ADMIN,CONTENT,DATE) value(?,?,?)";
+        String sql6="update user set points =  points - ? where id_user = ?";
         Timestamp NowTime = new Timestamp(new java.util.Date().getTime());
         update(sql1,create.getId_org_apply());
         update(sql2,create.getOrg_name(),create.getId_user(),NowTime);
@@ -47,6 +48,7 @@ public class ShowApplyOrgDaoImp extends DAO<ShowApplyOrganizationEntity> impleme
         String content = "管理员"+admin_name+"于"+NowTime+"同意"+create.getName()+"成立机构："+create.getOrg_name();
         List<ShowApplyOrganizationEntity> ShowApply = getForList(sql);
         update(sql5,id_admin,content,NowTime);
+        update(sql6,5,create.getId_user());
         return ShowApply;
     }
 
