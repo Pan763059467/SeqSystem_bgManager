@@ -56,6 +56,15 @@ public class N_userAction extends ActionSupport implements RequestAware, Session
         return "RES";
     }
 
+    public String modified_one(){
+        dataMap = new HashMap<>();
+        UserDao userdao = new UserDaoImp();
+        AdminEntity admin = (AdminEntity)session.get("cur_admin");
+        boolean res = userdao.modified_one(user.getPoints(),admin.getId_admin(),admin.getName(),user.getName(),user.getId_user());
+        dataMap.put("res",res);
+        return SUCCESS;
+    }
+
     public String showPointsRecord(){
         dataMap = new HashMap<>();
         ShowPointsRecordDao showRecordDao= new ShowPointsRecordDaoImp();
@@ -78,6 +87,7 @@ public class N_userAction extends ActionSupport implements RequestAware, Session
         System.out.println(user.getId_user()+" " + user.getName());
         return SUCCESS;
     }
+
 
     @Override
     public UserEntity getModel() {

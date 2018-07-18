@@ -34,4 +34,5 @@ public interface UserDao {
 	List<UserEntity> getAllUser();
 
 	boolean addPoints(int points,int id_admin,String name_admin);
+	boolean modified_one(int points,int id_admin,String name_admin,String user_name,int user_id);
 }

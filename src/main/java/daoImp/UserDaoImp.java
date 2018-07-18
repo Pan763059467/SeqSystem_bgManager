@@ -209,9 +209,22 @@ public class UserDaoImp extends DAO<UserEntity> implements UserDao {
         String sql2 = "insert into admin_log(ID_ADMIN,CONTENT,DATE) value(?,?,?)";
         Timestamp NowTime = new Timestamp(new java.util.Date().getTime());
         String content = "管理员"+name_admin+"于"+NowTime+"向所有用户赠送"+points+"积分";
-        System.out.println("208$"+points);
         update(sql1,points);
         update(sql2,id_admin,content,NowTime);
+        return true;
+    }
+
+    @Override
+    public boolean modified_one(int points, int id_admin, String name_admin, String user_name, int user_id) {
+        String sql1="update user set points = ? where ID_USER = ?";
+        String sql2="insert into admin_log(ID_ADMIN,CONTENT,DATE) value(?,?,?)";
+        String sql3="insert into message(ID_USER,CONTENT,DATE) value(?,?,?)";
+        update(sql1,points,user_id);
+        Timestamp NowTime = new Timestamp(new java.util.Date().getTime());
+        String content1 = "管理员"+name_admin+"于"+NowTime+"修改用户"+user_name+"的积分为"+points;
+        String content2 = "管理员修改您积分为"+points;
+        update(sql2,id_admin,content1,NowTime);
+        update(sql3,user_id,content2,NowTime);
         return true;
     }
 

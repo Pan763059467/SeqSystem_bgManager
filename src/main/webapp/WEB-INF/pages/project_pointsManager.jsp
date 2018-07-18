@@ -52,9 +52,14 @@
                     </li>
                 </ul>
             </div>
-            <div style="float: left;margin-top: 10px" class="col-md-6">
+            <div style="float: left;margin-top: 10px" class="col-md-1">
                 <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#addPoints">赠送积分</button>
             </div>
+                <div style="float: left" class="col-md-4">
+                    <input id="modified_one_points" type="text" maxlength="40"
+                           placeholder="请输入对单个用户进行积分修改的值"
+                           class="form-control" required="">
+                </div>
         </div>
             <div class="panel-body">
             <div class="ibox-content">
@@ -97,26 +102,6 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
                     <button id="Confirmation" type="button" class="btn btn-primary">赠送</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div  class="modal inmodal" id="Modified_Points" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content animated bounceInRight">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
-                    </button>
-                    <h4 class="modal-title">修改用户积分</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group"><label>请输入修改后的积分/个</label>
-                        <input id="Modified_One" type="text" maxlength="20" class="form-control" required="">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
-                    <button id="Modified" type="button" class="btn btn-primary">修改</button>
                 </div>
             </div>
         </div>
@@ -187,7 +172,7 @@
     );
     function operateFormatter(value,row,index) {
         return[
-            '<a class="Modified" style="padding-left: 10px"><button class="btn btn-info text-center btn-xs " data-toggle="modal" data-target="#Modified_Points">修改积分</button></a>',
+            '<a class="Modified" style="padding-left: 10px"><button class="btn btn-info text-center btn-xs">修改积分</button></a>',
             '<a class="Record" style="padding-left: 10px"><button class="btn btn-info text-center btn-xs " >查看积分历史</button></a>'
         ].join('');
     }
@@ -202,28 +187,75 @@
             var user_name = row.name;
             $.ajax(
                 {
-                    type:"GET",
+                    type: "GET",
                     data: {
-                        id_user:id_user,
-                        name:user_name
+                        id_user: id_user,
+                        name: user_name
                     },
-                    url:"N_user-saveRecordId",
-                    dataType:"json",
-                    success:function(){
-                            location.href = "N_user-jmpPointsRecordPage";
+                    url: "N_user-saveRecordId",
+                    dataType: "json",
+                    success: function () {
+                        location.href = "N_user-jmpPointsRecordPage";
                     },
-                    error:function(){
+                    error: function () {
                         swal("查看记录失败！", "服务器异常。", "error");
                     }
                 }
             )
+        },
+        'click .Modified': function (e, value, row, index) {
+            //查看用户积分记录
+            var id_user = parseInt(row.id_user);
+            var user_name = row.name;
+            var points=$("input#modified_one_points").val();
+            alert(points);
+            if(points !== 0 && points !==""){
+            swal(
+                {
+                    title: "您确定修改用户"+user_name+"积分为"+points+"吗？",
+                    text: "确认请点击确定",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#18a689",
+                    confirmButtonText: "确定",
+                    cancelButtonText: "取消",
+                    closeOnConfirm: false
+                }, function () {
+                    $.ajax(
+                        {
+                            type: "GET",
+                            data: {
+                                id_user: id_user,
+                                name: user_name,
+                                points: points
+                            },
+                            url: "N_user-modified_one",
+                            dataType: "json",
+                            success: function () {
+                                swal({
+                                    title: "积分修改成功！",
+                                    type:"success",
+                                    confirmButtonColor: "#18a689",
+                                    confirmButtonText: "OK"
+                                },function(){
+                                    location.href = "user-jmpPointManager";
+                                })
+                            },
+                            error: function () {
+                                swal("修改积分失败！", "服务器异常。", "error");
+                            }
+                        }
+                    )
+                })
+            } else{
+                swal("请先输入积分数额！", "在表头输入框输入。", "error");
+            }
         }
     }
 </script>
 <script>
     $("button#Confirmation").click(function () {
         var points = $("input#points").val();
-        alert(points);
         swal(
                 {
                     title: "您确认给所有用户增送积分吗",

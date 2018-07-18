@@ -245,7 +245,7 @@
             <result name="PointsRecordPage">/WEB-INF/pages/project_pointsRecord.jsp</result>
             <interceptor-ref name="myStack"/>
 
-            <allowed-methods>saveRecordId,jmpPointsRecordPage,showPointsRecord,addPoints,lock,unlock</allowed-methods>
+            <allowed-methods>modified_one,saveRecordId,jmpPointsRecordPage,showPointsRecord,addPoints,lock,unlock</allowed-methods>
         </action>
 
         <action name="deleteDiscuss-*" class="action.DeleteLibDiscussAction" method="{1}">
