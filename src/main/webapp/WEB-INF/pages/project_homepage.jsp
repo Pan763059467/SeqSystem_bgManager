@@ -132,14 +132,29 @@
                                             </div>
                                         </div>
                                         </a>
-
+                                        <a href="user-jmpPointsRules"><div id="div5" class="col-sm-4">
+                                            <div class="contact-box">
+                                                <div>
+                                                    <div style="margin: 10px 10px 10px 15px;float: left"><img src="/img/score_manager.png" height="125" width="125"/></div>
+                                                    <div style="margin: 10px;float: left">
+                                                        <h3>积分规则管理</h3>
+                                                        <br/>
+                                                        <p>查看用户积分的获取与使用规则</p>
+                                                        <p>可以修改当前积分规则</p>
+                                                    </div>
+                                                    <div style="clear: both;margin: 0px 10px 0px 10px">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                             <div class="tab-pane" id="tab-2">
                             </div>
                             <div class="tab-pane" id="tab-3">
-                                <a href="user-jmpDocDisManager"><div id="div5" class="col-sm-4">
+                                <a href="user-jmpDocDisManager"><div id="div6" class="col-sm-4">
                                     <div class="contact-box">
                                         <div>
                                             <div style="margin: 10px 10px 10px 15px;float: left"><img src="/img/comment_manager.png" height="125" width="125"/></div>
@@ -154,7 +169,7 @@
                                         </div>
                                     </div>
                                 </div></a>
-                                <a href="user-jmpLibraryDiscuss"> <div id="div6" class="col-sm-4">
+                                <a href="user-jmpLibraryDiscuss"> <div id="div7" class="col-sm-4">
                                     <div class="contact-box">
                                         <div>
                                             <div style="margin: 10px 10px 10px 15px;float: left"><img src="/img/comment_manager.png" height="125" width="125"/></div>

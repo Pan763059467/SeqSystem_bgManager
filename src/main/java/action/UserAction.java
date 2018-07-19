@@ -3,10 +3,8 @@ import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
-import dao.AdminDao;
-import dao.PersonalCenterDao;
-import dao.ShowLibraryDiscussDao;
-import dao.UserDao;
+import dao.*;
+import daoImp.PointsRulesDaoImp;
 import daoImp.ShowLibraryDiscussDaoImp;
 import daoImp.UserDaoImp;
 import daoImp.AdminDaoImp;
@@ -172,6 +170,16 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
         return "RES";
     }
 
+    public String showAllRules(){
+        dataMap = new HashMap<>();
+        PointsRulesDao pointsRulesDao = new PointsRulesDaoImp();
+        List<PointsRulesEntity> allRule = pointsRulesDao.getAll();
+        Gson gson = new Gson();
+        String json = gson.toJson(allRule);
+        dataMap.put("res",json);
+        return "RES";
+    }
+
     public String jmpLogin(){
         session.put("admin",null);
         return "loginPage";
@@ -239,6 +247,9 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
 
     public String jmpLibraryDiscuss(){
         return "LibraryDiscussPage";
+    }
+    public String jmpPointsRules(){
+        return "PointRulesPage";
     }
     @Override
     public AdminEntity getModel() {
