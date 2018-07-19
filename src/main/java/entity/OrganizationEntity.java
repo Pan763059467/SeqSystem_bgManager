@@ -7,15 +7,7 @@ public class OrganizationEntity {
     private String NAME;
     private int ID_USER;
     private Date TIME;
-    private char statu;
-
-    public char getStatu() {
-        return statu;
-    }
-
-    public void setStatu(char statu) {
-        this.statu = statu;
-    }
+    private int FLAG;
 
     public int getID_ORGANIZATION() {
         return ID_ORGANIZATION;
@@ -49,14 +41,22 @@ public class OrganizationEntity {
         this.TIME = TIME;
     }
 
-    public OrganizationEntity() {
+    public int getFLAG() {
+        return FLAG;
     }
 
-    public OrganizationEntity(int ID_ORGANIZATION, String NAME, int ID_USER, Date TIME, char statu) {
+    public void setFLAG(int FLAG) {
+        this.FLAG = FLAG;
+    }
+
+    public OrganizationEntity(int ID_ORGANIZATION, String NAME, int ID_USER, Date TIME, int FLAG) {
         this.ID_ORGANIZATION = ID_ORGANIZATION;
         this.NAME = NAME;
         this.ID_USER = ID_USER;
         this.TIME = TIME;
-        this.statu = statu;
+        this.FLAG = FLAG;
+    }
+
+    public OrganizationEntity() {
     }
 }
