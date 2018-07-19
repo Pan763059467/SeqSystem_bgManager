@@ -71,7 +71,7 @@ public class OrganizationDaoImp extends DAO<OrganizationEntity> implements Organ
 
     @Override
     public List<OrganizationEntity> getAllOrg() {
-        String sql = "select NAME from ORGANIZATION";
+        String sql = "select * from view_user_org";
         List<OrganizationEntity> MyOrgList = getForList(sql);
         return MyOrgList;
     }

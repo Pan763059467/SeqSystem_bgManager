@@ -35,7 +35,7 @@
         <ol class="breadcrumb" style="margin-left: 40px">
             <li style="font-size: 15px">
                 <strong>
-                    <a href="user-jmpHomepage">后台管理系统首页</a> >> 已有机构
+                    <a href="user-jmpHomepage">后台管理系统首页</a> >> <a href="Organization-jmpSysManager2"> 已有机构 </a>
                 </strong>
             </li>
         </ol>
@@ -53,7 +53,7 @@
                 </ul>
             </div>
             <div style="float: left;margin-top: 10px" class="col-md-6">
-                <button id="disbandment-button" type="button" class="btn btn-primary btn-xs">解散机构</button>
+                <%--<button id="disbandment-button" type="button" class="btn btn-primary btn-xs">解散机构</button>--%>
             </div>
             <div style="float: right;width: 300px" class="col-md-4">
                 <select id="gender" class="form-control" name="gender" onchange="orgName()">
@@ -101,6 +101,7 @@
 <script src="<%=basePath%>/js/plugins/pace/pace.min.js"></script>
 <script src="<%=basePath%>/js/plugins/sweetalert/sweetalert.min.js"></script>
 <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+<script src="<%=basePath%>/js/plugins/toastr/toastr.min.js"></script>
 <script src="<%=basePath%>/js/mjy.js"></script>
 <script src="<%=basePath%>/js/plugins/suggest/bootstrap-suggest.min.js"></script>
 <script src="<%=basePath%>/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
@@ -165,8 +166,11 @@
                 dataType:"json",
                 type: "Get",
                 async: "false",
-                success:function(json){
-                    var showAdminOrg = JSON.parse(json.res);
+                success:function(result){
+                    if(result.days < 0){
+                        showtoast("error", "机构管理员账号到期", "机构已停用");
+                    }
+                    var showAdminOrg = JSON.parse(result.res);
                     //finishingTask为table的id
                     $('#showAdminOrg').bootstrapTable('load',showAdminOrg);
                 },
@@ -210,7 +214,7 @@
                                     confirmButtonColor: "#18a689",
                                     confirmButtonText: "OK"
                                 }, function () {
-                                    location.href = "user-jmpHomepage";
+                                    location.href = "Organization-jmpSysManager2";
                                 })
                             },
                             error: function (result) {
@@ -257,7 +261,7 @@
                                         confirmButtonColor: "#18a689",
                                         confirmButtonText: "OK"
                                     },function(){
-                                        location.href = "user-jmpHomepage";
+                                        location.href = "Organization-jmpSysManager2";
                                     })
                                 }
                                 else swal("解散失败！", "未在系统中找到该机构", "error");

@@ -22,6 +22,7 @@ import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
 import java.io.UnsupportedEncodingException;
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,13 +58,15 @@ public class OrganizationAction extends ActionSupport implements RequestAware, S
         return "SysManager2Page";
     }
 
-    public String showAdminOrg(){
+    public String showAdminOrg() throws ParseException {
         dataMap = new HashMap<String, Object>();
         AdminOrgDao adminOrgDao = new AdminOrgDaoImp();
         List<AdminOrgEntity> AdminOrg = adminOrgDao.getAllMember(organization.getNAME());
+        int days = adminOrgDao.days(organization.getNAME());
         Gson gson = new Gson();
         String json = gson.toJson(AdminOrg);
         dataMap.put("res",json);
+        dataMap.put("days",days);
         return "display";
     }
 
