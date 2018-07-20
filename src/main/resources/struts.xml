@@ -60,10 +60,9 @@
             <result name="pointsManagerPage">/WEB-INF/pages/project_pointsManager.jsp</result>
             <result name="DocDisManagerPage">/WEB-INF/pages/project_doc_discuss.jsp</result>
             <result name="LibraryDiscussPage">/WEB-INF/pages/project_libraryDiscussManager.jsp</result>
-            <result name="PointRulesPage">/WEB-INF/pages/project_pointsRules.jsp</result>
         <interceptor-ref name="myStack"/>
             <allowed-methods>
-                showAllRules,jmpPointsRules,jmpDocDisManager,showAllLibDiscuss,jmpLibraryDiscuss,jmpPointManager,changePassword,showAllUser,jmpUserManager,jmpOperationLog,jmpMyprofile,jmpMycollect,jmpHomepage,jmpSysManager1,jmpSysManager2,jmpNewproject,jmpTemp,jmpCasecomponent,jmpUsercomponent,jmpCurrentProjectList,jmpCompletedProjectList
+                jmpDocDisManager,showAllLibDiscuss,jmpLibraryDiscuss,jmpPointManager,changePassword,showAllUser,jmpUserManager,jmpOperationLog,jmpMyprofile,jmpMycollect,jmpHomepage,jmpSysManager1,jmpSysManager2,jmpNewproject,jmpTemp,jmpCasecomponent,jmpUsercomponent,jmpCurrentProjectList,jmpCompletedProjectList
             </allowed-methods>
         </action>
 
@@ -266,6 +265,16 @@
             <result name="RES" type="json"><param name="root">dataMap</param></result>
             <interceptor-ref name="myStack"/>
             <allowed-methods>docDisList,deleteDiscuss</allowed-methods>
+        </action>
+
+        <action name="pointsRules-*" class="action.PointsRulesAction" method="{1}">
+            <result name="success" type="json">
+                <param name="root">dataMap</param>/
+            </result>
+            <result name="RES" type="json"><param name="root">dataMap</param></result>
+            <interceptor-ref name="myStack"/>
+            <result name="PointRulesPage">/WEB-INF/pages/project_pointsRules.jsp</result>
+            <allowed-methods>showAllRules,jmpPointsRules,modified</allowed-methods>
         </action>
 
     </package>

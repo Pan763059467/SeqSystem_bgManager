@@ -170,15 +170,6 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
         return "RES";
     }
 
-    public String showAllRules(){
-        dataMap = new HashMap<>();
-        PointsRulesDao pointsRulesDao = new PointsRulesDaoImp();
-        List<PointsRulesEntity> allRule = pointsRulesDao.getAll();
-        Gson gson = new Gson();
-        String json = gson.toJson(allRule);
-        dataMap.put("res",json);
-        return "RES";
-    }
 
     public String jmpLogin(){
         session.put("admin",null);
@@ -247,9 +238,6 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
 
     public String jmpLibraryDiscuss(){
         return "LibraryDiscussPage";
-    }
-    public String jmpPointsRules(){
-        return "PointRulesPage";
     }
     @Override
     public AdminEntity getModel() {

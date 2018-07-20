@@ -60,7 +60,7 @@
                     </ul>
                 </div>
                 <div style="float: left" class="col-md-4">
-                    <input id="modified_one_points" type="text" maxlength="40"
+                    <input id="modified_points" type="text" maxlength="40"
                            placeholder="请输入对单个规则进行所需积分修改的值"
                            class="form-control" required="">
                 </div>
@@ -143,7 +143,7 @@
     $.ajax(
         {
             type:"GET",
-            url:"user-showAllRules",
+            url:"pointsRules-showAllRules",
             dataType:"json",
             success:function(json){
                 var allRule = JSON.parse(json.res);
@@ -163,14 +163,14 @@
 
     window.actionEvents = {
         'click .Modified': function (e, value, row, index) {
-            var id_user = parseInt(row.id_user);
-            var user_name = row.name;
-            var points=$("input#modified_one_points").val();
+            var id_rule = parseInt(row.id_rule);
+            var content = row.content;
+            var points=$("input#modified_points").val();
             alert(points);
             if(points !== 0 && points !==""){
                 swal(
                     {
-                        title: "您确定修改用户"+user_name+"积分为"+points+"吗？",
+                        title: "您确定修改规则“"+content+"”积分为"+points+"吗？",
                         text: "确认请点击确定",
                         type: "warning",
                         showCancelButton: true,
@@ -183,11 +183,11 @@
                             {
                                 type: "GET",
                                 data: {
-                                    id_user: id_user,
-                                    name: user_name,
+                                    id_rule: id_rule,
+                                    content: content,
                                     points: points
                                 },
-                                url: "N_user-modified_one",
+                                url: "pointsRules-modified",
                                 dataType: "json",
                                 success: function () {
                                     swal({
@@ -196,7 +196,7 @@
                                         confirmButtonColor: "#18a689",
                                         confirmButtonText: "OK"
                                     },function(){
-                                        location.href = "user-jmpPointManager";
+                                        location.href = "pointsRules-jmpPointsRules";
                                     })
                                 },
                                 error: function () {

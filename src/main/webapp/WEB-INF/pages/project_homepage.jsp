@@ -132,7 +132,7 @@
                                             </div>
                                         </div>
                                         </a>
-                                        <a href="user-jmpPointsRules"><div id="div5" class="col-sm-4">
+                                        <a href="pointsRules-jmpPointsRules"><div id="div5" class="col-sm-4">
                                             <div class="contact-box">
                                                 <div>
                                                     <div style="margin: 10px 10px 10px 15px;float: left"><img src="/img/score_manager.png" height="125" width="125"/></div>
