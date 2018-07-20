@@ -73,7 +73,7 @@
                                             <div id="div1" class="col-sm-4">
                                                 <div class="contact-box">
                                                     <div>
-                                                        <div style="margin: 10px 10px 10px 15px;float: left"><img src="/img/user_manager.png" height="125" width="125"/></div>
+                                                        <div style="margin: 10px 10px 10px 15px;float: left"><img src="<%=basePath %>/img/user_manager.png" height="125" width="125"/></div>
                                                         <div style="margin: 10px;float: left">
                                                             <h3>用户信息管理</h3>
                                                             <br/>
@@ -89,7 +89,7 @@
                                         <a href="user-jmpSysManager1"><div id="div2" class="col-sm-4">
                                             <div class="contact-box">
                                                 <div>
-                                                    <div style="margin: 10px 10px 10px 15px;float: left"><img src="/img/org_apply_manager.png" height="125" width="125"/></div>
+                                                    <div style="margin: 10px 10px 10px 15px;float: left"><img src="<%=basePath %>/img/org_apply_manager.png" height="125" width="125"/></div>
                                                     <div style="margin: 10px;float: left">
                                                         <h3>机构申请管理</h3>
                                                         <br/>
@@ -104,7 +104,7 @@
                                         <a href="Organization-jmpSysManager2"><div id="div3" class="col-sm-4">
                                             <div class="contact-box">
                                                 <div>
-                                                    <div style="margin: 10px 10px 10px 15px;float: left"><img src="/img/org_manager.png" height="125" width="125"/></div>
+                                                    <div style="margin: 10px 10px 10px 15px;float: left"><img src="<%=basePath %>/img/org_manager.png" height="125" width="125"/></div>
                                                     <div style="margin: 10px;float: left">
                                                         <h3>机构管理</h3>
                                                         <br/>
@@ -119,7 +119,7 @@
                                         <a href="user-jmpPointManager"><div id="div4" class="col-sm-4">
                                             <div class="contact-box">
                                                 <div>
-                                                    <div style="margin: 10px 10px 10px 15px;float: left"><img src="/img/score_manager.png" height="125" width="125"/></div>
+                                                    <div style="margin: 10px 10px 10px 15px;float: left"><img src="<%=basePath %>/img/score_manager.png" height="125" width="125"/></div>
                                                     <div style="margin: 10px;float: left">
                                                         <h3>用户积分管理</h3>
                                                         <br/>
@@ -135,7 +135,7 @@
                                         <a href="pointsRules-jmpPointsRules"><div id="div5" class="col-sm-4">
                                             <div class="contact-box">
                                                 <div>
-                                                    <div style="margin: 10px 10px 10px 15px;float: left"><img src="/img/score_manager.png" height="125" width="125"/></div>
+                                                    <div style="margin: 10px 10px 10px 15px;float: left"><img src="<%=basePath %>/img/score_manager.png" height="125" width="125"/></div>
                                                     <div style="margin: 10px;float: left">
                                                         <h3>积分规则管理</h3>
                                                         <br/>
@@ -157,7 +157,7 @@
                                 <a href="user-jmpDocDisManager"><div id="div6" class="col-sm-4">
                                     <div class="contact-box">
                                         <div>
-                                            <div style="margin: 10px 10px 10px 15px;float: left"><img src="/img/comment_manager.png" height="125" width="125"/></div>
+                                            <div style="margin: 10px 10px 10px 15px;float: left"><img src="<%=basePath %>/img/comment_manager.png" height="125" width="125"/></div>
                                             <div style="margin: 10px;float: left">
                                                 <h3>文档评论管理</h3>
                                                 <br/>
@@ -172,7 +172,7 @@
                                 <a href="user-jmpLibraryDiscuss"> <div id="div7" class="col-sm-4">
                                     <div class="contact-box">
                                         <div>
-                                            <div style="margin: 10px 10px 10px 15px;float: left"><img src="/img/comment_manager.png" height="125" width="125"/></div>
+                                            <div style="margin: 10px 10px 10px 15px;float: left"><img src="<%=basePath %>/img/comment_manager.png" height="125" width="125"/></div>
                                             <div style="margin: 10px;float: left">
                                                 <h3>构件库评论管理</h3>
                                                 <br/>
