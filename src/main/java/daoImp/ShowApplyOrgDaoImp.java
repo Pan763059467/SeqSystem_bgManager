@@ -38,17 +38,25 @@ public class ShowApplyOrgDaoImp extends DAO<ShowApplyOrganizationEntity> impleme
         String sql4="insert into ORG_MEMBER (ID_USER,ID_ORGANIZATION,STATU) value(?,?,?)";
         String sql5="insert into admin_log(ID_ADMIN,CONTENT,DATE) value(?,?,?)";
         String sql6="update user set points =  points - ? where id_user = ?";
+        String sql7="insert into points_record (id_user,content,date) value(?,?,?)";
+        String sql8="select points from points_rule where id_rule = ?";
+        String sql9="insert into message(id_user,content,date,id_org) value(?,?,?,?)";
         Timestamp NowTime = new Timestamp(new java.util.Date().getTime());
         update(sql1,create.getId_org_apply());
         update(sql2,create.getOrg_name(),create.getId_user(),NowTime);
         int id_org=getForValue(sql3,create.getOrg_name());
+        int points = getForValue(sql8,1);
         int statu = 1;
-;       update(sql4,create.getId_user(),id_org,statu);
+        update(sql4,create.getId_user(),id_org,statu);
         String sql="select * from VIEW_showAPPLYORG where STATE=0";
         String content = "管理员"+admin_name+"于"+NowTime+"同意"+create.getName()+"成立机构："+create.getOrg_name();
+        String content1 = "于"+NowTime+"成立机构：“"+create.getOrg_name()+"”扣除积分"+points;
+        String content2 = "管理员于"+NowTime+"同意你成立机构：“"+create.getOrg_name()+"”扣除积分"+points;
         List<ShowApplyOrganizationEntity> ShowApply = getForList(sql);
         update(sql5,id_admin,content,NowTime);
-        update(sql6,5,create.getId_user());
+        update(sql6,points,create.getId_user());
+        update(sql7,create.getId_user(),content1,NowTime);
+        update(sql9,create.getId_user(),content2,NowTime,id_org);
         return ShowApply;
     }
 

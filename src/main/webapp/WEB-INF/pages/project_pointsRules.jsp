@@ -42,7 +42,7 @@
         <ol class="breadcrumb" style="margin-left: 40px">
             <li style="font-size: 15px">
                 <strong>
-                    <a href="user-jmpHomepage">后台管理系统首页</a> >> <a href="user-jmpPointsRules">积分规则管理</a>
+                    <a href="user-jmpHomepage">后台管理系统首页</a> >> <a href="pointsRules-jmpPointsRules">积分规则管理</a>
                 </strong>
             </li>
         </ol>
@@ -166,7 +166,6 @@
             var id_rule = parseInt(row.id_rule);
             var content = row.content;
             var points=$("input#modified_points").val();
-            alert(points);
             if(points !== 0 && points !==""){
                 swal(
                     {
