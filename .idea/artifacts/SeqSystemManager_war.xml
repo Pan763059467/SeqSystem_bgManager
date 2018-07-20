@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="war" name="SeqSystem:war">
+  <artifact type="war" name="SeqSystemManager:war">
     <output-path>$PROJECT_DIR$/target</output-path>
     <root id="archive" name="SeqSystem.war">
       <element id="artifact" artifact-name="SeqSystem:war exploded" />
