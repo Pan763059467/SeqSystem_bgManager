@@ -167,9 +167,9 @@
                 type: "Get",
                 async: "false",
                 success:function(result){
-                    if(result.days < 0){
-                        showtoast("error", "机构管理员账号到期", "机构已停用");
-                    }
+                    // if(result.days < 0){
+                    //     showtoast("error", "机构管理员账号到期", "机构已停用");
+                    // }
                     var showAdminOrg = JSON.parse(result.res);
                     //finishingTask为table的id
                     $('#showAdminOrg').bootstrapTable('load',showAdminOrg);
