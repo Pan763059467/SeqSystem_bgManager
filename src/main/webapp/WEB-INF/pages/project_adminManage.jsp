@@ -217,7 +217,17 @@
     });
 
 
-    $("button#addManager_button").click(function (){
+    $("button#addManager_button").click(function () {
+        var md5PWD = $("input#password").val();
+        var name = $("input#name").val();
+        if (name === "") {
+            swal("错误", "新增管理员姓名不能为空", "error");
+        }
+        else{
+        if (md5PWD === "") {
+            swal("错误", "新增管理员密码不能为空", "error");
+        }
+        else{
         swal(
             {
                 title: "您确认新增管理员吗？",
@@ -228,7 +238,7 @@
                 confirmButtonText: "新增",
                 cancelButtonText: "取消",
                 closeOnConfirm: false
-            },function () {
+            }, function () {
                 var md5PWD = $("input#password").val();
                 var password = hex_md5(md5PWD);
                 $.ajax({
@@ -241,67 +251,85 @@
                     type: "Post",
                     async: "false",
                     success: function (result) {
-                        if (result.res == true){
-                            swal({
-                                title: "增加成功",
-                                type:"success",
-                                confirmButtonColor: "#18a689",
-                                confirmButtonText: "OK"
-                            },function(){
-                                location.href = "adminManage-jmpAdminManager";
-                            })
+                        alert(password);
+                        if (result.flag === true) {
+                            if (result.res === true) {
+                                swal({
+                                    title: "增加成功",
+                                    type: "success",
+                                    confirmButtonColor: "#18a689",
+                                    confirmButtonText: "OK"
+                                }, function () {
+                                    location.href = "adminManage-jmpAdminManager";
+                                })
+                            }
+                            else swal("增加失败！", "操作失败", "error");
                         }
-                        else swal("增加失败！", "操作失败", "error");
+                        else swal("增加失败！", "输入不能为空", "error");
                     },
                     error: function () {
                         swal("增加失败！", "请检查你的网络", "error");
                     }
                 })
             })
+        }
+        }
     })
 </script>
 <script>
     $("button#replaceManager_button").click(function (){
-        swal(
-            {
-                title: "您确认重置管理员吗？",
-                text: "确认请点击重置",
-                type: "",
-                showCancelButton: true,
-                confirmButtonColor: "#18a689",
-                confirmButtonText: "重置",
-                cancelButtonText: "取消",
-                closeOnConfirm: false
-            },function () {
-                var md5PWD = $("input#password1").val();
-                var newPassword = hex_md5(md5PWD);
-                $.ajax({
-                    url: "adminManage-replacePassword",
-                    data: {
-                        name: $("input#name1").val(),
-                        newPassword: newPassword,
-                    },
-                    dataType: "json",
-                    type: "Post",
-                    async: "false",
-                    success: function (result) {
-                        if (result.res == true){
-                            swal({
-                                title: "重置成功",
-                                type:"success",
-                                confirmButtonColor: "#18a689",
-                                confirmButtonText: "OK"
-                            },function(){
-                                location.href = "adminManage-jmpAdminManager";
-                            })
-                        }
-                        else swal("重置失败！", "操作失败", "error");
-                    },
-                    error: function () {
-                        swal("重置失败！", "请检查你的网络", "error");
-                    }
-                })
-            })
+        var md5PWD = $("input#password1").val();
+        var name = $("input#name1").val();
+        if (name === "") {
+            swal("错误", "重置管理员姓名不能为空", "error");
+        }
+        else{
+            if (md5PWD === "") {
+                swal("错误", "重置管理员密码不能为空", "error");
+            }
+            else {
+                swal(
+                    {
+                        title: "您确认重置管理员吗？",
+                        text: "确认请点击重置",
+                        type: "",
+                        showCancelButton: true,
+                        confirmButtonColor: "#18a689",
+                        confirmButtonText: "重置",
+                        cancelButtonText: "取消",
+                        closeOnConfirm: false
+                    }, function () {
+                        var md5PWD = $("input#password1").val();
+                        var newPassword = hex_md5(md5PWD);
+                        $.ajax({
+                            url: "adminManage-replacePassword",
+                            data: {
+                                name: $("input#name1").val(),
+                                newPassword: newPassword,
+                            },
+                            dataType: "json",
+                            type: "Post",
+                            async: "false",
+                            success: function (result) {
+                                if (result.res == true) {
+                                    swal({
+                                        title: "重置成功",
+                                        type: "success",
+                                        confirmButtonColor: "#18a689",
+                                        confirmButtonText: "OK"
+                                    }, function () {
+                                        location.href = "adminManage-jmpAdminManager";
+                                    })
+                                }
+                                else swal("重置失败！", "操作失败", "error");
+                            },
+                            error: function () {
+                                swal("重置失败！", "请检查你的网络", "error");
+                            }
+                        })
+                    })
+            }
+        }
     })
 </script>
 <script>
