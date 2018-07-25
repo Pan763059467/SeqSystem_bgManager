@@ -81,11 +81,13 @@
             <result name="OrgManager1Page">/WEB-INF/pages/project_orgManager1.jsp</result>
             <result name="OrgManager2Page">/WEB-INF/pages/project_orgManager2.jsp</result>
             <result name="SysManager2Page">/WEB-INF/pages/project_sysManager2.jsp</result>
+            <result name="SysManager3Page">/WEB-INF/pages/project_sysManager3.jsp</result>
+            <result name="success" type="json"><param name="root">dataMap</param></result>
             <result name="display" type="json">
                 <param name="root">dataMap</param>
             </result>
         <interceptor-ref name="myStack"/>
-            <allowed-methods>disbandOrg,showAdminOrg,jmpSysManager2,jmpOrgManager1,jmpOrgManager2,,showAllProject,showHistoryProject</allowed-methods>
+            <allowed-methods>jmpSysManager3Page,saveOrgName,disbandOrg,showAdminOrg,jmpSysManager2,jmpOrgManager1,jmpOrgManager2,,showAllProject,showHistoryProject</allowed-methods>
         </action>
 
         <action name="infomation-*" class="action.InfomationAction" method="{1}">
@@ -234,7 +236,7 @@
             </result>
             <interceptor-ref name="myStack"/>
 
-            <allowed-methods>jmpAdminManager,addManager,showList,replacePassword,deleteManager</allowed-methods>
+            <allowed-methods>showOrgList,jmpAdminManager,addManager,showList,replacePassword,deleteManager</allowed-methods>
         </action>
 
         <action name="N_user-*" class="action.N_userAction" method="{1}">

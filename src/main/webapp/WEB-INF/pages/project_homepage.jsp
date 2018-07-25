@@ -52,15 +52,18 @@
                         <div class="panel-heading">
                             <div class="panel-options">
                                 <ul class="nav nav-tabs">
-                                <li class="active">
-                                    <a href="#tab-1" data-toggle="tab">用户常规管理</a>
-                                </li>
-                                <li>
-                                    <a href="#tab-2" data-toggle="tab">构件管理</a>
-                                </li>
-                                <li>
-                                    <a href="#tab-3" data-toggle="tab">评论管理</a>
-                                </li>
+                                    <li class="active">
+                                        <a href="#tab-1" data-toggle="tab">用户常规管理</a>
+                                    </li>
+                                    <li>
+                                        <a href="#tab-4" data-toggle="tab">机构管理</a>
+                                    </li>
+                                    <li>
+                                        <a href="#tab-2" data-toggle="tab">构件管理</a>
+                                    </li>
+                                    <li>
+                                        <a href="#tab-3" data-toggle="tab">评论管理</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -86,36 +89,6 @@
                                                 </div>
                                             </div>
                                         </a>
-                                        <a href="user-jmpSysManager1"><div id="div2" class="col-sm-4">
-                                            <div class="contact-box">
-                                                <div>
-                                                    <div style="margin: 10px 10px 10px 15px;float: left"><img src="<%=basePath %>/img/org_apply_manager.png" height="125" width="125"/></div>
-                                                    <div style="margin: 10px;float: left">
-                                                        <h3>机构申请管理</h3>
-                                                        <br/>
-                                                        <p> 审查用户的机构申请请求</p>
-                                                        <p>通过后即成立机构</p>
-                                                    </div>
-                                                    <div style="clear: both;margin: 0px 10px 0px 10px">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div></a>
-                                        <a href="Organization-jmpSysManager2"><div id="div3" class="col-sm-4">
-                                            <div class="contact-box">
-                                                <div>
-                                                    <div style="margin: 10px 10px 10px 15px;float: left"><img src="<%=basePath %>/img/org_manager.png" height="125" width="125"/></div>
-                                                    <div style="margin: 10px;float: left">
-                                                        <h3>机构管理</h3>
-                                                        <br/>
-                                                        <p>查看机构成员与项目</p>
-                                                        <p>可重新任命机构管理员</p>
-                                                    </div>
-                                                    <div style="clear: both;margin: 0px 10px 0px 10px">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div></a>
                                         <a href="user-jmpPointManager"><div id="div4" class="col-sm-4">
                                             <div class="contact-box">
                                                 <div>
@@ -185,6 +158,38 @@
                                     </div>
                                 </div>
                                 </a>
+                            </div>
+                            <div class="tab-pane" id="tab-4">
+                                <a href="user-jmpSysManager1"><div id="div2" class="col-sm-4">
+                                    <div class="contact-box">
+                                        <div>
+                                            <div style="margin: 10px 10px 10px 15px;float: left"><img src="<%=basePath %>/img/org_apply_manager.png" height="125" width="125"/></div>
+                                            <div style="margin: 10px;float: left">
+                                                <h3>机构申请管理</h3>
+                                                <br/>
+                                                <p> 审查用户的机构申请请求</p>
+                                                <p>通过后即成立机构</p>
+                                            </div>
+                                            <div style="clear: both;margin: 0px 10px 0px 10px">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div></a>
+                                <a href="Organization-jmpSysManager2"><div id="div3" class="col-sm-4">
+                                    <div class="contact-box">
+                                        <div>
+                                            <div style="margin: 10px 10px 10px 15px;float: left"><img src="<%=basePath %>/img/org_manager.png" height="125" width="125"/></div>
+                                            <div style="margin: 10px;float: left">
+                                                <h3>机构管理</h3>
+                                                <br/>
+                                                <p>查看机构成员与项目</p>
+                                                <p>可重新任命机构管理员</p>
+                                            </div>
+                                            <div style="clear: both;margin: 0px 10px 0px 10px">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div></a>
                             </div>
                         </div>
                     </div>

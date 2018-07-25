@@ -9,14 +9,8 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
-import dao.AdminOrgDao;
-import dao.OrganizationDao;
-import dao.ShowOrgProjectDao;
-import dao.UserDao;
-import daoImp.AdminOrgDaoImp;
-import daoImp.OrganizationDaoImp;
-import daoImp.ShowOrgProjectDaoImp;
-import daoImp.UserDaoImp;
+import dao.*;
+import daoImp.*;
 import entity.*;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
@@ -43,30 +37,23 @@ public class OrganizationAction extends ActionSupport implements RequestAware, S
     }
 
     public String jmpOrgManager1(){
-        dataMap = new HashMap<String, Object>();
-        organizationdao = new OrganizationDaoImp();
-        List<OrganizationEntity> list = organizationdao.getAllOrg();
-        ActionContext.getContext().getValueStack().set("list",list);
         return "OrgManager1Page";
 }
 
     public String jmpSysManager2(){
-        dataMap = new HashMap<String, Object>();
-        organizationdao = new OrganizationDaoImp();
-        List<OrganizationEntity> list = organizationdao.getAllOrg();
-        ActionContext.getContext().getValueStack().set("list",list);
         return "SysManager2Page";
     }
 
     public String showAdminOrg() throws ParseException {
         dataMap = new HashMap<String, Object>();
         AdminOrgDao adminOrgDao = new AdminOrgDaoImp();
-        List<AdminOrgEntity> AdminOrg = adminOrgDao.getAllMember(organization.getNAME());
-        int days = adminOrgDao.days(organization.getNAME());
+        String org_name = (String) session.get("org_name");
+        List<AdminOrgEntity> AdminOrg = adminOrgDao.getAllMember(org_name);
+//        int days = adminOrgDao.days(organization.getNAME());
         Gson gson = new Gson();
         String json = gson.toJson(AdminOrg);
         dataMap.put("res",json);
-        dataMap.put("days",days);
+//        dataMap.put("days",days);
         return "display";
     }
 
@@ -114,6 +101,14 @@ public class OrganizationAction extends ActionSupport implements RequestAware, S
         return "OrgManager2Page";
     }
 
+    public String saveOrgName(){
+        session.put("org_name",organization.getNAME());
+        return SUCCESS;
+    }
+
+    public String jmpSysManager3Page(){
+        return "SysManager3Page";
+    }
     @Override
     public void prepare() throws Exception {
         organization = new OrganizationEntity();

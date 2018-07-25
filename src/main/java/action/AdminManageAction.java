@@ -5,8 +5,13 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
 import dao.AdminDao;
+import dao.OrganizationDao;
+import dao.ViewOrgUserDao;
 import daoImp.AdminDaoImp;
+import daoImp.OrganizationDaoImp;
+import daoImp.ViewOrgUserDaoImp;
 import entity.AdminEntity;
+import entity.ViewOrgUserEntity;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
@@ -51,6 +56,16 @@ public class AdminManageAction extends ActionSupport implements RequestAware, Se
         boolean res = adminDao.replacePassword(seesionAdmin.getId_admin(),admin.getName(),newPassword);
         System.out.println(res);
         dataMap.put("res", res);
+        return SUCCESS;
+    }
+    public String showOrgList(){
+        dataMap = new HashMap<String, Object>();
+        ViewOrgUserDao viewOrgUser;
+        viewOrgUser = new ViewOrgUserDaoImp();
+        List<ViewOrgUserEntity> list = viewOrgUser.getAllOrg();
+        Gson gson = new Gson();
+        String json = gson.toJson(list);
+        dataMap.put("res",json);
         return SUCCESS;
     }
 

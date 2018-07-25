@@ -55,19 +55,11 @@
             <div style="float: left;margin-top: 10px" class="col-md-6">
                 <%--<button id="disbandment-button" type="button" class="btn btn-primary btn-xs">解散机构</button>--%>
             </div>
-            <div style="float: right;width: 300px" class="col-md-4">
-                <select id="gender" class="form-control" name="gender" onchange="orgName()">
-                    <option name="" disabled  selected="selected" >选择机构</option>
-                    <s:iterator value="list">
-                        <option name="displayOrg" class="orgName"><s:property value="NAME"/> </option>
-                    </s:iterator>
-                </select>
-            </div>
         </div>
             <div class="panel-body">
             <div class="ibox-content">
                 <div class="bootstrap-table">
-                    <table id="showAdminOrg"
+                    <table id="showAllOrg"
                            data-toggle="table"
                            data-click-to-select="true"
                            data-search="true"
@@ -107,27 +99,30 @@
 <script src="<%=basePath%>/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
 </body>
 <script type="text/javascript">
-    $('#showAdminOrg').bootstrapTable({
+    $('#showAllOrg').bootstrapTable({
             columns: [
                 {
-                    title: '成员姓名',
-                    field: 'name',
+                    title: '机构名',
+                    field: 'ORG_NAME',
                     align: 'center',
                     sortable: true,
                     valign: 'middle'
                 },
                 {
-                    field: 'mail',
+                    field: 'TIME',
+                    title: '成立时间',
+                    sortable: true,
+                    align: 'center'
+                }, {
+                    field: 'USER_NAME',
+                    title: '机构管理员',
+                    sortable: true,
+                    align: 'center'
+                },{
+                    field: 'MAIL',
                     title: '邮箱',
                     sortable: true,
                     align: 'center'
-                },
-                {
-                    field: 'statu',
-                    title: '职务',
-                    sortable: true,
-                    align: 'center',
-                    formatter: "rename"
                 },{
                     field:'operate',
                     title:'操作',
@@ -138,141 +133,50 @@
                 }
             ]
         }
-    );
+    )
+    $.ajax(
+        {
+            type:"GET",
+            url:"adminManage-showOrgList",
+            dataType:"json",
+            success:function(json){
+                var allOrg = JSON.parse(json.res);
+                //finishingTask为table的id
+                $('#showAllOrg').bootstrapTable('load',allOrg);
+            },
+            error:function(){
+                alert("错误");
+            }
+        }
+    )
     function operateFormatter(value,row,index) {
-        return[
-            '<a class="grant" style="padding-left: 10px"><button class="btn btn-info text-center btn-xs " >任命管理</button></a>',
+        return[,
+            '<a class="ListAllUser" style="padding-left: 10px"><button class="btn btn-info text-center btn-xs " >查看机构成员</button></a>'
         ].join('');
     }
-    function rename(value,row,index) {
-        var statu=parseInt(row.statu);
-        if(statu==0)
-            return '成员';
-        else if(statu==1)
-            return '机构管理员';
-        else if(statu==2)
-            return '机构副管理员';
-    }
-    function orgName() {
-        var objs = document.getElementById("gender");
-        var element = objs.value;
-        ALLMember(element)
-    }
-    function ALLMember(element){
-        $.ajax(
-            {
-                url:"Organization-showAdminOrg",
-                data: {NAME: element},
-                dataType:"json",
-                type: "Get",
-                async: "false",
-                success:function(result){
-                    // if(result.days < 0){
-                    //     showtoast("error", "机构管理员账号到期", "机构已停用");
-                    // }
-                    var showAdminOrg = JSON.parse(result.res);
-                    //finishingTask为table的id
-                    $('#showAdminOrg').bootstrapTable('load',showAdminOrg);
-                },
-                error:function(){
-                    alert(" 错误");
-                }
-            }
-        )
-    }
+
     window.actionEvents = {
-        'click .grant': function(e, value, row, index) {
-            //转移机构管理权限
-            var id_user = parseInt(row.id_user);
-            var user_name = row.name;
-            var currentOrg=$("#gender").val();
-            if(row.statu === 1){
-                swal("该用户已经是机构管理员！", "请选择其他用户", "error");
-            }
-            else {
-                swal(
-                    {
-                        title: "您确定任命此用户为该机构管理员吗",
-                        text: "请谨慎操作！",
-                        type: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#DD6B55",
-                        confirmButtonText: "确定",
-                        cancelButtonText: "取消",
-                        closeOnConfirm: false
-                    }, function () {
-                        $.ajax({
-                            type: "GET",
-                            url: "orgInvite-grantOrg",
-                            data: {ID_USER: id_user, USER_NAME: user_name, ORG_NAME: currentOrg},
-                            dataType: "json",
-                            success: function () {
-                                swal({
-                                    title: "操作完成",
-                                    text: "点击返回首页！",
-                                    type: "success",
-                                    confirmButtonColor: "#18a689",
-                                    confirmButtonText: "OK"
-                                }, function () {
-                                    location.href = "Organization-jmpSysManager2";
-                                })
-                            },
-                            error: function (result) {
-                                swal("操作失败！", "服务器异常。", "error");
-                            }
-                        })
-                    })
-            }
+        'click .ListAllUser': function (e, value, row, index) {
+            //查看用户积分记录
+            var org_name = row.ORG_NAME;
+            $.ajax(
+                {
+                    type: "GET",
+                    data: {
+                        NAME:org_name
+                    },
+                    url: "Organization-saveOrgName",
+                    dataType: "json",
+                    success: function () {
+                        location.href = "Organization-jmpSysManager3Page";
+                    },
+                    error: function () {
+                        swal("查看记录失败！", "服务器异常。", "error");
+                    }
+                }
+            )
         }
     };
 </script>
-<script>
-    $("button#disbandment-button").click(function () {
-        var currentOrg = $("#gender").val();
-        if(currentOrg === "" || currentOrg === null){
-            swal("请先选择机构！", "选择机构在右侧选项框", "error");
-        }
-        else {
-            swal(
-                {
-                    title: "您确定要解散该机构吗",
-                    text: "该操作不可取消",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#18a689",
-                    confirmButtonText: "确定",
-                    cancelButtonText: "取消",
-                    closeOnConfirm: false
-                }, function () {
-                    $.ajax(
-                        {
-                            url: "Organization-disbandOrg",
-                            data: {
-                                NAME: currentOrg
-                            },
-                            dataType: "json",
-                            type: "Post",
-                            async: "false",
-                            success: function (result) {
-                                if (result.res === true) {
-                                    swal({
-                                        title: "您已解散该机构",
-                                        type:"success",
-                                        confirmButtonColor: "#18a689",
-                                        confirmButtonText: "OK"
-                                    },function(){
-                                        location.href = "Organization-jmpSysManager2";
-                                    })
-                                }
-                                else swal("解散失败！", "未在系统中找到该机构", "error");
-                            },
-                            error: function () {
-                                swal("解散失败！", "服务器异常。", "error");
-                            }
-                        }
-                    )
-                })
-        }
-    })
-</script>
+
 </html>
