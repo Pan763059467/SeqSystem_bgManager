@@ -35,7 +35,7 @@
         </div>
         <form class="cmxform" id="signupForm">
             <div class="form-group col-sm-8 col-md-offset-2 loginLine">
-                <input name="name" id="name" type="text" aria-required="true" aria-invalid="true" class="form-control loginLine valiadate" style="font-size:12px" placeholder="输入管理员账号" required="">
+                <input name="name" id="name" type="text" aria-required="true" aria-invalid="true" class="form-control loginLine valiadate" style="font-size:12px" maxlength="20" placeholder="输入管理员账号" required="">
             </div>
             <div class="form-group col-sm-8 col-md-offset-2 loginLine">
                 <input name="password0" id="password0" type="password" class="form-control loginLine valiadate" style="font-size:12px" maxlength="22" placeholder="请输入原密码" required="">

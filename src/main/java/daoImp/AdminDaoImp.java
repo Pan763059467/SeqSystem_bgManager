@@ -97,9 +97,8 @@ public class AdminDaoImp extends DAO<AdminEntity> implements AdminDao {
             return false;
     }
 
-    public boolean addManager(int SP_id,String name, String password) {
+    public boolean addManager(int SP_id, String name, String password) {
         String sql = "insert into administrator(name,password) values(?,?)";
-        System.out.println(name + password);
         update(sql, name, password);
         //操作
         String sql1="SELECT ID_ADMIN FROM administrator where name=?";
