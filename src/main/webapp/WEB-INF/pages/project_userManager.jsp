@@ -35,7 +35,7 @@
         <ol class="breadcrumb" style="margin-left: 40px">
             <li style="font-size: 15px">
                 <strong>
-                    <a href="user-jmpHomepage">首页</a> >> 用户信息管理
+                    <a href="user-jmpHomepage">首页</a> >> <a href="user-jmpUserManager">用户信息管理</a>
                 </strong>
             </li>
         </ol>
@@ -63,8 +63,8 @@
                            data-pagination="true"
                            data-halign="center"
                            data-striped="true"
-                           data-page-size="6"
-                           data-height="410"
+                           data-page-size="10"
+                           data-height="420"
                            data-page-list="All"
                     >
                     </table>
