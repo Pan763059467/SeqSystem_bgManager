@@ -108,7 +108,7 @@
                                         <a href="pointsRules-jmpPointsRules"><div id="div5" class="col-sm-4">
                                             <div class="contact-box">
                                                 <div>
-                                                    <div style="margin: 10px 10px 10px 15px;float: left"><img src="<%=basePath %>/img/score_manager.png" height="125" width="125"/></div>
+                                                    <div style="margin: 10px 10px 10px 15px;float: left"><img src="<%=basePath %>/img/score_rule.png" height="125" width="125"/></div>
                                                     <div style="margin: 10px;float: left">
                                                         <h3>积分规则管理</h3>
                                                         <br/>
