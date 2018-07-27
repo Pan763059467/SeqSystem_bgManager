@@ -28,7 +28,7 @@
     <link href="<%=basePath%>/css/animate.min.css" rel="stylesheet">
     <link href="<%=basePath%>/css/style.min862f.css?v=4.1.0" rel="stylesheet">
     <!-- bootstrap-table -->
-    <link href="<%=basePath%>/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="<%=basePath%>/css/plugins/bootstrap-table/bootstrap-table.css" rel="stylesheet">
     <link href="<%=basePath%>/css/z_style.css" rel="stylesheet">
     <link href="<%=basePath%>/css/plugins/toastr/toastr.min.css" rel="stylesheet">
     <!-- Sweet Alert -->
@@ -123,8 +123,7 @@
                    data-pagination="true"
                    data-halign="center"
                    data-striped="true"
-                   data-page-size="5"
-                   data-height="510"
+                   data-page-size="10"
                    data-page-list="All"
             >
             </table>
