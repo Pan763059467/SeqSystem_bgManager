@@ -22,7 +22,7 @@
     <link href="<%=basePath%>/css/animate.min.css" rel="stylesheet">
     <link href="<%=basePath%>/css/style.min862f.css?v=4.1.0" rel="stylesheet">
     <!-- bootstrap-table -->
-    <link href="<%=basePath%>/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="<%=basePath%>/css/plugins/bootstrap-table/bootstrap-table.css" rel="stylesheet">
     <link href="<%=basePath%>/css/z_style.css" rel="stylesheet">
     <link href="<%=basePath%>/css/plugins/toastr/toastr.min.css" rel="stylesheet">
     <!-- Sweet Alert -->
@@ -60,30 +60,29 @@
                            placeholder="请输入对单个用户进行积分修改的值"
                            class="form-control" required="">
                 </div>
-        </div>
+            </div>
             <div class="panel-body">
-            <div class="ibox-content">
-                <div class="bootstrap-table">
-                    <table id="showAllUser"
-                           data-toggle="table"
-                           data-click-to-select="true"
-                           data-search="true"
-                           data-show-refresh="true"
-                           data-show-toggle="true"
-                           data-show-columns="true"
-                           data-toolbar="#toolbar"
-                           data-query-params="quefryParams"
-                           data-pagination="true"
-                           data-halign="center"
-                           data-striped="true"
-                           data-page-size="6"
-                           data-height="410"
-                           data-page-list="All"
-                    >
-                    </table>
+                <div class="ibox-content">
+                    <div id="tableshowAllUser">
+                        <table id="showAllUser"
+                               data-toggle="table"
+                               data-click-to-select="true"
+                               data-search="true"
+                               data-show-refresh="true"
+                               data-show-toggle="true"
+                               data-show-columns="true"
+                               data-toolbar="#toolbar"
+                               data-query-params="queryParams"
+                               data-pagination="true"
+                               data-halign="center"
+                               data-striped="true"
+                               data-page-size="10"
+                               data-page-list="All"
+                        >
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
         </div>
     </div>
     <div  class="modal inmodal" id="addPoints" tabindex="-1" role="dialog" aria-hidden="true">
