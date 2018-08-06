@@ -125,6 +125,21 @@
                                 </div>
                             </div>
                             <div class="tab-pane" id="tab-2">
+                                <a href="user-jmpUsableManage"><div id="div8" class="col-sm-4">
+                                    <div class="contact-box">
+                                        <div>
+                                            <div style="margin: 10px 10px 10px 15px;float: left"><img src="<%=basePath %>/img/comment_manager.png" height="125" width="125"/></div>
+                                            <div style="margin: 10px;float: left">
+                                                <h3>可用性规则管理</h3>
+                                                <br/>
+                                                <p>可查看该系统所有可用性规则</p>
+                                                <p>删可以修改当前可用性规则</p>
+                                            </div>
+                                            <div style="clear: both;margin: 0px 10px 0px 10px">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div></a>
                             </div>
                             <div class="tab-pane" id="tab-3">
                                 <a href="user-jmpDocDisManager"><div id="div6" class="col-sm-4">
