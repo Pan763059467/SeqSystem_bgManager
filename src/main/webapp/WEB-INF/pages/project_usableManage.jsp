@@ -60,7 +60,7 @@
                     </ul>
                 </div>
                 <div style="float: left;margin-top: 10px" class="col-md-1">
-                    <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#addPoints">新增可用性</button>
+                    <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#addUsable">新增可用性</button>
                 </div>
             </div>
             <div class="panel-body">
@@ -87,6 +87,35 @@
             </div>
         </div>
     </div>
+    <div  class="modal inmodal" id="addUsable" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content animated bounceInRight">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+                    </button>
+                    <h4 class="modal-title">新增可用性</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group"><label>请输入规则名称 必填</label>
+                        <input id="name" type="text" maxlength="20" class="form-control" required="">
+                    </div>
+                    <div class="form-group"><label>请输入规则适应范围 必填</label>
+                        <input id="rang" type="text" maxlength="100" class="form-control" required="">
+                    </div>
+                    <div class="form-group"><label>解决方案 必填</label>
+                        <input id="solution" type="text" maxlength="100" class="form-control" required="">
+                    </div>
+                    <div class="form-group"><label>规则举例</label>
+                        <input id="example" type="text" maxlength="50" class="form-control" required="">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                    <button id="Confirmation" type="button" class="btn btn-primary">新增</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script src="<%=basePath%>/js/jquery.min.js?v=2.1.4"></script>
@@ -98,7 +127,7 @@
 <script src="<%=basePath%>/js/hplus.min.js?v=4.1.0"></script>
 <script type="text/javascript" src="<%=basePath%>/js/contabs.min.js"></script>
 <script src="<%=basePath%>/js/plugins/pace/pace.min.js"></script>
-<script src="<%=basePath%>/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="<%=basePath%>/js/plugins/sweetalert/sweetalert.min5.js"></script>
 <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
 <script src="<%=basePath%>/js/mjy.js"></script>
 <script src="<%=basePath%>/js/plugins/suggest/bootstrap-suggest.min.js"></script>
@@ -176,51 +205,102 @@
 
     window.actionEvents = {
         'click .Modified': function (e, value, row, index) {
-            var id_rule = parseInt(row.id_rule);
-            var content = row.content;
-            var points=$("input#modified_points").val();
-            if(points !== 0 && points !==""){
-                swal(
-                    {
-                        title: "您确定修改规则“"+content+"”积分为"+points+"吗？",
-                        text: "确认请点击确定",
-                        type: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#18a689",
-                        confirmButtonText: "确定",
-                        cancelButtonText: "取消",
-                        closeOnConfirm: false
-                    }, function () {
-                        $.ajax(
-                            {
-                                type: "GET",
-                                data: {
-                                    id_rule: id_rule,
-                                    content: content,
-                                    points: points
-                                },
-                                url: "pointsRules-modified",
-                                dataType: "json",
-                                success: function () {
+            var id_usable = parseInt(row.id_usable);
+            var name = row.name;
+            swal(
+                {
+                    title: "您确定修改第"+id_usable+"条规则"+"“"+name+"”吗？",
+                    text: "规则名称 必填<input type='text' name='myinput' id='name1'>"
+                    +"规则适应范围 必填<input type='text' name='myinput' id='rang1'>"
+                    +"解决方案 必填<input type='text' name='myinput' id='solution1'>"
+                    +"规则举例 <input type='text' name='myinput' id='example1'>",
+                    html: true,
+                    type: "input",
+                    showCancelButton: true,
+                    confirmButtonColor: "#18a689",
+                    confirmButtonText: "确定",
+                    cancelButtonText: "取消",
+                    closeOnConfirm: false
+                }, function () {
+                    $.ajax(
+                        {
+                            type: "GET",
+                            data: {
+                                id_usable: id_usable,
+                                name:$("input#name1").val(),
+                                rang:$("input#rang1").val(),
+                                solution:$("input#solution1").val(),
+                                example:$("input#example1").val()
+                            },
+                            url: "usable-modified",
+                            dataType: "json",
+                            success: function (result) {
+                                alert(result.res)
+                                if (result.res === true) {
                                     swal({
-                                        title: "积分修改成功！",
+                                        title: "规则修改成功！",
                                         type:"success",
                                         confirmButtonColor: "#18a689",
                                         confirmButtonText: "OK"
                                     },function(){
-                                        location.href = "pointsRules-jmpPointsRules";
+                                        location.href = "user-jmpUsableManage";
                                     })
-                                },
-                                error: function () {
-                                    swal("修改积分失败！", "服务器异常。", "error");
                                 }
+                                else swal("修改失败！", "请输入对应内容", "error");
+                            },
+                            error: function () {
+                                swal("修改规则失败！", "服务器异常。", "error");
                             }
-                        )
-                    })
-            } else{
-                swal("请先输入积分数额！", "在表头输入框输入。", "error");
-            }
+                        }
+                    )
+                })
         }
     }
+</script>
+<script>
+    $("button#Confirmation").click(function () {
+        swal(
+            {
+                title: "您确认新增可用性吗",
+                text: "确认请点击确定",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#18a689",
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+                closeOnConfirm: false
+            }, function () {
+                $.ajax(
+                    {
+                        url: "usable-addUsable",
+                        data: {
+                            name:$("input#name").val(),
+                            rang:$("input#rang").val(),
+                            solution:$("input#solution").val(),
+                            example:$("input#example").val()
+                        },
+                        dataType: "json",
+                        type: "Post",
+                        async: "false",
+                        success: function (result) {
+                            if (result.res === true) {
+                                swal({
+                                    title: "新增可用性成功！",
+                                    type:"success",
+                                    confirmButtonColor: "#18a689",
+                                    confirmButtonText: "OK"
+                                },function(){
+                                    location.href = "user-jmpUsableManage";
+                                })
+                            }
+                            else swal("新增失败！", "请输入对应内容", "error");
+                        },
+                        error: function () {
+                            swal("新增失败！", "服务器异常。", "error");
+                        }
+                    }
+                )
+            })
+    })
 </script>
 </html>

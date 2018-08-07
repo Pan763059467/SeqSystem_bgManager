@@ -286,7 +286,7 @@
             </result>
             <result name="RES" type="json"><param name="root">dataMap</param></result>
             <interceptor-ref name="myStack"/>
-            <allowed-methods>showAllRules</allowed-methods>
+            <allowed-methods>showAllRules,addUsable,modified</allowed-methods>
         </action>
 
     </package>
