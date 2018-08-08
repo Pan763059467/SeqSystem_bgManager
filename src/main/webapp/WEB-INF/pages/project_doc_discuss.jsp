@@ -53,7 +53,7 @@
     </div>
     <div style="margin:16px 0px 0px -60px" class="col-md-10">
         <div class="ibox-title">
-            <h5>操作历史 </h5>
+            <h5>文档评论 </h5>
         </div>
         <div class="ibox float-e-margins">
             <div class="ibox-content">

@@ -222,6 +222,18 @@
                     cancelButtonText: "取消",
                     closeOnConfirm: false
                 }, function () {
+                    if ($("input#name1").val() === "") {
+                        swal("请输入修改的规则名称");
+                        return false
+                    }
+                    if ($("input#rang1").val() === "") {
+                        swal("请输入修改的规则适应范围");
+                        return false
+                    }
+                    if ($("input#solution1").val() === "") {
+                        swal("请输入修改的解决方案");
+                        return false
+                    }
                     $.ajax(
                         {
                             type: "GET",
@@ -235,7 +247,6 @@
                             url: "usable-modified",
                             dataType: "json",
                             success: function (result) {
-                                alert(result.res)
                                 if (result.res === true) {
                                     swal({
                                         title: "规则修改成功！",
@@ -270,6 +281,18 @@
                 cancelButtonText: "取消",
                 closeOnConfirm: false
             }, function () {
+                if ($("input#name").val() === "") {
+                    swal("请输入新增的规则名称");
+                    return false
+                }
+                if ($("input#rang").val() === "") {
+                    swal("请输入新增的规则适应范围");
+                    return false
+                }
+                if ($("input#solution").val() === "") {
+                    swal("请输入新增的解决方案");
+                    return false
+                }
                 $.ajax(
                     {
                         url: "usable-addUsable",

@@ -59,11 +59,6 @@
                         </li>
                     </ul>
                 </div>
-                <div style="float: left" class="col-md-4">
-                    <input id="modified_points" type="text" maxlength="40"
-                           placeholder="请输入对单个规则进行所需积分修改的值"
-                           class="form-control" required="">
-                </div>
             </div>
             <div class="panel-body">
                 <div class="ibox-content">
@@ -164,26 +159,28 @@
         'click .Modified': function (e, value, row, index) {
             var id_rule = parseInt(row.id_rule);
             var content = row.content;
-            var points=$("input#modified_points").val();
-            if(points !== 0 && points !==""){
                 swal(
                     {
-                        title: "您确定修改规则“"+content+"”积分为"+points+"吗？",
-                        text: "确认请点击确定",
-                        type: "warning",
+                        title: "您确定修改规则“"+content+"”积分吗？",
+                        text: "修改积分为",
+                        type: "input",
                         showCancelButton: true,
                         confirmButtonColor: "#18a689",
                         confirmButtonText: "确定",
                         cancelButtonText: "取消",
                         closeOnConfirm: false
-                    }, function () {
+                    }, function (inputValue) {
+                        if (inputValue === "") {
+                            swal.showInputError("请输入修改的积分");
+                            return false
+                        }
                         $.ajax(
                             {
                                 type: "GET",
                                 data: {
                                     id_rule: id_rule,
                                     content: content,
-                                    points: points
+                                    points: inputValue
                                 },
                                 url: "pointsRules-modified",
                                 dataType: "json",
@@ -203,9 +200,6 @@
                             }
                         )
                     })
-            } else{
-                swal("请先输入积分数额！", "在表头输入框输入。", "error");
-            }
         }
     }
 </script>
