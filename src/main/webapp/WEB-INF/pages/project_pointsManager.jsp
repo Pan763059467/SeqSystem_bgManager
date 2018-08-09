@@ -55,11 +55,6 @@
             <div style="float: left;margin-top: 10px" class="col-md-1">
                 <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#addPoints">赠送积分</button>
             </div>
-                <div style="float: left" class="col-md-4">
-                    <input id="modified_one_points" type="text" maxlength="40"
-                           placeholder="请输入对单个用户进行积分修改的值"
-                           class="form-control" required="">
-                </div>
             </div>
             <div class="panel-body">
                 <div class="ibox-content">
@@ -206,27 +201,28 @@
             //查看用户积分记录
             var id_user = parseInt(row.id_user);
             var user_name = row.name;
-            var points=$("input#modified_one_points").val();
-            alert(points);
-            if(points !== 0 && points !==""){
             swal(
                 {
-                    title: "您确定修改用户"+user_name+"积分为"+points+"吗？",
-                    text: "确认请点击确定",
-                    type: "warning",
+                    title: "您确定修改用户"+user_name+"积分吗？",
+                    text: "修改积分为",
+                    type: "input",
                     showCancelButton: true,
                     confirmButtonColor: "#18a689",
                     confirmButtonText: "确定",
                     cancelButtonText: "取消",
                     closeOnConfirm: false
-                }, function () {
+                }, function (inputValue) {
+                    if (inputValue === "") {
+                        swal.showInputError("请输入修改的积分");
+                        return false
+                    }
                     $.ajax(
                         {
                             type: "GET",
                             data: {
                                 id_user: id_user,
                                 name: user_name,
-                                points: points
+                                points: inputValue
                             },
                             url: "N_user-modified_one",
                             dataType: "json",
@@ -246,9 +242,6 @@
                         }
                     )
                 })
-            } else{
-                swal("请先输入积分数额！", "在表头输入框输入。", "error");
-            }
         }
     }
 </script>
