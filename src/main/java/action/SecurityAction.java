@@ -4,40 +4,41 @@ import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
-import dao.UsableDao;
-import daoImp.UsableDaoImp;
+import dao.SecurityDao;
+import daoImp.SecurityDaoImp;
 import entity.AdminEntity;
-import entity.UsableEntity;
+import entity.SecurityEntity;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
+
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class UsableAction extends ActionSupport implements RequestAware, SessionAware, ModelDriven<UsableEntity>, Preparable {
+public class SecurityAction extends ActionSupport implements RequestAware, SessionAware, ModelDriven<SecurityEntity>, Preparable {
     private Map<String, Object> dataMap;
-    private UsableEntity usableEntity;
+    private SecurityEntity securityEntity;
     private Map<String,Object> request;
     private Map<String,Object> session;
 
 
     public String showAllRules(){
         dataMap = new HashMap<>();
-        UsableDao usableDao = new UsableDaoImp();
-        List<UsableEntity> allRule = usableDao.getUsable();
+        SecurityDao securityDao = new SecurityDaoImp();
+        List<SecurityEntity> allRule = securityDao.getSecurity();
         Gson gson = new Gson();
         String json = gson.toJson(allRule);
         dataMap.put("res",json);
         return "RES";
     }
 
-    public String addUsable(){
+    public String addSecurity(){
         dataMap = new HashMap<>();
-        UsableDao usableDao = new UsableDaoImp();
+        SecurityDao securityDao = new SecurityDaoImp();
         AdminEntity admin = (AdminEntity)session.get("cur_admin");
-        if(usableEntity.getName()!=""&&usableEntity.getRang()!=""&&usableEntity.getSolution()!=""){
-            boolean res = usableDao.addUsable(admin.getId_admin(),usableEntity.getName(),usableEntity.getRang(),usableEntity.getSolution(),usableEntity.getExample());
+        if(securityEntity.getName()!=""&&securityEntity.getRang()!=""&&securityEntity.getSolution()!=""){
+            boolean res = securityDao.addSecurity(admin.getId_admin(),securityEntity.getName(),securityEntity.getRang(),securityEntity.getSolution(),securityEntity.getExample());
             dataMap.put("res",res);
             return "RES";
         }
@@ -47,10 +48,10 @@ public class UsableAction extends ActionSupport implements RequestAware, Session
 
     public String modified(){
         dataMap = new HashMap<>();
-        UsableDao usableDao = new UsableDaoImp();
+        SecurityDao securityDao = new SecurityDaoImp();
         AdminEntity admin = (AdminEntity)session.get("cur_admin");
-        if(usableEntity.getName()!=""&&usableEntity.getRang()!=""&&usableEntity.getSolution()!="") {
-            boolean res = usableDao.modified(admin.getId_admin(), usableEntity.getId_usable(), usableEntity.getName(), usableEntity.getRang(), usableEntity.getSolution(), usableEntity.getExample());
+        if(securityEntity.getName()!=""&&securityEntity.getRang()!=""&&securityEntity.getSolution()!="") {
+            boolean res = securityDao.modified(admin.getId_admin(), securityEntity.getId_security(), securityEntity.getName(), securityEntity.getRang(), securityEntity.getSolution(), securityEntity.getExample());
             dataMap.put("res", res);
             return "RES";
         }
@@ -66,22 +67,22 @@ public class UsableAction extends ActionSupport implements RequestAware, Session
         this.dataMap = dataMap;
     }
 
-    public UsableEntity getUsableEntity() {
-        return usableEntity;
+    public SecurityEntity getUsableEntity() {
+        return securityEntity;
     }
 
-    public void setUsableEntity(UsableEntity usableEntity) {
-        this.usableEntity = usableEntity;
+    public void setUsableEntity(SecurityEntity usableEntity) {
+        this.securityEntity = usableEntity;
     }
 
     @Override
-    public UsableEntity getModel() {
-        return usableEntity;
+    public SecurityEntity getModel() {
+        return securityEntity;
     }
 
     @Override
     public void prepare() throws Exception {
-        usableEntity = new UsableEntity();
+        securityEntity = new SecurityEntity();
     }
 
     @Override
@@ -94,3 +95,4 @@ public class UsableAction extends ActionSupport implements RequestAware, Session
         this.session = session;
     }
 }
+

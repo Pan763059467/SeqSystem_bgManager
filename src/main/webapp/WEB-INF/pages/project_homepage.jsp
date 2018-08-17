@@ -133,7 +133,22 @@
                                                 <h3>可用性规则管理</h3>
                                                 <br/>
                                                 <p>可查看该系统所有可用性规则</p>
-                                                <p>删可以修改当前可用性规则</p>
+                                                <p>可以修改当前可用性规则</p>
+                                            </div>
+                                            <div style="clear: both;margin: 0px 10px 0px 10px">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div></a>
+                                <a href="user-jmpSecurityManage"><div id="div9" class="col-sm-4">
+                                    <div class="contact-box">
+                                        <div>
+                                            <div style="margin: 10px 10px 10px 15px;float: left"><img src="<%=basePath %>/img/comment_manager.png" height="125" width="125"/></div>
+                                            <div style="margin: 10px;float: left">
+                                                <h3>安全性规则管理</h3>
+                                                <br/>
+                                                <p>可查看该系统所有安全性规则</p>
+                                                <p>可以修改当前安全性规则</p>
                                             </div>
                                             <div style="clear: both;margin: 0px 10px 0px 10px">
                                             </div>
