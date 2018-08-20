@@ -18,7 +18,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <title>可用性规则管理</title>
+    <title>易用性模式管理</title>
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
@@ -42,7 +42,7 @@
         <ol class="breadcrumb" style="margin-left: 40px">
             <li style="font-size: 15px">
                 <strong>
-                    <a href="user-jmpHomepage">后台管理系统首页</a> >> <a href="user-jmpUsableManage">可用性规则管理</a>
+                    <a href="user-jmpHomepage">后台管理系统首页</a> >> <a href="user-jmpUsableManage">易用性模式管理</a>
                 </strong>
             </li>
         </ol>
@@ -55,12 +55,12 @@
                 <div class="panel-options col-md-2">
                     <ul class="nav nav-tabs">
                         <li class="active">
-                            <a href="project_detail.html#tab-1" data-toggle="tab">可用性规则列表</a>
+                            <a href="project_detail.html#tab-1" data-toggle="tab">易用性模式列表</a>
                         </li>
                     </ul>
                 </div>
                 <div style="float: left;margin-top: 10px" class="col-md-1">
-                    <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#addUsable">新增可用性</button>
+                    <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#addUsable">新增易用性</button>
                 </div>
             </div>
             <div class="panel-body">
@@ -93,19 +93,19 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
                     </button>
-                    <h4 class="modal-title">新增可用性</h4>
+                    <h4 class="modal-title">新增易用性</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group"><label>请输入规则名称 必填</label>
+                    <div class="form-group"><label>请输入模式名称 必填</label>
                         <input id="name" type="text" maxlength="20" class="form-control" required="">
                     </div>
-                    <div class="form-group"><label>请输入规则适应范围 必填</label>
+                    <div class="form-group"><label>请输入模式适应范围 必填</label>
                         <input id="rang" type="text" maxlength="100" class="form-control" required="">
                     </div>
                     <div class="form-group"><label>解决方案 必填</label>
                         <input id="solution" type="text" maxlength="100" class="form-control" required="">
                     </div>
-                    <div class="form-group"><label>规则举例</label>
+                    <div class="form-group"><label>模式举例</label>
                         <input id="example" type="text" maxlength="50" class="form-control" required="">
                     </div>
                 </div>
@@ -137,21 +137,21 @@
     $('#showAllRules').bootstrapTable({
             columns: [
                 {
-                    title: '规则编号',
+                    title: '模式编号',
                     field: 'id_usable',
                     align: 'center',
                     sortable: true,
                     valign: 'middle'
                 },
                 {
-                    title: '规则名称',
+                    title: '模式名称',
                     field: 'name',
                     align: 'center',
                     sortable: true,
                     valign: 'middle'
                 },
                 {
-                    title: '规则适应范围',
+                    title: '模式适应范围',
                     field: 'rang',
                     align: 'center',
                     sortable: true,
@@ -165,7 +165,7 @@
                     valign: 'middle'
                 },
                 {
-                    title: '规则举例',
+                    title: '模式举例',
                     field: 'example',
                     align: 'center',
                     sortable: true,
@@ -209,11 +209,11 @@
             var name = row.name;
             swal(
                 {
-                    title: "您确定修改第"+id_usable+"条规则"+"“"+name+"”吗？",
-                    text: "规则名称 必填<input type='text' name='myinput' id='name1'>"
-                    +"规则适应范围 必填<input type='text' name='myinput' id='rang1'>"
+                    title: "您确定修改第"+id_usable+"条模式"+"“"+name+"”吗？",
+                    text: "模式名称 必填<input type='text' name='myinput' id='name1'>"
+                    +"模式适应范围 必填<input type='text' name='myinput' id='rang1'>"
                     +"解决方案 必填<input type='text' name='myinput' id='solution1'>"
-                    +"规则举例 <input type='text' name='myinput' id='example1'>",
+                    +"模式举例 <input type='text' name='myinput' id='example1'>",
                     html: true,
                     type: "input",
                     showCancelButton: true,
@@ -223,11 +223,11 @@
                     closeOnConfirm: false
                 }, function () {
                     if ($("input#name1").val() === "") {
-                        swal("请输入修改的规则名称");
+                        swal("请输入修改的模式名称");
                         return false
                     }
                     if ($("input#rang1").val() === "") {
-                        swal("请输入修改的规则适应范围");
+                        swal("请输入修改的模式适应范围");
                         return false
                     }
                     if ($("input#solution1").val() === "") {
@@ -249,7 +249,7 @@
                             success: function (result) {
                                 if (result.res === true) {
                                     swal({
-                                        title: "规则修改成功！",
+                                        title: "模式修改成功！",
                                         type:"success",
                                         confirmButtonColor: "#18a689",
                                         confirmButtonText: "OK"
@@ -260,7 +260,7 @@
                                 else swal("修改失败！", "请输入对应内容", "error");
                             },
                             error: function () {
-                                swal("修改规则失败！", "服务器异常。", "error");
+                                swal("修改模式失败！", "服务器异常。", "error");
                             }
                         }
                     )
@@ -272,7 +272,7 @@
     $("button#Confirmation").click(function () {
         swal(
             {
-                title: "您确认新增可用性吗",
+                title: "您确认新增易用性模式吗",
                 text: "确认请点击确定",
                 type: "warning",
                 showCancelButton: true,
@@ -282,11 +282,11 @@
                 closeOnConfirm: false
             }, function () {
                 if ($("input#name").val() === "") {
-                    swal("请输入新增的规则名称");
+                    swal("请输入新增的模式名称");
                     return false
                 }
                 if ($("input#rang").val() === "") {
-                    swal("请输入新增的规则适应范围");
+                    swal("请输入新增的模式适应范围");
                     return false
                 }
                 if ($("input#solution").val() === "") {
@@ -308,7 +308,7 @@
                         success: function (result) {
                             if (result.res === true) {
                                 swal({
-                                    title: "新增可用性成功！",
+                                    title: "新增易用性模式成功！",
                                     type:"success",
                                     confirmButtonColor: "#18a689",
                                     confirmButtonText: "OK"
