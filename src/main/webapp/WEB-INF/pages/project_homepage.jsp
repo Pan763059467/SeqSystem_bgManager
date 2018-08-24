@@ -130,10 +130,10 @@
                                         <div>
                                             <div style="margin: 10px 10px 10px 15px;float: left"><img src="<%=basePath %>/img/comment_manager.png" height="125" width="125"/></div>
                                             <div style="margin: 10px;float: left">
-                                                <h3>易用性模式管理</h3>
+                                                <h3>可用性模式管理</h3>
                                                 <br/>
-                                                <p>可查看该系统所有易用性模式</p>
-                                                <p>可以修改当前易用性模式</p>
+                                                <p>可查看该系统所有可用性模式</p>
+                                                <p>可以修改当前可用性模式</p>
                                             </div>
                                             <div style="clear: both;margin: 0px 10px 0px 10px">
                                             </div>

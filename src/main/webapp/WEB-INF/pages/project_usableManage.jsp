@@ -18,7 +18,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <title>易用性模式管理</title>
+    <title>可用性模式管理</title>
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
@@ -42,7 +42,7 @@
         <ol class="breadcrumb" style="margin-left: 40px">
             <li style="font-size: 15px">
                 <strong>
-                    <a href="user-jmpHomepage">后台管理系统首页</a> >> <a href="user-jmpUsableManage">易用性模式管理</a>
+                    <a href="user-jmpHomepage">后台管理系统首页</a> >> <a href="user-jmpUsableManage">可用性模式管理</a>
                 </strong>
             </li>
         </ol>
@@ -55,12 +55,12 @@
                 <div class="panel-options col-md-2">
                     <ul class="nav nav-tabs">
                         <li class="active">
-                            <a href="project_detail.html#tab-1" data-toggle="tab">易用性模式列表</a>
+                            <a href="project_detail.html#tab-1" data-toggle="tab">可用性模式列表</a>
                         </li>
                     </ul>
                 </div>
                 <div style="float: left;margin-top: 10px" class="col-md-1">
-                    <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#addUsable">新增易用性</button>
+                    <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#addUsable">新增可用性</button>
                 </div>
             </div>
             <div class="panel-body">
@@ -93,7 +93,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
                     </button>
-                    <h4 class="modal-title">新增易用性</h4>
+                    <h4 class="modal-title">新增可用性</h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-group"><label>请输入模式名称 必填</label>
@@ -272,7 +272,7 @@
     $("button#Confirmation").click(function () {
         swal(
             {
-                title: "您确认新增易用性模式吗",
+                title: "您确认新增可用性模式吗",
                 text: "确认请点击确定",
                 type: "warning",
                 showCancelButton: true,
@@ -308,7 +308,7 @@
                         success: function (result) {
                             if (result.res === true) {
                                 swal({
-                                    title: "新增易用性模式成功！",
+                                    title: "新增可用性模式成功！",
                                     type:"success",
                                     confirmButtonColor: "#18a689",
                                     confirmButtonText: "OK"
