@@ -239,6 +239,10 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
     public String jmpLibraryDiscuss(){
         return "LibraryDiscussPage";
     }
+    public String jmpUsableManage(){
+        return "UsableManagePage";
+    }
+    public String jmpSecurityManage(){ return "SecurityManagePage"; }
     @Override
     public AdminEntity getModel() {
         return admin;

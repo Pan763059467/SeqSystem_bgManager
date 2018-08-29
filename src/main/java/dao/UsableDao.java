@@ -10,5 +10,7 @@ import java.util.List;
  * @author MJY
  */
 public interface UsableDao {
+    boolean addUsable(int id_admin,String name,String rang,String solution,String example);
+    boolean modified(int id_admin,int id_usable,String name,String rang,String solution,String example);
     List<UsableEntity> getUsable();
 }

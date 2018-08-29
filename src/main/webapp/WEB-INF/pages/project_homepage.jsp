@@ -59,7 +59,7 @@
                                         <a href="#tab-4" data-toggle="tab">机构管理</a>
                                     </li>
                                     <li>
-                                        <a href="#tab-2" data-toggle="tab">构件管理</a>
+                                        <a href="#tab-2" data-toggle="tab">NFR模式管理</a>
                                     </li>
                                     <li>
                                         <a href="#tab-3" data-toggle="tab">评论管理</a>
@@ -125,6 +125,36 @@
                                 </div>
                             </div>
                             <div class="tab-pane" id="tab-2">
+                                <a href="user-jmpUsableManage"><div id="div8" class="col-sm-4">
+                                    <div class="contact-box">
+                                        <div>
+                                            <div style="margin: 10px 10px 10px 15px;float: left"><img src="<%=basePath %>/img/comment_manager.png" height="125" width="125"/></div>
+                                            <div style="margin: 10px;float: left">
+                                                <h3>可用性模式管理</h3>
+                                                <br/>
+                                                <p>可查看该系统所有可用性模式</p>
+                                                <p>可以修改当前可用性模式</p>
+                                            </div>
+                                            <div style="clear: both;margin: 0px 10px 0px 10px">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div></a>
+                                <a href="user-jmpSecurityManage"><div id="div9" class="col-sm-4">
+                                    <div class="contact-box">
+                                        <div>
+                                            <div style="margin: 10px 10px 10px 15px;float: left"><img src="<%=basePath %>/img/comment_manager.png" height="125" width="125"/></div>
+                                            <div style="margin: 10px;float: left">
+                                                <h3>安全性模式管理</h3>
+                                                <br/>
+                                                <p>可查看该系统所有安全性模式</p>
+                                                <p>可以修改当前安全性模式</p>
+                                            </div>
+                                            <div style="clear: both;margin: 0px 10px 0px 10px">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div></a>
                             </div>
                             <div class="tab-pane" id="tab-3">
                                 <a href="user-jmpDocDisManager"><div id="div6" class="col-sm-4">
