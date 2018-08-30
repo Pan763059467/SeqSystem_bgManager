@@ -46,6 +46,7 @@
             <result name="newprojectPage">/WEB-INF/pages/project_newproject.jsp</result>
             <result name="SysManager1Page">/WEB-INF/pages/project_sysManager1.jsp</result>
             <result name="SysManager2Page">/WEB-INF/pages/project_sysManager2.jsp</result>
+            <result name="SysManager4Page">/WEB-INF/pages/project_sysManager4.jsp</result>
             <result name="componentPage">/WEB-INF/pages/project_case_library.jsp</result>
             <result name="casecomponentPage">/WEB-INF/pages/project_case_component.jsp</result>
             <result name="usercomponentPage">/WEB-INF/pages/project_user_component.jsp</result>
@@ -64,8 +65,16 @@
             <result name="SecurityManagePage">/WEB-INF/pages/project_securityManage.jsp</result>
         <interceptor-ref name="myStack"/>
             <allowed-methods>
-                jmpSecurityManage,jmpUsableManage,jmpDocDisManager,showAllLibDiscuss,jmpLibraryDiscuss,jmpPointManager,changePassword,showAllUser,jmpUserManager,jmpOperationLog,jmpMyprofile,jmpMycollect,jmpHomepage,jmpSysManager1,jmpSysManager2,jmpNewproject,jmpTemp,jmpCasecomponent,jmpUsercomponent,jmpCurrentProjectList,jmpCompletedProjectList
+                jmpSecurityManage,jmpUsableManage,jmpDocDisManager,showAllLibDiscuss,jmpLibraryDiscuss,jmpPointManager,changePassword,showAllUser,jmpUserManager,jmpOperationLog,jmpMyprofile,jmpMycollect,jmpHomepage,jmpSysManager1,jmpSysManager2,jmpSysManager4,jmpNewproject,jmpTemp,jmpCasecomponent,jmpUsercomponent,jmpCurrentProjectList,jmpCompletedProjectList
             </allowed-methods>
+        </action>
+
+        <action name="libApply-*" class="action.LibApplyAction" method="{1}">
+            <result name="success" type="json">
+                <param name="root">dataMap</param>
+            </result>
+            <result name="SysManager5Page">/WEB-INF/pages/project_sysManager5.jsp</result>
+            <allowed-methods>showLibList,saveIdLib,jmpSysManager5Page,accept,refuse,showHistory</allowed-methods>
         </action>
 
         <action name="applyOrganization-*" class="action.ApplyOrganizationAction" method="{1}">

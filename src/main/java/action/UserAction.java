@@ -201,6 +201,9 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
     public String jmpSysManager2(){
         return "SysManager2Page";
     }
+    public String jmpSysManager4(){
+        return "SysManager4Page";
+    }
     public String jmpNewproject(){
         return "newprojectPage";
     }

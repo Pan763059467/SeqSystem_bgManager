@@ -64,6 +64,9 @@
                                     <li>
                                         <a href="#tab-3" data-toggle="tab">评论管理</a>
                                     </li>
+                                    <li>
+                                        <a href="#tab-5" data-toggle="tab">构件库管理</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -214,6 +217,23 @@
                                                 <br/>
                                                 <p>查看机构成员与项目</p>
                                                 <p>可重新任命机构管理员</p>
+                                            </div>
+                                            <div style="clear: both;margin: 0px 10px 0px 10px">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div></a>
+                            </div>
+                            <div class="tab-pane" id="tab-5">
+                                <a href="user-jmpSysManager4"><div id="div10" class="col-sm-4">
+                                    <div class="contact-box">
+                                        <div>
+                                            <div style="margin: 10px 10px 10px 15px;float: left"><img src="<%=basePath %>/img/org_apply_manager.png" height="125" width="125"/></div>
+                                            <div style="margin: 10px;float: left">
+                                                <h3>构件库发布管理</h3>
+                                                <br/>
+                                                <p> 审查用户发布构件库的申请请求</p>
+                                                <p>通过后即加入官方构件库</p>
                                             </div>
                                             <div style="clear: both;margin: 0px 10px 0px 10px">
                                             </div>
