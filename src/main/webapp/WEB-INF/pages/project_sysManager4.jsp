@@ -249,7 +249,7 @@
 
     function operateFormatter(value,row,index) {
         return[
-            '<a class="displayLib" style="padding-left: 10px"><button class="btn btn-info text-center btn-xs " >查看构件库内容</button></a>',
+            '<a class="displayLib" style="display:none;padding-left: 10px"><button class="btn btn-info text-center btn-xs " >查看构件库内容</button></a>',
             '<a class="acceptLib" style="padding-left: 10px"><button class="btn btn-info text-center btn-xs " >同意</button></a>',
             '<a class="refuseLib" style="padding-left: 10px"><button class="btn btn-info text-center btn-xs " >拒绝</button></a>'
         ].join('');
