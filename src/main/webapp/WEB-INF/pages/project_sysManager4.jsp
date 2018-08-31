@@ -35,7 +35,7 @@
         <ol class="breadcrumb" style="margin-left: 40px">
             <li style="font-size: 15px">
                 <strong>
-                    <a href="user-jmpHomepage">后台管理系统首页</a> >> <a href="Organization-jmpSysManager4"> 构件库申请 </a>
+                    <a href="user-jmpHomepage">后台管理系统首页</a> >> <a href="user-jmpSysManager4"> 构件库申请 </a>
                 </strong>
             </li>
         </ol>
@@ -249,7 +249,7 @@
 
     function operateFormatter(value,row,index) {
         return[
-            '<a class="displayLib" style="display:none;padding-left: 10px"><button class="btn btn-info text-center btn-xs " >查看构件库内容</button></a>',
+            '<a class="displayLib" style="display:none; padding-left: 10px"><button class="btn btn-info text-center btn-xs " >查看构件库内容</button></a>',
             '<a class="acceptLib" style="padding-left: 10px"><button class="btn btn-info text-center btn-xs " >同意</button></a>',
             '<a class="refuseLib" style="padding-left: 10px"><button class="btn btn-info text-center btn-xs " >拒绝</button></a>'
         ].join('');
@@ -267,13 +267,15 @@
         'click .displayLib': function (e, value, row, index) {
             //查看用户积分记录
             var id_library = row.id_library;
+            var id_template = row.title;
             $.ajax(
                 {
                     type: "GET",
                     data: {
-                        id_library:id_library
+                        id_library:id_library,
+                        id_template:id_template
                     },
-                    url: "libApply-saveIdLib",
+                    url: "structure-get",
                     dataType: "json",
                     success: function () {
                         location.href = "libApply-jmpSysManager5Page";

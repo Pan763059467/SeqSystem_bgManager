@@ -114,38 +114,13 @@
             <ol class="breadcrumb" style="margin-left: 50px">
                 <li style="font-size: 15px">
                     <strong>
-                        <a href="user-jmpHomepage">后台管理系统首页</a> >> <a href="user-jmpSysManager4"> 构件库申请 </a> >> 查看构件库
+                        <a href="user-jmpHomepage"><span class="lzf_b">首页</span></a> >><a href="library-get"><span class="lzf_b">构件库</span></a> >> 构件
                     </strong>
                 </li>
             </ol>
         </div>
         <div id="main" style="width:100%;margin-top: 10px ">
             <div id="head" style="width:1200px;font-size:x-small;margin: 0 auto">
-                <div style="float: left;height: 50px;width:300px;padding: 20px 20px 0px 20px;margin-left: 100px">
-                    <h2 style="font-weight:700"> ${requestScope.library.name}</h2>
-                </div>
-                <div style="float: left;height: 50px;width:200px;padding: 40px 0px 20px 0px;text-align:center;margin-top:5px">
-                    <p style="font-size: 16px;color: black">贡献人：${requestScope.library.user_name}</p>
-                </div>
-                <div style="float: left;height: 50px;width:200px;padding: 40px 0px 20px 0px;margin-top:5px;margin-left: 10px">
-                    <p style="font-size: 16px;color: black">发布时间：${requestScope.library.time}</p>
-                </div>
-                <div style="float: left;height: 50px;width:100px;padding: 40px 0px 20px 0px;margin-top:5px;margin-left: 10px">
-                    <p style="font-size: 16px;color: black">类型：${requestScope.library.title}</p>
-                </div>
-                <div style="float: left;height: 50px;width:100px;padding: 40px 0px 20px 0px;margin-top:5px;margin-left: 10px">
-                    <s:if test="#request.library.id_user == #session.user.id_user">
-                        <s:if test="#request.id_template==1">
-                            <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#newCommon">创建通用构件</button>
-                        </s:if>
-                        <s:elseif test="#request.id_template==2">
-                            <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#newUser">创建用户构件</button>
-                        </s:elseif>
-                        <s:elseif test="#request.id_template==3">
-                            <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#newCase">创建用例构件</button>
-                        </s:elseif>
-                    </s:if>
-                </div>
             </div>
             <s:if test="#request.id_template==1">
                 <div id="mid" style="clear: both;height:450px;width:1200px;margin-left:200px;padding: 20px 75px 20px 75px;overflow: hidden">
@@ -155,6 +130,30 @@
                                 <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';color: black;font-weight:700;" >内容：</span><span style="font-family:'Arial Normal', 'Arial';font-weight:500;overflow: hidden" id="commonContent"><s:property value="content"/></span>
                                 <span style="display:none;font-family:'Arial Negreta', 'Arial Normal', 'Arial';color: black;font-weight:700;" id="idStructure"><s:property value="id_structure"/></span>
                             </div>
+                            <s:if test="#request.library.id_user == #session.user.id_user">
+                                <div style="float: right;z-index:99999999;margin: -40px 10px 0px 0px">
+                                    <button id="deleteCommon" type="button" class="btn btn-warning btn-xs" myvalue="<s:property value="id_structure"/>">删除</button>
+                                    <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#editCommon">编辑</button>
+                                    <div  class="modal inmodal" id="editCommon" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content animated bounceInRight">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+                                                    </button>
+                                                    <h4 class="modal-title">编辑通用构件</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="form-group"><label>内容</label> <textarea id="editCommonContent" style="height: 300px" type="text" maxlength="100000" class="form-control" required="required"><s:property value="content"/></textarea></div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                                                    <button id="editCommon-button" type="submit" class="btn btn-primary" myvalue="<s:property value="id_structure"/>">保存</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </s:if>
                         </div>
                     </s:iterator>
                 </div>
@@ -177,6 +176,32 @@
                                 </span>
                                 </div>
                             </div>
+                            <s:if test="#request.library.id_user == #session.user.id_user">
+                                <div style="z-index:99999999;margin: 130px 10px 0px 420px">
+                                    <button id="deleteUser" type="submit" class="btn btn-warning btn-xs" myvalue="<s:property value="id_structure"/>">删除</button>
+                                    <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#editUser">编辑</button>
+                                    <div  class="modal inmodal" id="editUser" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content animated bounceInRight">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+                                                    </button>
+                                                    <h4 class="modal-title">编辑用户构件</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="form-group"><label>用户名</label> <input id="Usercontent2" type="text" maxlength="100" value="<s:property value="roleName"/>" class="form-control" required="required"></div>
+                                                    <div class="form-group"><label>用户描述</label> <textarea id="Usercontent3"  style="height: 60px" type="text"  maxlength="2000" class="form-control" required="required"><s:property value="describe"/></textarea></div>
+                                                    <div class="form-group"><label>用户权限</label> <textarea  id="Usercontent4"  style="height: 200px" type="text" maxlength="100000" class="form-control" required="required"><s:property value="permissions"/></textarea></div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                                                    <button id="editUser-button" type="submit" class="btn btn-primary" myvalue="<s:property value="id_structure"/>">保存</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </s:if>
                         </div>
                     </s:iterator>
                 </div>
@@ -221,6 +246,12 @@
                             <div style="margin: 5px 0px 20px 10px;overflow: hidden">
                                 <span style="color: black;font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;">备选操作流程 ：</span><span style="font-family:'Arial Normal', 'Arial';font-weight:400;"><s:property escapeHtml="false" value="alternative"/></span>
                             </div>
+                            <s:if test="#request.library.id_user == #session.user.id_user">
+                                <div style="z-index:99999999;margin: 130px 10px 0px 500px">
+                                    <button id="deleteFun" type="submit" class="btn btn-warning btn-xs" myvalue="<s:property value="id_structure"/>">删除</button>
+                                    <button type="button" class="btn btn-primary btn-xs" >编辑</button>
+                                </div>
+                            </s:if>
                         </div>
                     </s:iterator>
                 </div>
@@ -242,21 +273,6 @@
                     </s:iterator>
                 </div>
             </s:if>
-            <div id="footer" style="clear: both;text-align: center; margin-top:25px">
-                <div id="pages" style="height: 50px;margin:0px auto;" class="btn-group">
-                    <s:if  test="#request.page==1">
-                        <button type="button" class="btn btn-gray"><i class="fa fa-chevron-left"></i></button>
-                    </s:if>
-                    <s:else><button type="button" class="btn btn-white turnpage lastPage"><i class="fa fa-chevron-left"></i></button></s:else>
-                    <s:iterator begin="1" end="#request.num" step="1" status="st">
-                        <s:if test="#request.page==#st.index+1">
-                            <button type="button" class="btn btn-white active pagenum nowpage"><s:property value='#st.index+1'/></button></s:if>
-                        <s:else ><button type="button" class="btn btn-white pagenum"><s:property value='#st.index+1'/></button></s:else>
-                    </s:iterator>
-                    <s:if test="#request.page==#request.num"><button type="button" class="btn btn-gray"><i class="fa fa-chevron-right"></i></button></s:if>
-                    <s:else><button type="button" class="btn btn-white turnpage nextPage"><i class="fa fa-chevron-right"></i></button></s:else>
-                </div>
-            </div>
         </div>
     </div>
 </div>
