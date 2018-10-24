@@ -98,7 +98,7 @@
                 <param name="root">dataMap</param>
             </result>
         <interceptor-ref name="myStack"/>
-            <allowed-methods>jmpSysManager3Page,saveOrgName,disbandOrg,showAdminOrg,jmpSysManager2,jmpOrgManager1,jmpOrgManager2,,showAllProject,showHistoryProject</allowed-methods>
+            <allowed-methods>jmpSysManager3Page,saveOrgName,disbandOrg,showAdminOrg,jmpSysManager2,jmpOrgManager1,jmpOrgManager2,showAllProject,showHistoryProject,changeOrgName</allowed-methods>
         </action>
 
         <action name="infomation-*" class="action.InfomationAction" method="{1}">

@@ -94,6 +94,13 @@
                     align: 'middle'
                 },
                 {
+                    title: '真实姓名',
+                    field: 'realname',
+                    align: 'center',
+                    sortable: true,
+                    valign: 'middle'
+                },
+                {
                     title: '操作内容',
                     field: 'content',
                     sortable: true,

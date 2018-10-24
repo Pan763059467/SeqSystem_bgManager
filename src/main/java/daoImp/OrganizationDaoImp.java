@@ -88,6 +88,19 @@ public class OrganizationDaoImp extends DAO<OrganizationEntity> implements Organ
         return true;
     }
 
+    @Override
+    public boolean changeOrgName(String newname, int id_admin, String name_admin, String org_name) {
+        System.out.println("start DaoImp");
+        String sql1="update ORGANIZATION set NAME = ? where NAME = ?";
+        String sql2="insert into admin_log(ID_ADMIN,CONTENT,DATE) value(?,?,?)";
+        update(sql1,newname,org_name);
+        Timestamp NowTime = new Timestamp(new java.util.Date().getTime());
+        String content1 = "管理员"+name_admin+"于"+NowTime+"修改机构"+org_name+"的名称为"+newname;
+        update(sql2,id_admin,content1,NowTime);
+        System.out.println("将" + org_name + "改为" + newname);
+        return true;
+    }
+
 
     @Override
     public boolean isIn(int id_user,int id_org) {

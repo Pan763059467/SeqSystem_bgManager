@@ -102,7 +102,14 @@
                     title: '发言人',
                     sortable: true,
                     align: 'center'
-                }, {
+                },
+                {
+                    title: '真实姓名',
+                    field: 'realname',
+                    align: 'center',
+                    sortable: true,
+                    valign: 'middle'
+                },{
                     field: 'time',
                     title: '时间',
                     sortable: true,

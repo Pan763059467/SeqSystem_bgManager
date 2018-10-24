@@ -149,6 +149,13 @@
                     valign: 'middle'
                 },
                 {
+                    title: '真实姓名',
+                    field: 'realname',
+                    align: 'center',
+                    sortable: true,
+                    valign: 'middle'
+                },
+                {
                     field: 'org_name',
                     title: '申请机构名',
                     sortable: true,
@@ -274,6 +281,13 @@
                 {
                     title: '申请人',
                     field: 'name',
+                    align: 'center',
+                    sortable: true,
+                    valign: 'middle'
+                },
+                {
+                    title: '真实姓名',
+                    field: 'realname',
                     align: 'center',
                     sortable: true,
                     valign: 'middle'

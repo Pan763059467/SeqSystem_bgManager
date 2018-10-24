@@ -20,4 +20,5 @@ public interface OrganizationDao {
     String findName(int ID_ORGANIZATION);  //获取机构ID对应的NAME
     String findAdminName(int ID_ORGANIZATION);
     boolean disbandOrg(String org_name,String admin_name,int id_admin);
+    boolean changeOrgName(String newname,int id_admin,String name_admin,String org_name);
 }
