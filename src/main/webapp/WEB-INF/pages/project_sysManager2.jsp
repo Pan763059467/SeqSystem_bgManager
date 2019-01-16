@@ -117,6 +117,13 @@
                     title: '机构管理员',
                     sortable: true,
                     align: 'center'
+                },
+                {
+                    title: '真实姓名',
+                    field: 'realname',
+                    align: 'center',
+                    sortable: true,
+                    valign: 'middle'
                 },{
                     field: 'MAIL',
                     title: '邮箱',
@@ -149,8 +156,9 @@
         }
     )
     function operateFormatter(value,row,index) {
-        return[,
-            '<a class="ListAllUser" style="padding-left: 10px"><button class="btn btn-info text-center btn-xs " >查看机构成员</button></a>'
+        return[
+            '<a class="ListAllUser" style="padding-left: 10px"><button class="btn btn-info text-center btn-xs " >查看机构成员</button></a>',
+            '<a class="Modified" style="padding-left: 10px"><button class="btn btn-info text-center btn-xs " >修改机构名称</button></a>'
         ].join('');
     }
 
@@ -174,7 +182,60 @@
                     }
                 }
             )
+        },
+        'click .Modified': function (e, value, row, index) {
+            //修改机构名称
+            var org_name = row.ORG_NAME;
+            swal(
+                {
+                    title: "修改机构"+org_name+"的名称为",
+                    type: "input",
+                    showCancelButton: true,
+                    confirmButtonColor: "#18a689",
+                    confirmButtonText: "确定",
+                    cancelButtonText: "取消",
+                    closeOnConfirm: false
+                }, function (inputValue) {
+                    if (inputValue === "" || inputValue === false) {
+                        swal.showInputError("请输入修改的名称");
+                        return false
+                    }
+                    else {
+                        $.ajax(
+                            {
+                                type: "GET",
+                                data: {
+                                    NAME: org_name,
+                                    newname: inputValue
+                                },
+                                url: "Organization-changeOrgName",
+                                dataType: "json",
+                                async: false,
+                                success: function(result) {
+                                    if (result.res===true) {
+                                        swal({
+                                            title: "机构名称修改成功！",
+                                            type:"success",
+                                            confirmButtonColor: "#18a689",
+                                            confirmButtonText: "OK"
+                                        },function(){
+                                            location.href = "Organization-jmpSysManager2";
+                                        })
+                                    }
+                                    else
+                                        swal("修改名称失败！", "未输入字符", "error");
+                                },
+                                error: function () {
+                                    swal("修改名称失败！", "服务器异常。", "error");
+                                }
+                            }
+                        )
+                    }
+
+                }
+            )
         }
+
     };
 </script>
 

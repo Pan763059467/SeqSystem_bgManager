@@ -128,6 +128,13 @@
                     valign: 'middle'
                 },
                 {
+                    title: '真实姓名',
+                    field: 'realname',
+                    align: 'center',
+                    sortable: true,
+                    valign: 'middle'
+                },
+                {
                     field: 'mail',
                     title: '邮箱',
                     sortable: true,

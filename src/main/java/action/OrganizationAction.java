@@ -15,7 +15,6 @@ import entity.*;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
-import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
@@ -27,6 +26,7 @@ public class OrganizationAction extends ActionSupport implements RequestAware, S
     private Map<String, Object> session;
     private Map<String, Object> request;
     private Map<String, Object> dataMap;
+    private String newname;
 
     public String quitorg(){
         organizationdao = new OrganizationDaoImp();
@@ -106,6 +106,15 @@ public class OrganizationAction extends ActionSupport implements RequestAware, S
         return SUCCESS;
     }
 
+    public String changeOrgName() {
+        dataMap = new HashMap<>();
+        OrganizationDao organizationdao = new OrganizationDaoImp();
+        AdminEntity admin = (AdminEntity)session.get("cur_admin");
+        boolean res = organizationdao.changeOrgName(newname,admin.getId_admin(),admin.getName(),organization.getNAME());
+        dataMap.put("res",res);
+        return SUCCESS;
+    }
+
     public String jmpSysManager3Page(){
         return "SysManager3Page";
     }
@@ -136,6 +145,10 @@ public class OrganizationAction extends ActionSupport implements RequestAware, S
     @Override
     public OrganizationEntity getModel() {
         return organization;
+    }
+
+    public void setNewname(String newname) {
+        this.newname = newname;
     }
 }
 

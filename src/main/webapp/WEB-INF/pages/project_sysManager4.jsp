@@ -146,6 +146,13 @@
                     valign: 'middle'
                 },
                 {
+                    title: '真实姓名',
+                    field: 'realname',
+                    align: 'center',
+                    sortable: true,
+                    valign: 'middle'
+                },
+                {
                     field: 'lib_name',
                     title: '构件库名',
                     sortable: true,

@@ -102,9 +102,19 @@
                     title: '用户名',
                     sortable: true,
                     align: 'center'
-                }, {
+                },{
+                    field: 'realname',
+                    title: '真实姓名',
+                    sortable: true,
+                    align: 'center'
+                },{
                     field: 'mail',
                     title: '邮箱',
+                    sortable: true,
+                    align: 'center'
+                },{
+                    field: 'registrationtime',
+                    title: '注册时间',
                     sortable: true,
                     align: 'center'
                 },{

@@ -103,12 +103,11 @@
                                                data-show-toggle="true"
                                                data-show-columns="true"
                                                data-toolbar="#toolbar"
-                                               data-query-params="quefryParams"
+                                               data-query-params="queryParams"
                                                data-pagination="true"
                                                data-halign="center"
                                                data-striped="true"
-                                               data-page-size="6"
-                                               data-height="410"
+                                               data-page-size="10"
                                                data-page-list="All"
                                         >
                                         </table>
@@ -145,6 +144,13 @@
                 {
                     title: '申请人',
                     field: 'name',
+                    align: 'center',
+                    sortable: true,
+                    valign: 'middle'
+                },
+                {
+                    title: '真实姓名',
+                    field: 'realname',
                     align: 'center',
                     sortable: true,
                     valign: 'middle'
@@ -280,6 +286,13 @@
                     valign: 'middle'
                 },
                 {
+                    title: '真实姓名',
+                    field: 'realname',
+                    align: 'center',
+                    sortable: true,
+                    valign: 'middle'
+                },
+                {
                     field: 'org_name',
                     title: '申请机构名',
                     sortable: true,
@@ -321,8 +334,9 @@
         if(state==1)
             return '已同意';
         else if(state==-1)
-            return ['已拒绝',
-    '<a class="reAgree" style="padding-left: 10px"><button class="btn btn-info text-center btn-xs " >重新同意</button></a>'].join('');
+            return '已拒绝';
+            //return ['已拒绝',
+    // '<a class="reAgree" style="padding-left: 10px"><button class="btn btn-info text-center btn-xs " >重新同意</button></a>'].join('');
     }
     window.actionEvents2 = {
         'click .reAgree': function(e, value, row, index) {

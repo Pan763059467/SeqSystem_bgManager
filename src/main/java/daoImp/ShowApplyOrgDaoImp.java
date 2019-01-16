@@ -2,6 +2,7 @@ package daoImp;
 
 import dao.DAO;
 import dao.ShowApplyOrgDao;
+import entity.ApplyOrganizationEntity;
 import entity.ShowApplyOrganizationEntity;
 
 import java.sql.Date;
@@ -41,6 +42,8 @@ public class ShowApplyOrgDaoImp extends DAO<ShowApplyOrganizationEntity> impleme
         String sql7="insert into points_record (id_user,content,date) value(?,?,?)";
         String sql8="select points from points_rule where id_rule = ?";
         String sql9="insert into message(id_user,content,date,id_org) value(?,?,?,?)";
+        String sql10="select * from org_apply where org_name = ? and STATE = 0";
+        String sql11="update ORG_APPLY set STATE=-1 where ID_ORG_APPLY=?";
         Timestamp NowTime = new Timestamp(new java.util.Date().getTime());
         update(sql1,create.getId_org_apply());
         update(sql2,create.getOrg_name(),create.getId_user(),NowTime);
@@ -51,7 +54,16 @@ public class ShowApplyOrgDaoImp extends DAO<ShowApplyOrganizationEntity> impleme
         String sql="select * from VIEW_showAPPLYORG where STATE=0";
         String content = "管理员"+admin_name+"于"+NowTime+"同意"+create.getName()+"成立机构："+create.getOrg_name();
         String content1 = "于"+NowTime+"成立机构：“"+create.getOrg_name()+"”扣除积分"+points;
-        String content2 = "管理员于"+NowTime+"同意你成立机构：“"+create.getOrg_name()+"”扣除积分"+points;
+        String content2 = "管理员于"+NowTime+"同意"+create.getName()+"成立机构：“"+create.getOrg_name()+"”扣除积分"+points;
+        List<ShowApplyOrganizationEntity> list = getForList(sql10,create.getOrg_name());
+        for(int i=0; i<list.size(); i++){
+                System.out.println(list.get(i).getId_user()+" "+create.getId_user());
+                if(list.get(i).getId_user()!=create.getId_user()){
+                String content3 = "管理员于"+NowTime+"拒绝"+list.get(i).getName()+"成立机构："+list.get(i).getOrg_name();
+                update(sql11,list.get(i).getId_org_apply());
+                update(sql9,list.get(i).getId_user(),content3,NowTime,id_org);
+            }
+        }
         List<ShowApplyOrganizationEntity> ShowApply = getForList(sql);
         update(sql5,id_admin,content,NowTime);
         update(sql6,points,create.getId_user());
